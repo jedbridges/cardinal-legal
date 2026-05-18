@@ -90,75 +90,104 @@
     </div>
 
     <h1>Privacy Policy</h1>
-    <p class="meta">Last updated: April 1, 2026</p>
+    <p class="meta">Last updated: May 18, 2026</p>
 
-    <p class="intro">Your privacy matters. This policy explains what information Cardinal collects, how it is used, and your choices as a user.</p>
+    <p class="intro">Your privacy matters. Cardinal is designed to collect as little personal information as possible. This policy explains what is collected, how it is used, and your choices as a user.</p>
 
     <h2>1. Information We Collect</h2>
     <p><strong>Information you provide:</strong></p>
     <ul>
-      <li>Messages and questions you submit through the Ask feature</li>
-      <li>Verses, highlights, and notes you create within the App</li>
+      <li>Prompts, questions, and conversation history you submit through the App's AI features (the "Ask" chat, "Reflect on Sermon" and related sermon-note AI tools, and the "Custom Path" Quiet Time generator)</li>
+      <li>Verses, highlights, Bible notes, sermon notes, prayer items, and Quiet Time session records you create within the App</li>
     </ul>
     <p><strong>Automatically collected information:</strong></p>
     <ul>
-      <li>A randomly generated, anonymous device identifier (not linked to your name or Apple ID)</li>
-      <li>App usage data (features used, session length) for improving the App</li>
-      <li>Subscription status (active or inactive) via Apple StoreKit — we do not receive your payment details</li>
+      <li>A randomly generated, anonymous device identifier stored in your device's Keychain. It is used solely to enforce per-device rate limits on AI features and to track redemption-code credits. It is not linked to your name, email, or Apple ID.</li>
+      <li>Subscription status (active or inactive) and redemption-code credit balance</li>
+      <li>Standard server logs (IP address, request timestamp, response status) for our backend, retained briefly for security and abuse prevention</li>
     </ul>
     <p><strong>Information we do not collect:</strong></p>
     <ul>
-      <li>Your name, email address, or Apple ID</li>
-      <li>Your precise location</li>
-      <li>Contacts, photos, or other sensitive device data</li>
+      <li>Your name, email address, Apple ID, or any other directly identifying information</li>
+      <li>Your location</li>
+      <li>Your contacts, calendars, or device data unrelated to the App</li>
+      <li>Photos or images you capture for verse OCR (processed entirely on-device; never sent off-device)</li>
+      <li>Voice recordings (handled by Apple's speech recognition service; we never receive or store them)</li>
+      <li>Analytics, advertising identifiers, or any cross-app or cross-site tracking data</li>
+      <li>Your payment details (handled entirely by Apple via StoreKit)</li>
     </ul>
 
     <h2>2. How We Use Your Information</h2>
-    <p>We use the information collected to:</p>
+    <p>We use the information collected only to:</p>
     <ul>
       <li>Provide and operate the App and its features</li>
-      <li>Process your questions through the AI Ask feature</li>
-      <li>Improve the accuracy and performance of the App</li>
-      <li>Enforce our Terms of Use and prevent abuse</li>
+      <li>Process your prompts through the AI features</li>
+      <li>Enforce rate limits and prevent abuse of paid features</li>
+      <li>Maintain the security and reliability of our backend</li>
       <li>Comply with legal obligations</li>
     </ul>
 
-    <h2>3. AI Feature and Third-Party Processing</h2>
+    <h2>3. AI Features and Third-Party Processing</h2>
     <div class="highlight">
-      When you use the Ask feature, your message and conversation history are sent to our backend server, which uses a third-party AI service to generate responses.
+      When you use any AI feature (Ask, sermon reflection, or Custom Path generation), your message and the relevant Scripture context are sent to our backend server and forwarded to Anthropic, our AI provider, for processing by their Claude API.
     </div>
-    <p>By using the Ask feature, you consent to this processing. Please do not include personally sensitive information (such as your full name, home address, or medical details) in Ask messages.</p>
-    <p>We take reasonable steps to ensure our third-party providers handle data securely and in accordance with applicable law, but we cannot guarantee the practices of third parties.</p>
+    <p>Anthropic processes the request to generate a response and returns it to our server, which streams it back to your device. Anthropic's handling of your data is governed by their own privacy policy: <a href="https://www.anthropic.com/privacy">anthropic.com/privacy</a>.</p>
+    <p>By using the AI features, you consent to this processing. Please do not include personally sensitive information (such as your full legal name, home address, financial details, government identifiers, or detailed medical information) in AI prompts.</p>
+    <p>Our backend does not retain the full text of your prompts or responses after the request completes. We may temporarily log error events and request metadata for debugging and abuse prevention.</p>
 
-    <h2>4. Data Retention</h2>
+    <h2>4. iCloud Sync</h2>
+    <p>If you are signed into iCloud on your device, the App uses Apple's CloudKit service to sync your private app data (verses, highlights, Bible notes, chat history, sermon notes, Quiet Time sessions, prayer items) to your <strong>private</strong> iCloud database. This sync is between your own Apple devices only.</p>
     <ul>
-      <li>Conversation data sent to the Ask feature is used to generate a response and is not permanently stored by the Developer in a way that identifies you.</li>
-      <li>Verses, highlights, and notes are stored locally on your device. Using Settings → Reset All Data deletes this information.</li>
-      <li>Subscription status is managed by Apple and retained per Apple's policies.</li>
+      <li>This data is stored in your iCloud account, not on our servers. We cannot access it.</li>
+      <li>Apple's privacy policy applies to any data stored in iCloud: <a href="https://www.apple.com/legal/privacy/">apple.com/legal/privacy</a>.</li>
+      <li>You can disable iCloud sync for Cardinal at any time in iOS Settings → your name → iCloud → Apps Using iCloud.</li>
+      <li>If you are not signed into iCloud, the App stores this data locally on your device only.</li>
     </ul>
 
-    <h2>5. Data Sharing</h2>
-    <p>We do not sell your personal information. We may share information only:</p>
+    <h2>5. Camera, Microphone, and Speech Recognition</h2>
+    <p><strong>Camera (optional):</strong> The App can use the camera to capture verses from books or screens for memorization. Captured images are processed entirely on-device using Apple's Vision framework. Images are not sent to our servers and are not retained after the recognized text is extracted.</p>
+    <p><strong>Microphone and speech recognition (optional):</strong> The App can transcribe verses you speak aloud using Apple's built-in speech recognition. Audio is handled by Apple's <code>SFSpeechRecognizer</code> service, which may send audio to Apple's servers for transcription per Apple's policy. Cardinal does not store audio recordings and does not transmit them to our backend.</p>
+    <p>Both features are off by default and only used when you initiate them. You can deny or revoke camera, microphone, and speech-recognition permissions at any time in iOS Settings.</p>
+
+    <h2>6. Subscriptions and Redemption Codes</h2>
+    <p>Subscription purchases are processed entirely by Apple through StoreKit. We receive a signed entitlement confirming whether a subscription is active for your device. We never receive your payment information or Apple ID.</p>
+    <p>Redemption codes (used for granting free AI message credits) are tied to your anonymous device identifier on our server. The server stores only the count of remaining credits and which codes have been redeemed. This data is not linked to your identity.</p>
+
+    <h2>7. Data Retention</h2>
     <ul>
-      <li>With service providers necessary to operate the App (e.g., our backend AI provider), under confidentiality obligations</li>
+      <li>AI prompts and responses are not retained on our backend after the request completes.</li>
+      <li>App content (verses, highlights, notes, chats, sermon notes, Quiet Time sessions) is stored on your device, and in your private iCloud while iCloud sync is enabled. Selecting <em>Settings → Reset All Data</em> deletes the local copy. Removing the App from iCloud deletes the iCloud copy.</li>
+      <li>Subscription status is managed by Apple and retained per Apple's policies.</li>
+      <li>Redemption-credit balances tied to your anonymous device ID are retained on our server until the credits are consumed or the device data is reset.</li>
+      <li>Server logs and abuse-prevention metadata are retained for a limited operational period.</li>
+    </ul>
+
+    <h2>8. Data Sharing</h2>
+    <p>We do not sell your personal information. We share information only:</p>
+    <ul>
+      <li>With Anthropic, our AI provider, solely for processing AI feature requests as described in Section 3</li>
+      <li>With Apple, for subscription processing and (if you choose) iCloud sync</li>
       <li>As required by law, regulation, or valid legal process</li>
       <li>To protect the rights, property, or safety of the Developer or others</li>
     </ul>
 
-    <h2>6. Children's Privacy</h2>
+    <h2>9. Children's Privacy</h2>
     <p>The App is not directed at children under 13 years of age (or 16 in the European Economic Area). We do not knowingly collect personal information from children. If you believe a child has provided us information, contact us at the address below and we will promptly delete it.</p>
 
-    <h2>7. Your Rights</h2>
-    <p>Depending on your location, you may have rights regarding your personal information, including the right to access or delete information associated with your device identifier, the right to opt out of certain data processing, and rights under GDPR (EEA residents), CCPA (California residents), or other applicable laws.</p>
-    <p>To exercise these rights, contact us at <a href="mailto:Bridges@duck.com">Bridges@duck.com</a>. Because we do not collect identifying information, we may need to work with you to verify your request.</p>
+    <h2>10. Your Rights</h2>
+    <p>Depending on your location, you may have rights regarding your personal information, including the right to access, correct, or delete information associated with your device identifier, the right to opt out of certain data processing, and rights under the GDPR (EEA residents), the UK GDPR, the CCPA/CPRA (California residents), and other applicable laws.</p>
+    <p>To exercise these rights, contact us at <a href="mailto:Bridges@duck.com">Bridges@duck.com</a>. Because we do not collect identifying information, we may ask you to provide additional details (such as the approximate date you began using the App or the device on which you used it) so we can associate a request with the limited data we hold.</p>
 
-    <h2>8. Security</h2>
-    <p>We implement reasonable technical and organizational measures to protect your information. However, no method of transmission over the internet or electronic storage is 100% secure, and we cannot guarantee absolute security.</p>
+    <h2>11. Security</h2>
+    <p>All communication between the App and our backend uses HTTPS (TLS). We implement reasonable technical and organizational measures to protect your information. However, no method of transmission over the internet or electronic storage is completely secure, and we cannot guarantee absolute security.</p>
 
-    <h2>9. Changes to This Policy</h2>
-    <p>We may update this Privacy Policy from time to time. We will notify you of material changes through the App. Continued use after changes take effect constitutes acceptance of the revised policy.</p>
+    <h2>12. International Transfers</h2>
+    <p>Our backend and Anthropic's services are operated in the United States. If you access the App from outside the United States, your information may be transferred to, stored, and processed in the United States or other countries where our service providers operate.</p>
 
-    <h2>10. Contact</h2>
+    <h2>13. Changes to This Policy</h2>
+    <p>We may update this Privacy Policy from time to time. Material changes will be communicated through the App or by updating this page. Continued use after changes take effect constitutes acceptance of the revised policy.</p>
+
+    <h2>14. Contact</h2>
     <p>For privacy-related questions or requests:</p>
     <p>
       <strong>Jed Bridges</strong><br />
