@@ -22,10 +22,9 @@
     }
     .app-badge .icon {
       width: 52px; height: 52px;
-      background: #e8352a;
       border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
-      color: white; font-size: 24px;
+      display: block;
+      object-fit: cover;
     }
     .app-badge .name {
       font-size: 20px;
@@ -82,7 +81,7 @@
   <div class="container">
 
     <div class="app-badge">
-      <div class="icon">✝</div>
+      <img class="icon" src="app-icon.png" alt="Cardinal app icon" />
       <div>
         <div class="name">Cardinal</div>
         <div class="tagline">Your Bible &amp; Study Companion</div>
