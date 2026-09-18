@@ -7,8 +7,7 @@
   <title>Cardinal · Bible, Quiet Time &amp; Scripture Memory</title>
   <meta name="description" content="Cardinal is a Bible app built for being alone with Scripture. Read, listen, memorize, and sit with a guided quiet time. No feed, no streaks, no account. Reading is always free." />
   <link rel="canonical" href="https://cardinalbible.app/" />
-  <meta name="theme-color" content="#FAF7F2" media="(prefers-color-scheme: light)" />
-  <meta name="theme-color" content="#22201D" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#FAF7F2" />
 
   <meta property="og:title" content="Cardinal · Bible, Quiet Time &amp; Scripture Memory" />
   <meta property="og:description" content="Just you, God and Scripture. No noise. A Bible app built for reading, not scrolling." />
@@ -72,27 +71,6 @@
       --maxw: 1080px;
     }
 
-    @media (prefers-color-scheme: dark) {
-      :root {
-        color-scheme: dark;
-        --red: #C23D3D;
-        --red-ink: #E58A86;
-        --red-soft: rgba(194,61,61,0.14);
-        --ink: #EBEBEB;
-        --ink-2: #D6CFC6;
-        --ink-3: #BDBDBD;
-        --muted: #8C8C8C;
-        --bg: #22201D;
-        --bg-2: #1C1A18;
-        --card: #272522;
-        --border: rgba(255,255,255,0.10);
-        --border-soft: rgba(255,255,255,0.07);
-        /* Bands must still read as a distinct panel once the page itself
-           is dark, so they step up rather than matching the background. */
-        --dark-bg: #2E2B27;
-      }
-    }
-
     html { scroll-behavior: smooth; }
 
     body {
@@ -115,9 +93,6 @@
       background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.08  0 0 0 0 0.06  0 0 0 0 0.02  0 0 0 0.035 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
       opacity: 0.55;
       mix-blend-mode: multiply;
-    }
-    @media (prefers-color-scheme: dark) {
-      body::before { mix-blend-mode: overlay; opacity: 0.35; }
     }
 
     a { color: var(--red-ink); text-decoration: none; }
@@ -208,8 +183,8 @@
     /* ---------- Hero ---------- */
     .hero {
       display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: clamp(2rem, 5vw, 4.5rem);
+      grid-template-columns: 1fr 0.95fr;
+      gap: clamp(2rem, 5vw, 4rem);
       align-items: center;
       padding: var(--s-7) 0 var(--section-y);
     }
@@ -242,7 +217,7 @@
     }
 
     .shot {
-      border-radius: 34px;
+      border-radius: 22px;
       box-shadow:
         0 2px 4px rgba(31,31,31,0.06),
         0 30px 60px -24px rgba(31,31,31,0.42),
@@ -250,16 +225,8 @@
       width: 100%;
       height: auto;
     }
-    @media (prefers-color-scheme: dark) {
-      /* A dark screenshot on a dark page needs an edge, not a shadow. */
-      .shot {
-        box-shadow:
-          0 0 0 1px rgba(255,255,255,0.10),
-          0 30px 60px -24px rgba(0,0,0,0.7);
-      }
-    }
     .hero .shot-col { display: flex; justify-content: center; }
-    .hero .shot { max-width: 296px; }
+    .hero .shot { max-width: 440px; }
 
     /* ---------- Dark bands ---------- */
     .band {
@@ -323,8 +290,8 @@
     /* ---------- Chapters ---------- */
     .chapter {
       display: grid;
-      grid-template-columns: 1fr 0.78fr;
-      gap: clamp(2rem, 6vw, 5.5rem);
+      grid-template-columns: 1fr 1.02fr;
+      gap: clamp(2rem, 5vw, 4.5rem);
       align-items: center;
       padding: var(--section-y) 0;
       border-top: 1px solid var(--border-soft);
@@ -333,7 +300,7 @@
     .chapter.flip .copy { order: 2; }
     .chapter.flip .shot-col { order: 1; }
     .chapter .shot-col { display: flex; justify-content: center; }
-    .chapter .shot { max-width: 272px; }
+    .chapter .shot { max-width: 460px; }
 
     .kicker {
       font-size: 11.5px; font-weight: 600;
@@ -396,6 +363,10 @@
       grid-template-columns: repeat(auto-fit, minmax(258px, 1fr));
       gap: var(--s-4);
     }
+    /* Exactly four tiles balance as a 2x2 rather than orphaning one. */
+    .grid.two { grid-template-columns: repeat(2, 1fr); }
+    @media (max-width: 760px) { .grid.two { grid-template-columns: 1fr; } }
+
     .tile {
       background: var(--card);
       border: 1px solid var(--border-soft);
@@ -614,11 +585,11 @@
       .hero, .chapter, .why { grid-template-columns: 1fr; }
       .hero { gap: var(--s-7); padding-top: var(--s-5); }
       .hero .shot-col { order: -1; }
-      .hero .shot { max-width: 232px; }
+      .hero .shot { max-width: 420px; }
       .chapter { gap: var(--s-6); }
       .chapter.flip .copy, .chapter.flip .shot-col { order: 0; }
       .chapter .shot-col { justify-content: flex-start; }
-      .chapter .shot { max-width: 230px; }
+      .chapter .shot { max-width: 440px; }
       .nav-links { display: none; }
       .quote-band .band-inner { grid-template-columns: 1fr; gap: var(--s-3); }
       .quote-mark { font-size: 3.5rem; }
@@ -652,6 +623,7 @@
     </a>
     <div class="nav-links">
       <a href="#read">Features</a>
+      <a href="#study">Study tools</a>
       <a href="#translations">Translations</a>
       <a href="#privacy">Privacy</a>
       <a href="#pricing">Pricing</a>
@@ -679,7 +651,7 @@
       <div class="shot-col">
         <picture>
           <source srcset="img/today.webp" type="image/webp" />
-          <img class="shot" src="img/today.png" width="620" height="1348" alt="Cardinal's Today screen, showing John 1:35 to 51 as the day's passage with a Begin Quiet Time button and a prayer list below it." />
+          <img class="shot" src="img/today.png" width="900" height="654" alt="Cardinal's Reflect screen on iPad, showing John 1:1 to 18 as day one of the 90-Day Starter path, with a Begin Quiet Time button and a prayer list below it." />
         </picture>
       </div>
     </header>
@@ -722,9 +694,38 @@
       <div class="shot-col">
         <picture>
           <source srcset="img/bible.webp" type="image/webp" />
-          <img class="shot" src="img/bible.png" loading="lazy" width="620" height="1348" alt="Cardinal's Bible screen, showing the books of the Old Testament as a grid of cards with the author of each book beneath its name." />
+          <img class="shot" src="img/bible.png" loading="lazy" width="900" height="1200" alt="Cardinal's Bible screen on iPad, showing a search field above the books of the Old Testament laid out as a grid of cards, each with its author beneath the name." />
         </picture>
       </div>
+    </section>
+  </div>
+
+  <!-- ---------- Inside the reader ---------- -->
+  <div class="wrap">
+    <section style="padding: 0 0 var(--section-y);" id="study" aria-labelledby="study-h">
+      <div class="head reveal">
+        <h2 id="study-h">What a tap opens.</h2>
+        <p>The study tools are not in a separate mode you have to go and find. Tap a word, a verse, or the chapter title, and they are already there. Three of the four need no connection at all.</p>
+      </div>
+      <div class="grid two reveal">
+        <article class="tile">
+          <h3>Word study</h3>
+          <p>Tap a single word to see the Hebrew or Greek behind it: the likely match, what it carries, and every other place it appears. Below that sits the whole verse as an interlinear, each original word tappable in turn. When a word cannot be matched with confidence, it says so rather than guessing.</p>
+        </article>
+        <article class="tile">
+          <h3>Cross-reference map</h3>
+          <p>A verse's cross-references open as a canvas you pan and zoom rather than a list you scroll. When a verse reaches into both testaments, the Old and New separate into columns, so you can see the shape of the connection. Tap any node to read it, then jump straight there.</p>
+        </article>
+        <article class="tile">
+          <h3>Compare translations</h3>
+          <p>Hold a verse up against the other English translations at once, with the words that differ from yours picked out. This is the tool for the moment a verse reads strangely and you want to know whether that is the translator or the text itself.</p>
+        </article>
+        <article class="tile">
+          <h3>Chapter context</h3>
+          <p>Tap the chapter title for where it sits in the book, how long it is, the places named in it, and a brief on the book with its key verses. None of this is written by an AI. The facts are computed and the prose is written by a person, because a model asked to state checkable facts will eventually state one wrongly.</p>
+        </article>
+      </div>
+      <p class="tnote">The lexicon is built from the MACULA Hebrew and Greek datasets and Strong's, and the cross-references come from the Treasury of Scripture Knowledge by way of OpenBible.info. All of it ships inside the app.</p>
     </section>
   </div>
 
@@ -747,7 +748,7 @@
       <div class="shot-col">
         <picture>
           <source srcset="img/today.webp" type="image/webp" />
-          <img class="shot" src="img/today.png" loading="lazy" width="620" height="1348" alt="The Today screen again, with the passage card, the Begin Quiet Time button, and the prayer list row." />
+          <img class="shot" src="img/today.png" loading="lazy" width="900" height="654" alt="The Reflect screen again, with the path selector, the passage card, the Begin Quiet Time button, and the prayer list row." />
         </picture>
       </div>
     </section>
@@ -770,7 +771,7 @@
       <div class="shot-col">
         <picture>
           <source srcset="img/memorize.webp" type="image/webp" />
-          <img class="shot" src="img/memorize.png" loading="lazy" width="620" height="1348" alt="Cardinal's Memorize screen, showing a browsable grid of verse packs such as Spiritual Warfare, Thanksgiving, God's Love for You and Financial Wisdom." />
+          <img class="shot" src="img/memorize.png" loading="lazy" width="900" height="1200" alt="Cardinal's Memorize screen on iPad, showing a browsable grid of themed verse packs." />
         </picture>
       </div>
     </section>
@@ -793,7 +794,7 @@
       <div class="shot-col">
         <picture>
           <source srcset="img/ask.webp" type="image/webp" />
-          <img class="shot" src="img/ask.png" loading="lazy" width="620" height="1348" alt="Cardinal's Ask screen, reading 'Ask anything about Scripture, thoughtful answers grounded in the verses themselves', above a list of suggested questions." />
+          <img class="shot" src="img/ask.png" loading="lazy" width="900" height="1200" alt="Cardinal's Ask screen on iPad, reading &ldquo;Ask anything about Scripture, thoughtful answers grounded in the verses themselves&rdquo;, above a list of suggested questions." />
         </picture>
       </div>
     </section>
