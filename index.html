@@ -182,8 +182,8 @@
     /* ---------- Hero ---------- */
     .hero {
       display: grid;
-      grid-template-columns: 1fr 0.95fr;
-      gap: clamp(2rem, 5vw, 4rem);
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: clamp(2rem, 5vw, 4.5rem);
       align-items: center;
       padding: var(--s-7) 0 var(--section-y);
     }
@@ -216,7 +216,7 @@
     }
 
     .shot {
-      border-radius: 22px;
+      border-radius: 34px;
       box-shadow:
         0 2px 4px rgba(31,31,31,0.06),
         0 30px 60px -24px rgba(31,31,31,0.42),
@@ -225,7 +225,7 @@
       height: auto;
     }
     .hero .shot-col { display: flex; justify-content: center; }
-    .hero .shot { max-width: 440px; }
+    .hero .shot { max-width: 296px; }
 
     /* ---------- Dark bands ---------- */
     .band {
@@ -291,8 +291,8 @@
     /* ---------- Chapters ---------- */
     .chapter {
       display: grid;
-      grid-template-columns: 1fr 1.02fr;
-      gap: clamp(2rem, 5vw, 4.5rem);
+      grid-template-columns: 1fr 0.78fr;
+      gap: clamp(2rem, 6vw, 5.5rem);
       align-items: center;
       padding: var(--section-y) 0;
       border-top: 1px solid var(--border-soft);
@@ -301,7 +301,7 @@
     .chapter.flip .copy { order: 2; }
     .chapter.flip .shot-col { order: 1; }
     .chapter .shot-col { display: flex; justify-content: center; }
-    .chapter .shot { max-width: 460px; }
+    .chapter .shot { max-width: 272px; }
 
     .kicker {
       font-size: 11.5px; font-weight: 600;
@@ -585,11 +585,11 @@
       .hero, .chapter, .why { grid-template-columns: 1fr; }
       .hero { gap: var(--s-7); padding-top: var(--s-5); }
       .hero .shot-col { order: -1; }
-      .hero .shot { max-width: 420px; }
+      .hero .shot { max-width: 232px; }
       .chapter { gap: var(--s-6); }
       .chapter.flip .copy, .chapter.flip .shot-col { order: 0; }
       .chapter .shot-col { justify-content: flex-start; }
-      .chapter .shot { max-width: 440px; }
+      .chapter .shot { max-width: 230px; }
       .nav-links { display: none; }
       .quote-band .band-inner { grid-template-columns: 1fr; gap: var(--s-3); }
       .quote-mark { font-size: 3.5rem; }
@@ -651,7 +651,7 @@
       <div class="shot-col">
         <picture>
           <source srcset="img/today.webp" type="image/webp" />
-          <img class="shot" src="img/today.png" width="900" height="654" alt="Cardinal's Reflect screen on iPad, showing John 1:1 to 18 as day one of the 90-Day Starter path, with a Begin Quiet Time button and a prayer list below it." />
+          <img class="shot" src="img/today.png" width="620" height="1348" alt="Cardinal's Today screen, showing John 1:35 to 51 as the day's passage with a Begin Quiet Time button and a prayer list below it." />
         </picture>
       </div>
     </header>
@@ -694,7 +694,7 @@
       <div class="shot-col">
         <picture>
           <source srcset="img/bible.webp" type="image/webp" />
-          <img class="shot" src="img/bible.png" loading="lazy" width="900" height="1200" alt="Cardinal's Bible screen on iPad, showing a search field above the books of the Old Testament laid out as a grid of cards, each with its author beneath the name." />
+          <img class="shot" src="img/bible.png" loading="lazy" width="620" height="1348" alt="Cardinal's Bible screen, showing the books of the Old Testament as a grid of cards with the author of each book beneath its name." />
         </picture>
       </div>
     </section>
@@ -748,7 +748,7 @@
       <div class="shot-col">
         <picture>
           <source srcset="img/today.webp" type="image/webp" />
-          <img class="shot" src="img/today.png" loading="lazy" width="900" height="654" alt="The Reflect screen again, with the path selector, the passage card, the Begin Quiet Time button, and the prayer list row." />
+          <img class="shot" src="img/today.png" loading="lazy" width="620" height="1348" alt="The Today screen again, with the passage card, the Begin Quiet Time button, and the prayer list row." />
         </picture>
       </div>
     </section>
@@ -771,7 +771,7 @@
       <div class="shot-col">
         <picture>
           <source srcset="img/memorize.webp" type="image/webp" />
-          <img class="shot" src="img/memorize.png" loading="lazy" width="900" height="1200" alt="Cardinal's Memorize screen on iPad, showing a browsable grid of themed verse packs." />
+          <img class="shot" src="img/memorize.png" loading="lazy" width="620" height="1348" alt="Cardinal's Memorize screen, showing a browsable grid of verse packs such as Spiritual Warfare, Thanksgiving, God's Love for You and Financial Wisdom." />
         </picture>
       </div>
     </section>
@@ -794,7 +794,7 @@
       <div class="shot-col">
         <picture>
           <source srcset="img/ask.webp" type="image/webp" />
-          <img class="shot" src="img/ask.png" loading="lazy" width="900" height="1200" alt="Cardinal's Ask screen on iPad, reading &ldquo;Ask anything about Scripture, thoughtful answers grounded in the verses themselves&rdquo;, above a list of suggested questions." />
+          <img class="shot" src="img/ask.png" loading="lazy" width="620" height="1348" alt="Cardinal's Ask screen, reading &ldquo;Ask anything about Scripture, thoughtful answers grounded in the verses themselves&rdquo;, above a list of suggested questions." />
         </picture>
       </div>
     </section>
