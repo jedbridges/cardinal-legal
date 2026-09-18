@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
   <meta charset="UTF-8" />
+  <script>document.documentElement.classList.remove('no-js');</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>Cardinal · Bible, Quiet Time &amp; Scripture Memory</title>
@@ -300,7 +301,9 @@
       padding: var(--section-y) 0;
       border-top: 1px solid var(--border-soft);
     }
-    .chapter:first-of-type { border-top: 0; }
+    #read.chapter { border-top: 0; }
+    /* Swap the tracks too, or the flipped copy lands in the narrow one. */
+    .chapter.flip { grid-template-columns: 0.78fr 1fr; }
     .chapter.flip .copy { order: 2; }
     .chapter.flip .shot-col { order: 1; }
     .chapter .shot-col { display: flex; justify-content: center; }
@@ -334,11 +337,10 @@
     }
     .points li::before {
       content: "";
-      width: 6px; height: 6px;
+      width: 5px; height: 5px;
       border-radius: 50%;
-      background: var(--red);
-      opacity: 0.5;
-      margin-top: 0.62em;
+      background: var(--muted);
+      margin-top: 0.68em;
     }
     .points strong { color: var(--ink); font-weight: 600; }
     .aside {
@@ -386,6 +388,59 @@
     }
     .tile p { font-size: 14.8px; color: var(--ink-3); }
 
+    /* ---------- Showcase ---------- */
+    /* Four sheets shown rather than described. No card chrome: the screens
+       are the content, the caption is the margin note. */
+    .showcase {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--s-5);
+    }
+    .showcase figure { margin: 0; display: grid; gap: var(--s-4); }
+    .showcase img {
+      width: 100%;
+      height: auto;
+      border-radius: 20px;
+      box-shadow:
+        0 2px 4px rgba(31,31,31,0.05),
+        0 20px 40px -20px rgba(31,31,31,0.36);
+      transition: transform 0.5s var(--ease-out), box-shadow 0.5s var(--ease-out);
+    }
+    .showcase figure:hover img {
+      transform: translateY(-6px) scale(1.012);
+      box-shadow:
+        0 2px 4px rgba(31,31,31,0.05),
+        0 34px 60px -24px rgba(31,31,31,0.42);
+    }
+    .showcase figcaption { font-size: 14.2px; color: var(--ink-3); line-height: 1.55; }
+    .showcase strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: var(--s-1);
+      font-variation-settings: "opsz" 40;
+    }
+    @media (max-width: 1000px) { .showcase { grid-template-columns: repeat(2, 1fr); gap: var(--s-6) var(--s-5); } }
+    @media (max-width: 620px) {
+      /* A swipeable rail beats two cramped columns on a phone. */
+      .showcase {
+        grid-template-columns: none;
+        grid-auto-flow: column;
+        grid-auto-columns: 74%;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: var(--s-4);
+        padding-bottom: var(--s-4);
+        margin-inline: calc(var(--s-5) * -1);
+        padding-inline: var(--s-5);
+        scrollbar-width: none;
+      }
+      .showcase::-webkit-scrollbar { display: none; }
+      .showcase figure { scroll-snap-align: start; }
+    }
+
     /* ---------- Quote ---------- */
     .quote {
       font-family: var(--font-display);
@@ -401,7 +456,6 @@
       grid-template-columns: auto 1fr;
       gap: clamp(1.25rem, 3vw, 2.5rem);
       align-items: start;
-      max-width: 840px;
     }
     .quote-mark {
       font-family: var(--font-display);
@@ -469,9 +523,8 @@
     }
     .langs span::after {
       content: "·";
-      color: var(--red);
+      color: var(--muted);
       margin-left: var(--s-3);
-      opacity: 0.6;
     }
     .langs span:last-child::after { content: ""; }
 
@@ -518,11 +571,11 @@
     .plan.pro li { color: var(--ink-3); }
     .plan li::before {
       content: "";
-      width: 7px; height: 7px;
+      width: 5px; height: 5px;
       border-radius: 50%;
-      background: var(--red);
-      margin-top: 0.58em;
-      margin-left: 5px;
+      background: var(--muted);
+      margin-top: 0.62em;
+      margin-left: 6px;
     }
     .pricenote {
       font-size: 13.5px; color: var(--muted);
@@ -683,19 +736,130 @@
     ::selection { background: rgba(189,38,48,0.16); color: var(--ink); }
 
     /* ---------- Reveal ---------- */
-    .reveal {
+    /* Scoped to .no-js's absence: with scripts blocked the page renders
+       whole and unanimated rather than as 8,000px of blank paper. */
+    html:not(.no-js) .reveal {
       opacity: 0;
       transform: translateY(16px);
       transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
     }
-    .reveal.in { opacity: 1; transform: none; }
+    html:not(.no-js) .reveal.in { opacity: 1; transform: none; }
+
+    /* ---------- Motion ---------- */
+    /* Opt-in: needs .js, and the reduced-motion block unwinds all of it. */
+
+    .line-wrap { display: block; overflow: hidden; padding-bottom: 0.06em; }
+    .line-inner {
+      display: block;
+      transform: translateY(105%);
+      transition: transform 1.05s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .lines-in .line-inner { transform: translateY(0); }
+    .lines-in .line-wrap:nth-child(2) .line-inner { transition-delay: 0.08s; }
+    .lines-in .line-wrap:nth-child(3) .line-inner { transition-delay: 0.16s; }
+    .lines-in .line-wrap:nth-child(4) .line-inner { transition-delay: 0.24s; }
+
+    html:not(.no-js) .hero .eyebrow,
+    html:not(.no-js) .hero .lede,
+    html:not(.no-js) .hero .cta-row,
+    html:not(.no-js) .hero .cta-note {
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+    }
+    .hero-in .eyebrow { transition-delay: 0.05s; }
+    .hero-in .lede    { transition-delay: 0.42s; }
+    .hero-in .cta-row { transition-delay: 0.52s; }
+    .hero-in .cta-note{ transition-delay: 0.60s; }
+    html:not(.no-js) .hero-in .eyebrow,
+    html:not(.no-js) .hero-in .lede,
+    html:not(.no-js) .hero-in .cta-row,
+    html:not(.no-js) .hero-in .cta-note {
+      opacity: 1; transform: none;
+    }
+
+    html:not(.no-js) .hero .shot {
+      opacity: 0;
+      transform: translateY(34px) scale(0.965);
+      filter: blur(6px);
+      transition: opacity 1.1s var(--ease-out), transform 1.2s var(--ease-out), filter 1.1s var(--ease-out);
+      transition-delay: 0.22s;
+    }
+    html:not(.no-js) .hero-in .shot { opacity: 1; transform: none; filter: none; }
+
+    .shot { will-change: transform; }
+    .chapter .shot { transform: translateY(var(--drift, 0px)); }
+
+    html:not(.no-js) .refusals li {
+      opacity: 0;
+      transform: translateX(-10px);
+      transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+      border-bottom-color: transparent;
+    }
+    .refusals li { position: relative; }
+    html:not(.no-js) .refusals li::after {
+      content: "";
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: 1px;
+      background: var(--band-border);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.9s var(--ease-out);
+    }
+    .refusals li:last-child::after { display: none; }
+    html:not(.no-js) .refusals.in li { opacity: 1; transform: none; }
+    html:not(.no-js) .refusals.in li::after { transform: scaleX(1); }
+    .refusals.in li:nth-child(2), .refusals.in li:nth-child(2)::after { transition-delay: 0.11s; }
+    .refusals.in li:nth-child(3), .refusals.in li:nth-child(3)::after { transition-delay: 0.22s; }
+    .refusals.in li:nth-child(4), .refusals.in li:nth-child(4)::after { transition-delay: 0.33s; }
+
+    html:not(.no-js) .showcase figure {
+      opacity: 0;
+      transform: translateY(26px) rotate(-1.2deg);
+      transition: opacity 0.8s var(--ease-out), transform 0.9s var(--ease-out);
+    }
+    html:not(.no-js) .showcase.in figure { opacity: 1; transform: none; }
+    .showcase.in figure:nth-child(2) { transition-delay: 0.09s; }
+    .showcase.in figure:nth-child(3) { transition-delay: 0.18s; }
+    .showcase.in figure:nth-child(4) { transition-delay: 0.27s; }
+
+    html:not(.no-js) .chips .chip {
+      opacity: 0;
+      transform: translateY(8px) scale(0.96);
+      transition: opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out);
+    }
+    html:not(.no-js) .chips.in .chip { opacity: 1; transform: none; }
+
+    .btn-primary { will-change: transform; }
+
+    .subnav-progress {
+      position: absolute;
+      left: 0; bottom: -1px;
+      height: 2px;
+      width: 100%;
+      background: var(--red);
+      transform: scaleX(var(--progress, 0));
+      transform-origin: left;
+    }
+
+    /* Browser surfaces the page did not draw. */
+    html { scrollbar-color: var(--border) transparent; }
+    ::-webkit-scrollbar { width: 12px; height: 12px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 99px;
+      border: 3px solid var(--bg);
+    }
+    ::-webkit-scrollbar-thumb:hover { background: var(--muted); }
 
     /* ---------- Responsive ---------- */
     @media (max-width: 900px) {
       .hero, .chapter, .why { grid-template-columns: 1fr; }
       .hero { gap: var(--s-7); padding-top: var(--s-5); }
-      .hero .shot-col { order: -1; }
-      .hero .shot { max-width: 232px; }
+      /* Proposition and action first; the screenshot follows as a scroll cue. */
+      .hero .shot { max-width: 190px; }
       .chapter { gap: var(--s-6); }
       .chapter.flip .copy, .chapter.flip .shot-col { order: 0; }
       .chapter .shot-col { justify-content: flex-start; }
@@ -718,6 +882,17 @@
         transition-duration: 0.01ms !important;
       }
       .reveal { opacity: 1; transform: none; }
+      .line-inner { transform: none !important; }
+      .hero .eyebrow, .hero .lede, .hero .cta-row, .hero .cta-note,
+      .hero .shot, .refusals li, .showcase figure, .chips .chip {
+        opacity: 1 !important;
+        transform: none !important;
+        filter: none !important;
+      }
+      .refusals li { border-bottom-color: var(--band-border) !important; }
+      .refusals li::after { transform: scaleX(1) !important; }
+      .chapter .shot { --drift: 0px !important; }
+      .subnav-progress { display: none; }
     }
   </style>
 </head>
@@ -743,6 +918,7 @@
 
 <nav class="subnav" id="subnav" aria-label="Sections">
   <div class="subnav-inner">
+    <span class="subnav-progress" aria-hidden="true"></span>
     <a class="brand" href="#top" aria-label="Back to top">
       <img src="favicon-48.png" alt="" width="26" height="26" />
       <span>Cardinal</span>
@@ -761,7 +937,7 @@
   </div>
 </nav>
 
-<main id="main" tabindex="-1" style="outline:none">
+<main id="main" tabindex="-1">
 
   <div class="wrap" id="top">
     <header class="hero">
@@ -779,10 +955,7 @@
         <p class="cta-note">Reading the Bible is free, always. No account, no sign-in.</p>
       </div>
       <div class="shot-col">
-        <picture>
-          <source srcset="img/today.webp" type="image/webp" />
-          <img class="shot" src="img/today.png" width="620" height="1348" alt="Cardinal's Today screen, showing John 1:35 to 51 as the day's passage with a Begin Quiet Time button and a prayer list below it." />
-        </picture>
+        <img class="shot" src="img/today.webp" width="620" height="1348" decoding="async" alt="Cardinal's Reflect tab, showing Psalm 121:1 as day 76 of the 90-Day Starter path, a Begin Quiet Time button, and a prayer list with five active prayers." />
       </div>
     </header>
   </div>
@@ -822,10 +995,7 @@
         </ul>
       </div>
       <div class="shot-col">
-        <picture>
-          <source srcset="img/bible.webp" type="image/webp" />
-          <img class="shot" src="img/bible.png" loading="lazy" width="620" height="1348" alt="Cardinal's Bible screen, showing the books of the Old Testament as a grid of cards with the author of each book beneath its name." />
-        </picture>
+        <img class="shot" src="img/reader.webp" loading="lazy" width="620" height="1348" decoding="async" alt="Psalm 23 open in Cardinal's reader, headed by a large red chapter numeral and a drop cap, with two phrases highlighted in the text." />
       </div>
     </section>
   </div>
@@ -837,27 +1007,36 @@
         <h2 id="study-h">What a tap opens.</h2>
         <p>The study tools are not in a separate mode you have to go and find. Tap a word, a verse, or the chapter title, and they are already there. Three of the four need no connection at all.</p>
       </div>
-      <div class="grid two reveal">
-        <article class="tile">
-          <h3>Word study</h3>
-          <p>Tap a single word to see the Hebrew or Greek behind it: the likely match, what it carries, and every other place it appears. Below that sits the whole verse as an interlinear, each original word tappable in turn. When a word cannot be matched with confidence, it says so rather than guessing.</p>
-        </article>
-        <article class="tile">
-          <h3>Cross-reference map</h3>
-          <p>A verse's cross-references open as a canvas you pan and zoom rather than a list you scroll. When a verse reaches into both testaments, the Old and New separate into columns, so you can see the shape of the connection. Tap any node to read it, then jump straight there.</p>
-        </article>
-        <article class="tile">
-          <h3>Compare translations</h3>
-          <p>Hold a verse up against the other English translations at once, with the words that differ from yours picked out. This is the tool for the moment a verse reads strangely and you want to know whether that is the translator or the text itself.</p>
-        </article>
-        <article class="tile">
-          <h3>Chapter context</h3>
-          <p>Tap the chapter title for where it sits in the book, how long it is, the places named in it, and a brief on the book with its key verses. None of this is written by an AI. The facts are computed and the prose is written by a person, because a model asked to state checkable facts will eventually state one wrongly.</p>
-        </article>
+      <div class="showcase reveal">
+        <figure>
+          <img src="img/word-study.webp" loading="lazy" decoding="async" width="620" height="1348" alt="A word study sheet for the word vine, showing the Greek ampelos with its parsing and lemma above a tappable interlinear of the whole verse." />
+          <figcaption>
+            <strong>Word study</strong>
+            The Hebrew or Greek behind a tapped word, with the whole verse as an interlinear underneath. When a word cannot be matched with confidence, it says so rather than guessing.
+          </figcaption>
+        </figure>
+        <figure>
+          <img src="img/verse-actions.webp" loading="lazy" decoding="async" width="620" height="1348" alt="The verse action sheet for John 15:1, offering Highlight, Note, Copy and Share above Ask, Cross-reference map and Compare translations." />
+          <figcaption>
+            <strong>One sheet, one verse</strong>
+            Highlight, note, copy, share. Then the study tools: ask about it, open its cross-references, or hold it against another translation.
+          </figcaption>
+        </figure>
+        <figure>
+          <img src="img/compare.webp" loading="lazy" decoding="async" width="620" height="1348" alt="Compare translations for John 3:19, with the Berean Standard reading pinned on top and KJV, NLT, NKJV and CSB below it, the differing words picked out in red." />
+          <figcaption>
+            <strong>Compare translations</strong>
+            One verse across the English translations at once, with the words that differ from yours picked out. For the moment a verse reads strangely and you want to know whether that is the translator or the text.
+          </figcaption>
+        </figure>
+        <figure>
+          <img src="img/chapter-context.webp" loading="lazy" decoding="async" width="620" height="1348" alt="The chapter context sheet for John 15, showing the chapter's verse count, a note on the word abide, and a written brief on the Gospel of John." />
+          <figcaption>
+            <strong>Chapter context</strong>
+            Where the chapter sits, how long it is, the places named in it, and a brief on the book. None of it is written by an AI. The facts are computed and the prose is written by a person.
+          </figcaption>
+        </figure>
       </div>
-      <p class="tnote">The lexicon is built from the MACULA Hebrew and Greek datasets and Strong's, and the cross-references come from the Treasury of Scripture Knowledge by way of OpenBible.info. All of it ships inside the app.</p>
-    </section>
-  </div>
 
   <!-- ---------- Quiet Time ---------- -->
   <div class="wrap">
@@ -876,10 +1055,7 @@
         <p class="aside">Your archive is searchable, and it is private. Nothing keeps score.</p>
       </div>
       <div class="shot-col">
-        <picture>
-          <source srcset="img/today.webp" type="image/webp" />
-          <img class="shot" src="img/today.png" loading="lazy" width="620" height="1348" alt="The Today screen again, with the passage card, the Begin Quiet Time button, and the prayer list row." />
-        </picture>
+        <img class="shot" src="img/quiet-time-read.webp" loading="lazy" width="620" height="1348" decoding="async" alt="The Read step of a Quiet Time, showing Psalm 121:1 with a step progress bar above it and an Ask chip beside the passage." />
       </div>
     </section>
   </div>
@@ -899,10 +1075,7 @@
         </ul>
       </div>
       <div class="shot-col">
-        <picture>
-          <source srcset="img/memorize.webp" type="image/webp" />
-          <img class="shot" src="img/memorize.png" loading="lazy" width="620" height="1348" alt="Cardinal's Memorize screen, showing a browsable grid of verse packs such as Spiritual Warfare, Thanksgiving, God's Love for You and Financial Wisdom." />
-        </picture>
+        <img class="shot" src="img/memorize.webp" loading="lazy" width="620" height="1348" decoding="async" alt="Cardinal's verse packs, a grid of themed sets including The Good News, Red Letter Words and Guarding Your Mind." />
       </div>
     </section>
   </div>
@@ -922,10 +1095,7 @@
         </ul>
       </div>
       <div class="shot-col">
-        <picture>
-          <source srcset="img/ask.webp" type="image/webp" />
-          <img class="shot" src="img/ask.png" loading="lazy" width="620" height="1348" alt="Cardinal's Ask screen, reading &ldquo;Ask anything about Scripture, thoughtful answers grounded in the verses themselves&rdquo;, above a list of suggested questions." />
-        </picture>
+        <img class="shot" src="img/ask.webp" loading="lazy" width="620" height="1348" decoding="async" alt="Cardinal's Ask tab, showing past conversations above a library of common questions and a composer reading Ask anything, three free questions this month." />
       </div>
     </section>
   </div>
@@ -1163,28 +1333,130 @@
   document.getElementById('year').textContent = new Date().getFullYear();
 
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var items = document.querySelectorAll('.reveal');
+  var hasIO = 'IntersectionObserver' in window;
 
-  if (reduce || !('IntersectionObserver' in window)) {
+  // ---- Scroll reveals -------------------------------------------------
+  var items = document.querySelectorAll('.reveal');
+  if (reduce || !hasIO) {
     items.forEach(function (el) { el.classList.add('in'); });
   } else {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
-        if (e.isIntersecting) {
-          e.target.classList.add('in');
-          io.unobserve(e.target);
-        }
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
       });
     }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
     items.forEach(function (el) { io.observe(el); });
   }
 
-  // Sticky section nav: show it once the hero has left, and mark the
-  // section the reader is actually in.
+  // ---- Staggered groups ------------------------------------------------
+  // The refusal ledger, the showcase and the chip rows each deal in rather
+  // than appearing, so the eye is led along them in reading order.
+  var groups = document.querySelectorAll('.refusals, .showcase, .chips');
+  if (reduce || !hasIO) {
+    groups.forEach(function (el) { el.classList.add('in'); });
+  } else {
+    var gio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); gio.unobserve(e.target); }
+      });
+    }, { threshold: 0.2 });
+    groups.forEach(function (el) { gio.observe(el); });
+    document.querySelectorAll('.chips .chip').forEach(function (c, n) {
+      c.style.transitionDelay = (n % 8) * 0.045 + 's';
+    });
+  }
+
+  // ---- Hero: headline rises line by line, then the rest follows --------
+  (function () {
+    var hero = document.querySelector('.hero');
+    var h1 = hero && hero.querySelector('h1');
+    if (!hero || !h1) return;
+    if (reduce) { hero.classList.add('hero-in', 'lines-in'); return; }
+
+    var original = h1.innerHTML;
+    // Wrap each word so we can group them by the line they land on.
+    function wrapWords(node) {
+      Array.prototype.slice.call(node.childNodes).forEach(function (child) {
+        if (child.nodeType === 3) {
+          var frag = document.createDocumentFragment();
+          child.textContent.split(/(\s+)/).forEach(function (tok) {
+            if (!tok) return;
+            if (/^\s+$/.test(tok)) { frag.appendChild(document.createTextNode(tok)); return; }
+            var w = document.createElement('span');
+            w.className = 'w';
+            w.textContent = tok;
+            frag.appendChild(w);
+          });
+          node.replaceChild(frag, child);
+        } else if (child.nodeType === 1) {
+          wrapWords(child);
+        }
+      });
+    }
+
+    try {
+      wrapWords(h1);
+      var words = Array.prototype.slice.call(h1.querySelectorAll('.w'));
+      if (!words.length) throw new Error('no words');
+      // Group by vertical position, then rebuild as masked lines.
+      var lines = [], lastTop = null;
+      words.forEach(function (w) {
+        var top = Math.round(w.offsetTop);
+        if (lastTop === null || Math.abs(top - lastTop) > 4) { lines.push([]); lastTop = top; }
+        lines[lines.length - 1].push(w);
+      });
+      var built = document.createDocumentFragment();
+      lines.forEach(function (line) {
+        var wrap = document.createElement('span');
+        wrap.className = 'line-wrap';
+        var inner = document.createElement('span');
+        inner.className = 'line-inner';
+        line.forEach(function (w, n) {
+          // Keep the <em> styling by moving the original node, not its text.
+          var src = w.parentNode !== h1 ? w.cloneNode(true) : w;
+          if (w.parentNode && w.parentNode.tagName === 'EM') {
+            var em = document.createElement('em');
+            em.appendChild(document.createTextNode(w.textContent));
+            inner.appendChild(em);
+          } else {
+            inner.appendChild(document.createTextNode(w.textContent));
+          }
+          if (n < line.length - 1) inner.appendChild(document.createTextNode(' '));
+        });
+        wrap.appendChild(inner);
+        built.appendChild(wrap);
+        // Keep a space between lines so the accessible name does not read
+        // "thatleaves" while the entrance is playing.
+        built.appendChild(document.createTextNode(' '));
+      });
+      h1.innerHTML = '';
+      h1.appendChild(built);
+    } catch (err) {
+      h1.innerHTML = original;          // never let the headline go missing
+      hero.classList.add('lines-in');
+    }
+
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        hero.classList.add('hero-in', 'lines-in');
+      });
+    });
+
+    // Once the entrance is done, put the real markup back so reflow and
+    // text selection behave normally.
+    setTimeout(function () {
+      if (h1.querySelector('.line-wrap')) {
+        h1.innerHTML = original;
+        h1.style.opacity = '1';
+      }
+    }, 2200);
+  })();
+
+  // ---- Sticky section nav ----------------------------------------------
   (function () {
     var bar = document.getElementById('subnav');
     var hero = document.querySelector('.hero');
-    if (!bar || !hero || !('IntersectionObserver' in window)) return;
+    if (!bar || !hero || !hasIO) return;
 
     new IntersectionObserver(function (entries) {
       bar.classList.toggle('in', !entries[0].isIntersecting);
@@ -1196,18 +1468,68 @@
       if (el) links[el.id] = a;
     });
 
-    var visible = {};
-    var spy = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) { visible[e.target.id] = e.isIntersecting; });
-      var current = null;
-      Object.keys(links).forEach(function (id) { if (visible[id]) current = current || id; });
+    // Nearest section above the reading line wins, so the mark is never
+    // blank in the gaps between the five it knows about.
+    var sections = Object.keys(links).map(function (id) { return document.getElementById(id); });
+    function markCurrent() {
+      var line = window.scrollY + window.innerHeight * 0.3, current = null;
+      sections.forEach(function (el) { if (el.offsetTop <= line) current = el.id; });
       Object.keys(links).forEach(function (id) {
         if (id === current) links[id].setAttribute('aria-current', 'true');
         else links[id].removeAttribute('aria-current');
       });
-    }, { rootMargin: '-60px 0px -55% 0px' });
-    Object.keys(links).forEach(function (id) { spy.observe(document.getElementById(id)); });
+    }
+
+    var progress = bar.querySelector('.subnav-progress');
+    var ticking = false;
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function () {
+        markCurrent();
+        if (progress && !reduce) {
+          var max = document.documentElement.scrollHeight - window.innerHeight;
+          progress.style.setProperty('--progress', max > 0 ? (window.scrollY / max).toFixed(4) : 0);
+        }
+        if (!reduce) drift();
+        ticking = false;
+      });
+    }
+
+    // ---- Screenshots drift against the text ----------------------------
+    var shots = Array.prototype.slice.call(document.querySelectorAll('.chapter .shot'));
+    function drift() {
+      var vh = window.innerHeight;
+      shots.forEach(function (img) {
+        var r = img.getBoundingClientRect();
+        if (r.bottom < -200 || r.top > vh + 200) return;
+        var centre = (r.top + r.height / 2 - vh / 2) / vh;   // -1 .. 1
+        img.style.setProperty('--drift', (centre * -26).toFixed(1) + 'px');
+      });
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    onScroll();
   })();
+
+  // ---- The primary button leans toward the cursor ----------------------
+  if (!reduce && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    document.querySelectorAll('.btn-primary').forEach(function (btn) {
+      var raf = null;
+      btn.addEventListener('pointermove', function (e) {
+        if (raf) return;
+        raf = requestAnimationFrame(function () {
+          var r = btn.getBoundingClientRect();
+          var dx = (e.clientX - (r.left + r.width / 2)) / r.width;
+          var dy = (e.clientY - (r.top + r.height / 2)) / r.height;
+          btn.style.transform = 'translate(' + (dx * 7).toFixed(1) + 'px,' + (dy * 5 - 2).toFixed(1) + 'px)';
+          raf = null;
+        });
+      });
+      btn.addEventListener('pointerleave', function () { btn.style.transform = ''; });
+    });
+  }
 </script>
 
 </body>
