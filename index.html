@@ -533,6 +533,9 @@
     /* ---------- Privacy ---------- */
     .privacy-list { list-style: none; display: grid; gap: var(--s-5); max-width: 62ch; }
     .privacy-list li { font-size: 16px; color: var(--ink-3); }
+    /* Was an 18px-tall target. */
+    .band a { display: inline-block; padding: 6px 0; }
+
     .privacy-list strong {
       display: block;
       font-family: var(--font-display);
@@ -572,8 +575,15 @@
       gap: var(--s-4);
       font-size: 13.5px; color: var(--muted);
     }
-    .foot-links { display: flex; flex-wrap: wrap; gap: var(--s-5); }
-    .foot-links a { color: var(--ink-3); }
+    .foot-links { display: flex; flex-wrap: wrap; gap: var(--s-4); }
+    /* Was 21.6px tall at 390px. Pad the hit area without moving the type. */
+    .foot-links a {
+      color: var(--ink-3);
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      padding: 0 var(--s-2);
+    }
 
     /* ---------- Sticky section nav ---------- */
     /* Appears once the hero is gone, so the page keeps a spine on a long
@@ -587,13 +597,20 @@
       -webkit-backdrop-filter: saturate(150%) blur(14px);
       border-bottom: 1px solid var(--border-soft);
       transform: translateY(-101%);
-      transition: transform 0.45s var(--ease-out);
+      /* visibility, not just transform: a translated-away bar keeps its links
+         in the tab order, and focus lands on something nobody can see. */
+      visibility: hidden;
+      transition: transform 0.45s var(--ease-out), visibility 0s linear 0.45s;
       will-change: transform;
     }
     @supports not (background: color-mix(in srgb, red 50%, transparent)) {
       .subnav { background: var(--bg); }
     }
-    .subnav.in { transform: translateY(0); }
+    .subnav.in {
+      transform: translateY(0);
+      visibility: visible;
+      transition: transform 0.45s var(--ease-out), visibility 0s;
+    }
 
     .subnav-inner {
       max-width: var(--maxw);
@@ -653,8 +670,9 @@
       /* Too many labels to fit honestly; the bar keeps the one job that
          still matters on a phone, which is the download. */
       .subnav-links { display: none; }
-      .subnav .btn { margin-left: auto; }
-      .subnav-inner { height: 54px; }
+      .subnav .btn { margin-left: auto; min-height: 44px; }
+      .subnav-inner { height: 60px; }
+      .subnav .brand { min-height: 44px; }
     }
     @media (prefers-reduced-motion: reduce) {
       .subnav { transition: none; }
@@ -710,7 +728,7 @@
 <div class="wrap">
   <nav class="topnav">
     <a class="brand" href="#top" aria-label="Cardinal, home">
-      <img src="app-icon.png" alt="" width="36" height="36" />
+      <img src="favicon-48.png" alt="" width="36" height="36" />
       <span>Cardinal</span>
     </a>
     <div class="nav-links">
@@ -726,7 +744,7 @@
 <nav class="subnav" id="subnav" aria-label="Sections">
   <div class="subnav-inner">
     <a class="brand" href="#top" aria-label="Back to top">
-      <img src="app-icon.png" alt="" width="26" height="26" />
+      <img src="favicon-48.png" alt="" width="26" height="26" />
       <span>Cardinal</span>
     </a>
     <div class="subnav-links">
@@ -743,7 +761,7 @@
   </div>
 </nav>
 
-<main id="main">
+<main id="main" tabindex="-1" style="outline:none">
 
   <div class="wrap" id="top">
     <header class="hero">
@@ -1117,7 +1135,7 @@
   <div class="wrap foot">
     <div>&copy; <span id="year">2026</span> Cardinal</div>
     <div class="foot-links">
-      <a href="privacy-policy.html">Privacy</a>
+      <a href="privacy-policy.html">Privacy policy</a>
       <a href="terms-of-use.html">Terms</a>
       <a href="https://apps.apple.com/app/id6758185643">App Store</a>
     </div>
