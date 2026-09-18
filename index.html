@@ -41,7 +41,7 @@
       --ink: #1F1F1F;
       --ink-2: #47382E;
       --ink-3: #5C5C5C;
-      --muted: #8A8279;
+      --muted: #706962;   /* darkened from #8A8279: the old tone was 3.5:1 on paper, under AA */
 
       --bg: #FAF7F2;
       --bg-2: #F3EFE7;
@@ -49,11 +49,10 @@
       --border: #E6E0D5;
       --border-soft: #EFEAE0;
 
-      --dark-bg: #22201D;
-      --dark-card: #2B2925;
-      --dark-ink: #EBEBEB;
-      --dark-ink-2: #BDBDBD;
-      --dark-border: rgba(255,255,255,0.09);
+      /* Bands are a deeper tone of the same paper, never ink. They still
+         have to read as a distinct panel, so they carry hairline rules. */
+      --band-bg: #F2EADC;
+      --band-border: #E2D7C4;
 
       --s-1: 0.25rem; --s-2: 0.5rem;  --s-3: 0.75rem; --s-4: 1rem;
       --s-5: 1.5rem;  --s-6: 2rem;    --s-7: 3rem;    --s-8: 4rem;
@@ -230,13 +229,15 @@
 
     /* ---------- Dark bands ---------- */
     .band {
-      background: var(--dark-bg);
-      color: var(--dark-ink);
+      background: var(--band-bg);
+      color: var(--ink);
+      border-top: 1px solid var(--band-border);
+      border-bottom: 1px solid var(--band-border);
       padding: var(--section-y) 0;
       position: relative;
       z-index: 1;
     }
-    .band h2 { color: #fff; }
+    .band h2 { color: var(--ink); }
     .band-inner { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--s-5); }
 
     .why {
@@ -251,7 +252,7 @@
       max-width: 16ch;
     }
     .why p {
-      color: var(--dark-ink-2);
+      color: var(--ink-3);
       font-size: 16.5px;
       margin-bottom: var(--s-5);
       max-width: 48ch;
@@ -261,7 +262,7 @@
       font-family: var(--font-display);
       font-size: clamp(1.3rem, 2.2vw, 1.75rem);
       line-height: 1.3;
-      color: #fff;
+      color: var(--ink);
       letter-spacing: -0.015em;
       margin-top: var(--s-6);
     }
@@ -273,8 +274,8 @@
       gap: var(--s-4);
       align-items: start;
       padding-bottom: var(--s-4);
-      border-bottom: 1px solid var(--dark-border);
-      color: var(--dark-ink-2);
+      border-bottom: 1px solid var(--band-border);
+      color: var(--ink-3);
       font-size: 15.5px;
     }
     .refusals li:last-child { border-bottom: 0; padding-bottom: 0; }
@@ -285,7 +286,7 @@
       line-height: 1.1;
       font-weight: 500;
     }
-    .refusals strong { color: #fff; font-weight: 600; display: block; }
+    .refusals strong { color: var(--ink); font-weight: 600; display: block; }
 
     /* ---------- Chapters ---------- */
     .chapter {
@@ -388,7 +389,7 @@
       font-size: clamp(1.45rem, 3vw, 2.25rem);
       line-height: 1.28;
       letter-spacing: -0.015em;
-      color: #fff;
+      color: var(--ink);
       max-width: 26ch;
       font-variation-settings: "opsz" 144;
     }
@@ -415,7 +416,7 @@
       font-size: 13px;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--muted);
+      color: var(--ink-3);
       font-weight: 500;
     }
 
@@ -485,16 +486,15 @@
       border: 1px solid var(--border-soft);
     }
     .plan.pro {
-      background: var(--dark-bg);
-      border-color: transparent;
-      color: var(--dark-ink);
+      background: var(--red-soft);
+      border-color: #EBD6D3;
     }
     .plan h3 {
       font-size: 22px;
       margin-bottom: var(--s-2);
       font-variation-settings: "opsz" 60;
     }
-    .plan.pro h3 { color: #fff; }
+    .plan.pro h3 { color: var(--ink); }
     .price {
       font-family: var(--font-display);
       font-size: 17px;
@@ -502,7 +502,7 @@
       margin-bottom: var(--s-5);
       font-weight: 500;
     }
-    .plan.pro .price { color: #E9A6A2; }
+    .plan.pro .price { color: var(--red-ink); }
     .plan ul { list-style: none; display: grid; gap: var(--s-3); }
     .plan li {
       display: grid;
@@ -512,7 +512,7 @@
       font-size: 15.3px;
       color: var(--ink-3);
     }
-    .plan.pro li { color: var(--dark-ink-2); }
+    .plan.pro li { color: var(--ink-3); }
     .plan li::before {
       content: "";
       width: 7px; height: 7px;
@@ -934,7 +934,7 @@
         <div>
           <h2 id="pr-h">Nobody is watching <em>you read.</em></h2>
           <p style="margin-top:1.5rem">What you underline, what you pray about, and what you ask are some of the most private things a person has. Cardinal is built so that they stay that way.</p>
-          <p><a href="privacy-policy.html" style="color:#E9A6A2">Read the full privacy policy</a></p>
+          <p><a href="privacy-policy.html">Read the full privacy policy</a></p>
         </div>
         <ul class="refusals">
           <li><span class="no">01</span><span><strong>No account</strong>No name, no email, no sign-in. Nothing to create before you can read.</span></li>
