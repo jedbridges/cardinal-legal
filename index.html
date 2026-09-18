@@ -580,6 +580,16 @@
       margin-top: 0.62em;
       margin-left: 6px;
     }
+    .plan-lead {
+      grid-template-columns: 1fr !important;
+      color: var(--ink) !important;
+      font-weight: 500;
+      padding-bottom: var(--s-3);
+      margin-bottom: var(--s-1);
+      border-bottom: 1px solid #EBD6D3;
+    }
+    .plan-lead::before { display: none; }
+
     .pricenote {
       font-size: 13.5px; color: var(--muted);
       margin-top: var(--s-5);
@@ -1277,6 +1287,7 @@
           <h3>Cardinal Pro</h3>
           <p class="price">A subscription</p>
           <ul>
+            <li class="plan-lead"><span>Everything in the free version, plus&hellip;</span></li>
             <li><span>Ask, beyond the free monthly questions</span></li>
             <li><span>The NKJV, NASB, CSB and NLT</span></li>
             <li><span>Two translations side by side</span></li>
