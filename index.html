@@ -2920,15 +2920,30 @@
       impression();
     }
 
-    // Delegated, and on pointerdown rather than click: a tap that leaves
-    // for the App Store can tear the page down before a click listener
-    // gets its turn, and a lost conversion is worse than a double count.
-    var sent = false;
-    document.addEventListener('pointerdown', function (e) {
-      if (sent) return;
+    // Delegated, and bound to both events on purpose.
+    //
+    // `pointerdown` is the one that matters for mouse and touch. It fires
+    // before the browser starts leaving for the App Store, where a click
+    // listener can lose the race against the page being torn down, and a
+    // lost conversion is worse than a double count.
+    //
+    // `click` is the only one a keyboard raises: pressing Enter on a
+    // focused link fires no pointer event at all. Without it, everyone
+    // navigating by keyboard, and every screen reader activating a link,
+    // converts invisibly.
+    //
+    // Which means most real conversions raise both, so they are collapsed:
+    // the same link firing twice inside 1.5s counts once. Two different
+    // buttons are two different intents and both count.
+    var lastLink = null, lastAt = 0;
+
+    function conversion(e) {
       var a = e.target.closest && e.target.closest('a[href*="apps.apple.com"]');
       if (!a) return;
-      sent = true;
+      var now = Date.now();
+      if (a === lastLink && now - lastAt < 1500) return;
+      lastLink = a;
+      lastAt = now;
       track('web.download_clicked', {
         variant: variant,
         // Which button did the work: the hero, the sticky bar, or the
@@ -2937,8 +2952,10 @@
              : a.closest('.subnav') ? 'subnav'
              : a.closest('footer') ? 'footer' : 'page'
       });
-      setTimeout(function () { sent = false; }, 1500);
-    }, true);
+    }
+
+    document.addEventListener('pointerdown', conversion, true);
+    document.addEventListener('click', conversion, true);
   })();
 
   // ---- Phone: keep the current section visible in the scrolling rail ----
