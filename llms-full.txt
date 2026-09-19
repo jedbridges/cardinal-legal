@@ -63,7 +63,7 @@ verse.
   chapter you were last in, so picking the Bible up again is one tap rather than a
   hunt.
 
-### What a tap opens
+### Four study tools, one tap from the verse
 
 The study tools are not in a separate mode you have to go and find. Tap a word, a
 verse, or the chapter title, and they are already there. Three of the four below
@@ -167,7 +167,7 @@ quietly works out which verses you are still learning.
 
 ## Threads
 
-**Someone in here has already been where you are.** Twenty-four lives from
+**Someone in Scripture has already been where you are.** Twenty-four lives from
 Scripture, each told as the handful of moments that actually made it. You find
 them by what they are about rather than by name, because you usually arrive
 carrying a situation and not a person.
@@ -221,7 +221,7 @@ Abraham's road, the Exodus, Passion Week. Each one flies stop to stop across rea
 
 ---
 
-## And the rest of it
+## Everything else in the app
 
 All of it is included for everyone, with no subscription. Where one part of
 something needs Pro, it says so below.
