@@ -72,32 +72,33 @@
   <!-- ------------------------------------------------------------------
        ANALYTICS
 
-       TelemetryDeck, which the app already reports to, which means this
-       site adds no new company to the list of people handling anything.
-       Section 13 of the privacy policy names one processor instead of two,
-       and that is worth more on this site than on most.
+       Umami Cloud. No cookies, no device storage, no identifier, and
+       nothing that can be tied back to a person or followed to another
+       site, so no consent banner is required. Section 13 of the privacy
+       policy names it.
 
-       SETUP, once: create a SEPARATE app in TelemetryDeck for the website
-       and use its ID here. Do not reuse the iOS app's ID. Web visitors and
-       app users in one bucket means every app metric quietly counts people
-       who only ever read a web page.
-
-       Then replace TELEMETRYDECK_APP_ID_NOT_SET below. Until then the
-       script 404s harmlessly, every track() call no-ops, and the
-       experiment still assigns and renders. Nothing on this page depends
-       on analytics loading, so a forgotten ID costs data and not a page.
+       It is a second company, which TelemetryDeck (kept below) would not
+       have been, since the app already reports there. The trade went this
+       way because this is a website test and Umami answers it directly:
+       it counts events against page views and hands back a conversion
+       rate, where TelemetryDeck is built for apps and would mean building
+       two insights and dividing them by hand every time.
 
        `defer` matters. It keeps the script off the critical path, and it
        guarantees execution before DOMContentLoaded, which is what lets
-       the events below fire without a queue. See the note there.
+       the events below fire without a queue. Umami has no queue of its
+       own, so an event sent mid-parse is simply lost. See the note there.
   ------------------------------------------------------------------- -->
+  <script defer src="https://cloud.umami.is/script.js"
+          data-website-id="77a312b1-950f-4354-8a9e-a2dd24edeebb"></script>
+
+  <!-- TelemetryDeck, kept as the alternative. Uncomment this and remove
+       the tag above to switch; track() below detects whichever is present.
+       Create a SEPARATE app for the website first, rather than reusing the
+       iOS app's ID: web visitors and app users in one bucket means every
+       app metric quietly counts people who only ever read a web page.
   <script defer src="https://cdn.telemetrydeck.com/websdk/telemetrydeck.min.js"
           data-app-id="TELEMETRYDECK_APP_ID_NOT_SET"></script>
-
-  <!-- Umami, kept as the alternative. Uncomment this and remove the tag
-       above to switch; track() below detects whichever is present.
-  <script defer src="https://cloud.umami.is/script.js"
-          data-website-id="UMAMI_WEBSITE_ID_NOT_SET"></script>
   -->
 
   <style>
@@ -2861,24 +2862,27 @@
   (function () {
     var variant = window.__hero || 'unassigned';
 
-    // Provider-agnostic on purpose. TelemetryDeck's web SDK could not be
-    // read from where this was written, so rather than hardcode a guess at
-    // its call signature, the adapter looks for a `signal` function on the
-    // globals it might use and calls the one it finds. Umami and Plausible
-    // are kept as fallbacks; switching is a script tag, not a rewrite.
+    // Provider-agnostic on purpose: the adapter finds whichever SDK is on
+    // the page rather than naming one, so changing analytics is a script
+    // tag in the head and not a rewrite here. Umami is live; TelemetryDeck
+    // and Plausible are the alternatives.
+    //
+    // The TelemetryDeck branch looks for a `signal` function across the
+    // three globals it might use instead of assuming one, because its web
+    // SDK could not be read from where this was written.
     //
     // Names follow the app's own convention (AnalyticsEvent.swift): dotted,
-    // lowercase, underscores inside a word. So the website's signals sort
+    // lowercase, underscores inside a word. So the website's events sort
     // next to the app's rather than looking like a different product.
     var DEBUG = /[?&]debug=analytics\b/.test(location.search);
 
     function provider() {
+      if (window.umami && typeof window.umami.track === 'function') {
+        return { name: 'umami', send: function (e, p) { window.umami.track(e, p); } };
+      }
       var td = window.td || window.TelemetryDeck || window.telemetrydeck;
       if (td && typeof td.signal === 'function') {
         return { name: 'telemetrydeck', send: function (e, p) { td.signal(e, p); } };
-      }
-      if (window.umami && typeof window.umami.track === 'function') {
-        return { name: 'umami', send: function (e, p) { window.umami.track(e, p); } };
       }
       if (typeof window.plausible === 'function') {
         return { name: 'plausible', send: function (e, p) { window.plausible(e, { props: p }); } };
@@ -2907,7 +2911,7 @@
         var p = provider();
         console.log('[analytics] variant=' + variant +
           ' | provider=' + (p ? p.name : 'none') +
-          ' | if this says none, the app ID is still unset or the script is blocked');
+          ' | if this says none, the script is blocked or the website ID is wrong');
       }
     }
     if (document.readyState === 'loading') {

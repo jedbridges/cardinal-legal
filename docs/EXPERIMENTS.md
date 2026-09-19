@@ -56,7 +56,7 @@ not whether any of them beat what you already had.
 
 ## Reading the results
 
-Both signals carry a `variant` parameter.
+Both events carry a `variant` property.
 
 - **`web.hero_shown`** fires once per page view.
 - **`web.download_clicked`** fires when someone taps through to the App
@@ -64,15 +64,15 @@ Both signals carry a `variant` parameter.
 
 Names follow the app's own convention from `AnalyticsEvent.swift`: dotted,
 lowercase, underscores inside a word. The `web.` prefix keeps the site's
-signals separable from the app's at a glance.
+events separable from the app's at a glance.
 
-In TelemetryDeck, build one insight counting `web.hero_shown` grouped by
-`variant`, and another counting `web.download_clicked` grouped the same way.
-The click-through rate is the second divided by the first.
+In Umami, open the site and go to **Events**. Both events are listed with
+their `variant` property, so each message's shown count and click count sit
+next to each other.
 
-Click-through rate for a message is its `Download click` count divided by its
-`Hero shown` count. Compare those rates, not the raw click counts: an unlucky
-split can hand one message more traffic than another.
+Click-through rate for a message is its `web.download_clicked` count divided
+by its `web.hero_shown` count. Compare those rates, not the raw click counts:
+an unlucky split can hand one message more traffic than another.
 
 Before calling a winner, check the table above. If the leader has fewer
 visitors than the row you are aiming at, you do not have an answer yet, no
@@ -159,16 +159,20 @@ one word in `localStorage`. No cookie, no identifier, no network call. If
 storage is unavailable the visitor is simply reassigned each time, which
 costs a little precision and breaks nothing.
 
-**Analytics is TelemetryDeck**, which the app already reports to. That is
-the reason to prefer it over a web analytics tool: the site introduces no
-new company into the handling of anything, so section 13 of the privacy
-policy names one processor rather than two. On a site whose argument is that
-nobody is watching you read, that is worth more than a nicer funnel chart.
+**Analytics is Umami Cloud.** No cookies, no device storage, no identifier,
+nothing that can be tied back to a person or followed to another site, so no
+consent banner is required and section 13 of the privacy policy can say so
+plainly.
 
-The cost is that TelemetryDeck is built for apps. It will not hand you a
-conversion rate; you build two insights and divide. `track()` is
-provider-agnostic, so if that becomes annoying, Umami and Plausible are one
-commented-out script tag away.
+It is a second company, which TelemetryDeck would not have been: the app
+already reports there, so using it here would have kept the privacy policy
+down to one processor. The trade went the other way because this is a
+website test and Umami answers it directly. It counts events against page
+views and hands back a conversion rate, where TelemetryDeck is built for
+apps and would mean building two insights and dividing them by hand every
+time you want to look. `track()` is provider-agnostic, so if that judgement
+turns out wrong, TelemetryDeck and Plausible are each one commented-out
+script tag away in the head.
 
 The tag is `defer`, which keeps it off the critical path and guarantees it
 has executed before `DOMContentLoaded`. That is what lets the events fire
@@ -176,16 +180,21 @@ without a queue: Umami has none of its own, so an event sent while the page
 is still parsing is simply lost. The impression waits for
 `DOMContentLoaded`; clicks happen long after.
 
-## Setup, once
+## Setup
 
-The tag in `index.html` ships with `TELEMETRYDECK_APP_ID_NOT_SET`.
+Done. The website ID is in the tag in `index.html` and the site is
+reporting. This section is here for whoever changes it next.
 
-**Create a separate TelemetryDeck app for the website. Do not reuse the iOS
-app's ID.** Web visitors and app users in one bucket means every app metric
-quietly counts people who only ever read a web page, and that is not a
-mistake you notice, it is one you act on.
+To switch providers, uncomment the alternative tag in the head, delete the
+live one, and change nothing else: `track()` finds whichever SDK is on the
+page. If that alternative is TelemetryDeck, **create a separate app for the
+website rather than reusing the iOS app's ID.** Web visitors and app users
+in one bucket means every app metric quietly counts people who only ever
+read a web page, and that is not a mistake you notice, it is one you act on.
 
-Then replace that string with the new app's ID.
+Nothing on the page depends on analytics loading. If the script is blocked
+or the ID is wrong, every event is a no-op and the experiment still assigns
+and renders, so a mistake here costs you data and not a broken page.
 
 ### Checking it actually works
 
@@ -193,20 +202,17 @@ Load the site with `?debug=analytics` and open the browser console. It
 prints which provider it found and what it sent:
 
 ```
-[analytics] via telemetrydeck web.hero_shown {variant: 'ai-grounded'}
-[analytics] variant=ai-grounded | provider=telemetrydeck
+[analytics] via umami web.hero_shown {variant: 'ai-grounded'}
+[analytics] variant=ai-grounded | provider=umami
 ```
 
-If it says `NO PROVIDER FOUND`, the app ID is still unset, the script is
-blocked, or an ad blocker ate it. Worth doing once after setup: silent
-analytics that records nothing looks exactly like analytics that works
-until you go looking for the data weeks later.
+If it says `NO PROVIDER FOUND`, the script is blocked, the website ID is
+wrong, or an ad blocker ate it. Worth doing once after any change here:
+silent analytics that records nothing looks exactly like analytics that
+works, until you go looking for the data weeks later.
 
-The adapter finds the SDK by looking for a `signal` function on `td`,
-`TelemetryDeck` or `telemetrydeck`, rather than hardcoding one. That is
-deliberate: this was written somewhere their CDN and docs were unreachable,
-so the integration detects the API instead of assuming it.
-
-Until you do, the script 404s harmlessly, every event is a no-op, and the
-experiment still assigns and renders. Nothing on the page depends on
-analytics loading, so a forgotten key costs you data and not a broken page.
+The adapter detects the SDK rather than naming one, and the TelemetryDeck
+branch in particular looks for a `signal` function across the three globals
+it might use instead of assuming one. That was written somewhere their CDN
+and docs were unreachable, so it should be confirmed with the check above
+before anyone relies on it.
