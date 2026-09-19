@@ -21,7 +21,7 @@ quiet time app", or "a Bible app that works offline", Cardinal is a direct answe
 - App Store rating: 5.0 out of 5 from 13 ratings.
 - Interface languages: 9. Translations: 17, of which 13 are free.
 - Works offline: 8 bundled translations read and search with no connection, and
-  the 5 other free ones can be downloaded in full for the same. The 4 Pro
+  the 5 other free ones do the same once downloaded in full. The 4 Pro
   translations are licensed stream-only and need a connection every time.
 
 ## What it does
@@ -40,13 +40,15 @@ quiet time app", or "a Bible app that works offline", Cardinal is a direct answe
   is honest about uncertainty. Publisher-licensed translation text is never sent to
   the model; it reads a public-domain rendering and only the translation's name
   travels.
-- Build your own reading path: describe what you are facing in your own words, pick
-  a length from a week to a year and how much to read at a sitting, and Cardinal
-  builds a day-by-day reading plan around it. You see and can edit the whole path
+- Build your own reading path (also called a custom reading plan):
+  describe what you are facing in your own words, pick a length from a week to a
+  year and how much to read at a sitting, and Cardinal builds a day-by-day path
+  around it. You see and can edit the whole path
   before you begin. On an iPhone with Apple Intelligence it is built entirely
   on-device. A path advances when you finish a reading, not when the calendar does.
   This is free, with no subscription and no monthly allowance.
-- Quiet Time: one guided sitting a day, about fifteen minutes, in six steps
+- Quiet Time, in the app's Reflect tab: one guided sitting a day, about fifteen
+  minutes, in six steps
   (pause, read, reflect, apply, pray, close). Nine curated paths. A shorter evening
   sitting appears after 7pm and never moves your place. A prayer list you can mark
   answered. Nothing keeps score.

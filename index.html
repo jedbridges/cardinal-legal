@@ -348,6 +348,11 @@
       font-weight: 500;
     }
     .refusals strong { color: var(--ink); font-weight: 600; display: block; }
+    /* The refusal ledger earns its first column: every row there begins with
+       the same red "No". The privacy ledger has no such word and no order, so
+       it drops the column rather than filling it with 01 02 03 04, which would
+       promise a sequence the four facts do not have. */
+    .refusals.plain li { grid-template-columns: 1fr; }
 
     /* ---------- Chapters ---------- */
     .chapter {
@@ -1521,7 +1526,7 @@
     <section style="padding: 0 0 var(--section-y);" id="study" aria-labelledby="study-h">
       <div class="head reveal">
         <h2 id="study-h">What a tap opens.</h2>
-        <p>The study tools are not in a separate mode you have to go and find. Tap a word, a verse, or the chapter title, and they are already there. Three of the four need no connection at all.</p>
+        <p>The study tools are not in a separate mode you have to go and find. Tap a word, a verse, or the chapter title, and they are already there. Three of the four below need no connection at all.</p>
       </div>
       <div class="showcase reveal">
         <figure>
@@ -1604,9 +1609,9 @@
   <div class="wrap">
     <section class="chapter reveal" id="quiet-time" aria-labelledby="qt-h">
       <div class="copy">
-        <p class="kicker">Quiet Time</p>
+        <p class="kicker">Reflect</p>
         <h2 id="qt-h">One sitting a day, about fifteen minutes.</h2>
-        <p class="sub">You are never handed a chapter and left to it. Each day is a curated passage of fifteen to twenty-five verses, the natural scene the text is built around.</p>
+        <p class="sub">Cardinal&rsquo;s Reflect tab holds one Quiet Time a day. You are never handed a chapter and left to it: each day is a curated passage of fifteen to twenty-five verses, the natural scene the text is built around.</p>
         <ul class="points">
           <li><span><strong>Six steps.</strong> Pause, read, reflect, apply, pray, close. The same shape every day, so you stop having to decide how to begin.</span></li>
           <li><span><strong>Nine curated paths.</strong> From the Story of Jesus in John, to thirty days in the Psalms, to the whole Bible in a year.</span></li>
@@ -1647,7 +1652,7 @@
     <section style="padding: var(--section-y) 0; border-top: 1px solid var(--border-soft);" aria-labelledby="more-h">
       <div class="head reveal">
         <h2 id="more-h">And the rest of it.</h2>
-        <p>Everything below is included for everyone, with no subscription, unless it says otherwise.</p>
+        <p>All of it is included for everyone, with no subscription. Where one part of something needs Pro, it says so below.</p>
       </div>
       <div class="grid reveal">
         <article class="tile">
@@ -1688,7 +1693,7 @@
         <article class="tile">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 18.4h.01"/><path d="M8.7 14.7a5 5 0 0 1 6.6 0"/><path d="M5.7 11.4a9.4 9.4 0 0 1 12.6 0"/><path d="M2.7 8.1a13.9 13.9 0 0 1 18.6 0"/><path d="M3 3l18 18"/></svg>
           <h3>Works offline</h3>
-          <p>The eight bundled translations read and search with no connection at all, and the five free streamed ones can be downloaded in full for the same. Memorizing, highlighting and note-taking work anywhere. Audio and Ask need a signal, and so do the four Pro translations, which their licenses keep stream-only.</p>
+          <p>The eight bundled translations read and search with no connection at all, and the five other free ones do the same once you download them in full. Memorizing, highlighting and note-taking work anywhere. Audio and Ask need a signal, and so do the four Pro translations, which their licenses keep stream-only.</p>
         </article>
       </div>
     </section>
@@ -1700,7 +1705,7 @@
       <div class="reviews-top">
       <div class="head reveal">
         <h2 id="reviews-h">Five stars, from the people reading it.</h2>
-        <p>Every rating Cardinal has on the App Store is a five. Here are three of them, in full.</p>
+        <p>Every rating Cardinal has on the App Store is a five. Here are three of the reviews, in full.</p>
       </div>
 
       <div class="rating reveal">
@@ -1826,11 +1831,11 @@
           <p style="margin-top:1.5rem">What you underline, what you pray about, and what you ask are some of the most private things a person has. Cardinal is built so that they stay that way.</p>
           <p><a href="privacy-policy.html">Read the full privacy policy</a></p>
         </div>
-        <ul class="refusals">
-          <li><span class="no">01</span><span><strong>No account</strong>No name, no email, no sign-in. Nothing to create before you can read.</span></li>
-          <li><span class="no">02</span><span><strong>No ads, and no cross-app tracking</strong>No advertising identifiers, and no permission prompt asking to follow you elsewhere.</span></li>
-          <li><span class="no">03</span><span><strong>Your writing is yours</strong>Sittings, notes, prayers and highlights stay on your device, and with iCloud on, in your own private iCloud. They are not on a server anyone here can read.</span></li>
-          <li><span class="no">04</span><span><strong>Nothing sent that does not need to be</strong>Photos you scan are read on your device and never uploaded. Payment is handled entirely by Apple.</span></li>
+        <ul class="refusals plain">
+          <li><span><strong>No account</strong>No name, no email, no sign-in. Nothing to create before you can read.</span></li>
+          <li><span><strong>No ads, and no cross-app tracking</strong>No advertising identifiers, and no permission prompt asking to follow you elsewhere.</span></li>
+          <li><span><strong>Your writing is yours</strong>Sittings, notes, prayers and highlights stay on your device, and with iCloud on, in your own private iCloud. They are not on a server anyone here can read.</span></li>
+          <li><span><strong>Nothing sent that does not need to be</strong>Photos you scan are read on your device and never uploaded. Payment is handled entirely by Apple.</span></li>
         </ul>
       </div>
     </div>
@@ -1884,7 +1889,7 @@
     <section style="padding: 0 0 var(--section-y);" id="faq" aria-labelledby="faq-h">
       <div class="head reveal">
         <h2 id="faq-h">Questions people ask first.</h2>
-        <p>The short answers, without having to install anything to find them out.</p>
+        <p>The short answers, before you download anything.</p>
       </div>
       <div class="faq reveal">
         <details name="faq" open>
@@ -1902,7 +1907,7 @@
         <details name="faq">
           <summary>Does Cardinal work offline?<span class="mark" aria-hidden="true"></span></summary>
           <div class="faq-body">
-            <p>Thirteen of the seventeen translations can be. Eight are bundled with the app and read and search with no connection at all: the King James, Berean Standard, World English and Majority Standard Bibles, Reina-Valera 1909, Louis Segond 1910, Almeida 1911, and 和合本 (简体). The five other free translations stream a chapter at a time and keep it, and you can download any of them in full from the translation picker. The four Pro translations are the exception: their publishers do not permit storing the text, so those read from a connection every time and are never searchable offline. Highlighting, notes and memorizing work anywhere.</p>
+            <p>Yes, in thirteen of the seventeen translations. Eight are bundled with the app and read and search with no connection at all: the King James, Berean Standard, World English and Majority Standard Bibles, Reina-Valera 1909, Louis Segond 1910, Almeida 1911, and 和合本 (简体). The five other free translations stream a chapter at a time and keep it, and you can download any of them in full from the translation picker. The four Pro translations are the exception: their publishers do not permit storing the text, so those read from a connection every time and are never searchable offline. Highlighting, notes and memorizing work anywhere.</p>
           </div>
         </details>
         <details name="faq">
@@ -1973,7 +1978,7 @@
         </ul>
       </div>
       <div>
-        <h2>Written</h2>
+        <h2>Articles</h2>
         <ul>
           <li><a href="/offline-bible-app/">Offline reading</a></li>
           <li><a href="/bible-app-no-ads/">No ads, no account</a></li>
@@ -1984,7 +1989,7 @@
         <h2>Help</h2>
         <ul>
           <li><a href="support.html">Support</a></li>
-          <li><a href="#faq">Questions</a></li>
+          <li><a href="#faq">Common questions</a></li>
           <li><a href="https://apps.apple.com/app/id6758185643">App Store</a></li>
         </ul>
       </div>
@@ -2139,7 +2144,7 @@
           "name": "Does Cardinal work offline?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Thirteen of the seventeen translations can be. Eight are bundled with the app and read and search with no connection at all: the King James, Berean Standard, World English and Majority Standard Bibles, Reina-Valera 1909, Louis Segond 1910, Almeida 1911, and the Chinese Union Version in simplified characters. The five other free translations stream a chapter at a time and keep it, and any of them can be downloaded in full from the translation picker. The four Cardinal Pro translations are the exception: their publishers do not permit storing the text, so those read from a connection every time and are never searchable offline. Highlighting, notes and memorizing work anywhere."
+            "text": "Yes, in thirteen of the seventeen translations. Eight are bundled with the app and read and search with no connection at all: the King James, Berean Standard, World English and Majority Standard Bibles, Reina-Valera 1909, Louis Segond 1910, Almeida 1911, and the Chinese Union Version in simplified characters. The five other free translations stream a chapter at a time and keep it, and any of them can be downloaded in full from the translation picker. The four Cardinal Pro translations are the exception: their publishers do not permit storing the text, so those read from a connection every time and are never searchable offline. Highlighting, notes and memorizing work anywhere."
           }
         },
         {

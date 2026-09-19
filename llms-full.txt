@@ -66,8 +66,8 @@ verse.
 ### What a tap opens
 
 The study tools are not in a separate mode you have to go and find. Tap a word, a
-verse, or the chapter title, and they are already there. Three of the four need no
-connection at all.
+verse, or the chapter title, and they are already there. Three of the four below
+need no connection at all.
 
 - **Word study.** The Hebrew or Greek behind a tapped word, with the whole verse as
   an interlinear underneath. When a word cannot be matched with confidence, it says
@@ -130,9 +130,10 @@ it. This is free: there is no subscription and no monthly allowance on it.
 
 ## Quiet Time
 
-**One sitting a day, about fifteen minutes.** You are never handed a chapter and
-left to it. Each day is a curated passage of fifteen to twenty-five verses, the
-natural scene the text is built around.
+**One sitting a day, about fifteen minutes.** Cardinal's Reflect tab holds one
+Quiet Time a day. You are never handed a chapter and left to it: each day is a
+curated passage of fifteen to twenty-five verses, the natural scene the text is
+built around.
 
 - **Six steps.** Pause, read, reflect, apply, pray, close. The same shape every
   day, so you stop having to decide how to begin.
@@ -166,8 +167,8 @@ quietly works out which verses you are still learning.
 
 ## And the rest of it
 
-Everything below is included for everyone, with no subscription, unless it says
-otherwise.
+All of it is included for everyone, with no subscription. Where one part of
+something needs Pro, it says so below.
 
 - **Listen.** Scripture read aloud, with the words lighting up in time with the
   narration and the page following on its own. Six narrators, a sleep timer,
@@ -189,9 +190,9 @@ otherwise.
 - **iPad.** The same app, laid out for the larger screen. Good for a long sitting
   at a desk, or for reading two translations side by side.
 - **Works offline.** The eight bundled translations read and search with no
-  connection at all, and the five free streamed ones can be downloaded in full for
-  the same. Memorizing, highlighting and note-taking work anywhere. Audio and Ask
-  need a signal, and so do the four Pro translations, which their licenses keep
+  connection at all, and the five other free ones do the same once you download
+  them in full. Memorizing, highlighting and note-taking work anywhere. Audio and
+  Ask need a signal, and so do the four Pro translations, which their licenses keep
   stream-only.
 
 A promise kept in the source code: **Cardinal will not write your sermon. The
@@ -319,7 +320,7 @@ You open the app and you are reading. Your sittings, notes, prayers and highligh
 live on your device, and with iCloud turned on, in your own private iCloud.
 
 **Does Cardinal work offline?**
-Thirteen of the seventeen translations can be. Eight are bundled with the app and
+Yes, in thirteen of the seventeen translations. Eight are bundled with the app and
 read and search with no connection at all: the King James, Berean Standard, World
 English and Majority Standard Bibles, Reina-Valera 1909, Louis Segond 1910,
 Almeida 1911, and 和合本 (简体). The five other free translations stream a chapter at

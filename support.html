@@ -5,7 +5,7 @@
   <script>document.documentElement.classList.remove('no-js');</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Cardinal Support: Help With the Bible App</title>
+  <title>Cardinal Support &middot; Help With the Bible App</title>
   <meta name="description" content="Help with Cardinal, the Bible app. Answers to the questions people ask most, and a form that reaches a person." />
   <link rel="canonical" href="https://cardinalbible.app/support.html" />
   <meta name="theme-color" content="#FAF7F2" />
@@ -261,6 +261,10 @@
       margin-top: var(--s-2);
       line-height: 1.55;
     }
+    /* A one-line hint sits under its field. An instruction about what to write
+       sits above the box, because under 150px of textarea it is out of the
+       reader's way at exactly the moment they need it. */
+    .hint.before { margin-top: 0; margin-bottom: var(--s-3); }
     input, select, textarea {
       width: 100%;
       font-family: var(--font-ui);
@@ -440,7 +444,7 @@
 
     <section aria-labelledby="q-h" class="reveal">
       <h2 id="q-h">Before you write</h2>
-      <p class="sub">The eight questions that come up most, answered properly.</p>
+      <p class="sub">The questions that come up most, answered in full.</p>
 
       <div class="faq">
         <details name="support">
@@ -507,7 +511,7 @@
 
     <section aria-labelledby="w-h" class="reveal">
       <h2 id="w-h">Write to us</h2>
-      <p class="sub">This goes straight to a person, not a ticket queue. If something is broken, saying which iPhone and which iOS version usually saves a round trip.</p>
+      <p class="sub">This goes straight to a person, not a ticket queue.</p>
 
       <div class="form-card">
         <!--
@@ -545,13 +549,13 @@
 
           <div class="field">
             <label for="name">Your name <span class="opt">(optional)</span></label>
-            <input type="text" id="name" name="name" autocomplete="name" placeholder="So we know what to call you" />
+            <input type="text" id="name" name="name" autocomplete="name" />
           </div>
 
           <div class="field">
             <label for="email">Email</label>
-            <input type="email" id="email" name="email" required autocomplete="email" inputmode="email" placeholder="Where the reply should go" />
-            <p class="hint">Used to reply to you and nothing else. It is not added to a list, because there is no list.</p>
+            <input type="email" id="email" name="email" required autocomplete="email" inputmode="email" aria-describedby="email-hint" />
+            <p class="hint" id="email-hint">Where the reply goes. Used for that and nothing else: it is not added to a list, because there is no list.</p>
           </div>
 
           <div class="field">
@@ -568,7 +572,8 @@
 
           <div class="field">
             <label for="message">Message</label>
-            <textarea id="message" name="message" required placeholder="What happened, and what you expected instead."></textarea>
+            <p class="hint before" id="message-hint">What happened, and what you expected instead. If something is broken, naming your iPhone model and iOS version usually saves a round trip.</p>
+            <textarea id="message" name="message" required aria-describedby="message-hint"></textarea>
           </div>
 
           <button class="btn" type="submit" id="submit">
@@ -593,11 +598,13 @@
           <li><a href="/">Home</a></li>
           <li><a href="/#read">Read</a></li>
           <li><a href="/#ask">Ask</a></li>
+          <li><a href="/#quiet-time">Reflect</a></li>
+          <li><a href="/#memorize">Memorize</a></li>
           <li><a href="/#pricing">What&rsquo;s free</a></li>
         </ul>
       </div>
       <div>
-        <h2>Written</h2>
+        <h2>Articles</h2>
         <ul>
           <li><a href="/offline-bible-app/">Offline reading</a></li>
           <li><a href="/bible-app-no-ads/">No ads, no account</a></li>
@@ -786,11 +793,11 @@
             form.reset();
             show('ok', 'Sent. A person will read it and reply to the address you gave, usually within a couple of days.');
           } else {
-            show('error', 'That did not send. Please try again, and if it keeps failing, write to us on the App Store listing instead.');
+            show('error', 'That did not send. Your message is still in the box, so you can try again in a moment.');
           }
         })
         .catch(function () {
-          show('error', 'That did not send, which usually means the connection dropped. Your message is still in the box, so you can try again.');
+          show('error', 'That did not send. The connection dropped on the way. Your message is still in the box, so you can try again.');
         })
         .finally(function () { busy(false); });
     });
