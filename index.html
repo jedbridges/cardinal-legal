@@ -9,6 +9,14 @@
   <meta name="description" content="Cardinal is a Bible app built for being alone with Scripture. Read, listen, memorize, and sit with a guided quiet time. No feed, no streaks, no account. Reading is always free." />
   <link rel="canonical" href="https://cardinalbible.app/" />
   <meta name="theme-color" content="#FAF7F2" />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <meta name="author" content="Cardinal" />
+  <meta name="apple-itunes-app" content="app-id=6758185643" />
+
+  <!-- For answer engines: a short map at /llms.txt, the whole site as plain
+       text at /llms-full.txt, and schema.org JSON-LD at the foot of this file. -->
+  <link rel="alternate" type="text/plain" href="/llms.txt" title="llms.txt" />
+  <link rel="alternate" type="text/plain" href="/llms-full.txt" title="llms-full.txt" />
 
   <meta property="og:title" content="Cardinal · Bible, Quiet Time &amp; Scripture Memory" />
   <meta property="og:description" content="Just you, God and Scripture. No noise. A Bible app built for reading, not scrolling." />
@@ -55,6 +63,8 @@
       /* Bronze from the app's own supporting palette: warm, and not the
          accent, so the tiles never compete with the one red button. */
       --icon: #96763F;
+      /* Gold reads as a rating everywhere, and this one clears 3:1 on paper. */
+      --star: #AD7F22;
 
       --s-1: 0.25rem; --s-2: 0.5rem;  --s-3: 0.75rem; --s-4: 1rem;
       --s-5: 1.5rem;  --s-6: 2rem;    --s-7: 3rem;    --s-8: 4rem;
@@ -102,9 +112,9 @@
       position: fixed; inset: 0;
       pointer-events: none;
       z-index: 0;
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.10  0 0 0 0 0.075  0 0 0 0 0.03  0 0 0 0.055 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.68' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.10  0 0 0 0 0.075  0 0 0 0 0.03  0 0 0 0.105 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
       background-size: 260px 260px;
-      opacity: 0.8;
+      opacity: 1;
       mix-blend-mode: multiply;
     }
 
@@ -189,7 +199,11 @@
       font-family: var(--font-ui);
       font-size: 15px;
     }
-    .nav-links a { color: var(--ink-3); font-weight: 500; }
+    .nav-links a {
+      color: var(--ink-3); font-weight: 500;
+      /* A 25px-tall link is a 25px-tall target. */
+      display: inline-flex; align-items: center; min-height: 44px;
+    }
     .nav-links a:hover { color: var(--ink); text-decoration: none; }
 
     /* ---------- Buttons ---------- */
@@ -264,30 +278,34 @@
       margin-top: var(--s-4);
     }
 
+    /* The corner is baked into the image alpha as a superellipse, at the
+       real device ratio, because a CSS border-radius is a circular arc and
+       an iPhone's corner is not. The shadow has to follow that alpha, so
+       drop-shadow rather than box-shadow. */
     .shot {
-      border-radius: 34px;
-      box-shadow:
-        0 2px 4px rgba(31,31,31,0.06),
-        0 30px 60px -24px rgba(31,31,31,0.42),
-        0 60px 110px -40px rgba(31,31,31,0.26);
       width: 100%;
       height: auto;
+      filter:
+        drop-shadow(0 2px 3px rgba(31,31,31,0.10))
+        drop-shadow(0 26px 44px rgba(31,31,31,0.24));
     }
     .hero .shot-col { display: flex; justify-content: center; }
     .hero .shot { max-width: 330px; }
 
     /* ---------- Dark bands ---------- */
+    /* One surface archetype for every panel: same paper, same radius, no
+       rules top or bottom. */
     .band {
       background: var(--band-bg);
       color: var(--ink);
-      border-top: 1px solid var(--band-border);
-      border-bottom: 1px solid var(--band-border);
-      padding: var(--section-y) 0;
+      border-radius: var(--r-xl);
+      padding: clamp(2.5rem, 5.5vw, 4rem);
+      margin-bottom: var(--section-y);
       position: relative;
       z-index: 1;
     }
     .band h2 { color: var(--ink); }
-    .band-inner { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--s-6); }
+    .band-inner { max-width: 100%; }
 
     .why {
       display: grid;
@@ -454,17 +472,16 @@
     .showcase img {
       width: 100%;
       height: auto;
-      border-radius: 20px;
-      box-shadow:
-        0 2px 4px rgba(31,31,31,0.05),
-        0 20px 40px -20px rgba(31,31,31,0.36);
-      transition: transform 0.5s var(--ease-out), box-shadow 0.5s var(--ease-out);
+      filter:
+        drop-shadow(0 2px 3px rgba(31,31,31,0.08))
+        drop-shadow(0 18px 32px rgba(31,31,31,0.22));
+      transition: transform 0.5s var(--ease-out), filter 0.5s var(--ease-out);
     }
     .showcase figure:hover img {
       transform: translateY(-6px) scale(1.012);
-      box-shadow:
-        0 2px 4px rgba(31,31,31,0.05),
-        0 34px 60px -24px rgba(31,31,31,0.42);
+      filter:
+        drop-shadow(0 2px 3px rgba(31,31,31,0.08))
+        drop-shadow(0 30px 50px rgba(31,31,31,0.26));
     }
     .showcase figcaption { font-size: 15px; color: var(--ink-3); line-height: 1.66; }
     .showcase strong {
@@ -492,6 +509,88 @@
       }
       .showcase::-webkit-scrollbar { display: none; }
       .showcase figure { scroll-snap-align: start; }
+    }
+
+    /* ---------- Reviews ---------- */
+    .reviews { padding: var(--section-y) 0; }
+
+    .rating {
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: var(--s-3) var(--s-5);
+      margin-bottom: var(--s-8);
+    }
+    .rating-score {
+      font-family: var(--font-display);
+      font-size: clamp(3.25rem, 7vw, 5rem);
+      font-weight: 500;
+      line-height: 0.9;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+    }
+    .rating-count {
+      font-family: var(--font-ui);
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .stars { display: inline-flex; gap: 3px; }
+    .star {
+      width: 17px; height: 17px;
+      fill: var(--star);
+      flex: none;
+    }
+    .rating .star { width: 25px; height: 25px; gap: 4px; }
+
+    /* The stars strike one after another, left to right, once. */
+    html:not(.no-js) .stars .star {
+      opacity: 0;
+      transform: scale(0.4) rotate(-18deg);
+      transition: opacity 0.42s var(--ease-out), transform 0.52s cubic-bezier(0.34, 1.4, 0.64, 1);
+    }
+    html:not(.no-js) .stars.lit .star { opacity: 1; transform: none; }
+    .stars.lit .star:nth-child(2) { transition-delay: 0.07s; }
+    .stars.lit .star:nth-child(3) { transition-delay: 0.14s; }
+    .stars.lit .star:nth-child(4) { transition-delay: 0.21s; }
+    .stars.lit .star:nth-child(5) { transition-delay: 0.28s; }
+
+    .review-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--s-5);
+      align-items: start;
+    }
+    .review {
+      margin: 0;
+      background: var(--card);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--r-lg);
+      padding: var(--s-6) var(--s-6) var(--s-7);
+      display: grid;
+      gap: var(--s-4);
+      transition: border-color 0.25s ease, transform 0.35s var(--ease-out);
+    }
+    .review:hover { border-color: var(--border); transform: translateY(-3px); }
+    .review h3 { font-size: 19px; font-weight: 600; margin: 0; }
+    .review blockquote {
+      margin: 0;
+      font-size: 16px;
+      color: var(--ink-3);
+      line-height: 1.66;
+    }
+    .review figcaption {
+      font-family: var(--font-ui);
+      font-size: 13.5px;
+      color: var(--ink);
+      font-weight: 500;
+    }
+    .review figcaption span { color: var(--muted); font-weight: 400; }
+
+    @media (max-width: 900px) { .review-grid { grid-template-columns: 1fr; gap: var(--s-4); } }
+
+    @media (prefers-reduced-motion: reduce) {
+      .stars .star { opacity: 1 !important; transform: none !important; }
     }
 
     /* ---------- Quote ---------- */
@@ -559,10 +658,12 @@
       border: 1px solid var(--border-soft);
       color: var(--ink-2);
     }
+    /* The old fill measured 1.05:1 against the page, so the badge never
+       read as a badge. Deeper tint, darker ink, 6.9:1 on it. */
     .chip.pro {
-      background: var(--red-soft);
+      background: #F0CBC5;
       border-color: transparent;
-      color: var(--red-ink);
+      color: #871620;
       font-weight: 500;
     }
     .tnote { font-size: 14px; color: var(--muted); margin-top: var(--s-4); max-width: 60ch; }
@@ -601,8 +702,8 @@
       border: 1px solid var(--border-soft);
     }
     .plan.pro {
-      background: var(--red-soft);
-      border-color: #EBD6D3;
+      background: #FAEBE7;
+      border-color: #EFD5D0;
     }
     .plan h3 {
       font-size: 22px;
@@ -650,6 +751,95 @@
       font-size: 13.5px; color: var(--muted);
       margin-top: var(--s-5);
       max-width: 56ch;
+    }
+
+    /* The fold is a phone affordance only; wider screens keep the full list,
+       so the button it belongs to has no business being there. */
+    .more-toggle { display: none; }
+
+    /* ---------- Questions ---------- */
+    /* One card, hairline rows inside it. Nesting a card per question would
+       make nine of them and say nothing the rule does not. */
+    .faq {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--r-xl);
+      padding: var(--s-2) clamp(1.25rem, 3vw, 2.5rem);
+      /* Left edge shared with the heading above it. Centring the card would
+         leave the section's own title hanging off to one side. */
+      max-width: 90ch;
+    }
+    .faq details { border-top: 1px solid var(--border-soft); }
+    .faq details:first-child { border-top: 0; }
+    .faq summary {
+      list-style: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--s-5);
+      min-height: 44px;
+      padding: var(--s-5) 0;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: clamp(17px, 1.5vw, 19.5px);
+      letter-spacing: -0.015em;
+      line-height: 1.35;
+      color: var(--ink);
+      transition: color 0.2s ease;
+    }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary:hover { color: var(--red-ink); }
+    /* Drawn, not a glyph: a plus that loses its upright to become a minus. */
+    .faq summary .mark {
+      flex: none;
+      position: relative;
+      width: 18px; height: 18px;
+      color: var(--icon);
+    }
+    .faq summary .mark::before,
+    .faq summary .mark::after {
+      content: "";
+      position: absolute;
+      left: 50%; top: 50%;
+      width: 15px; height: 1.6px;
+      background: currentColor;
+      border-radius: 2px;
+      transform: translate(-50%, -50%);
+      transition: transform 0.35s var(--ease-out), opacity 0.2s ease;
+    }
+    .faq summary .mark::after { transform: translate(-50%, -50%) rotate(90deg); }
+    .faq details[open] summary .mark::after {
+      transform: translate(-50%, -50%) rotate(0deg);
+      opacity: 0;
+    }
+    .faq-body {
+      padding: 0 0 var(--s-6);
+      max-width: 72ch;
+    }
+    .faq-body p {
+      font-size: 16.5px;
+      line-height: 1.72;
+      color: var(--ink-3);
+      text-wrap: pretty;
+    }
+    /* Native <details> snaps open. Give it the page's ease instead, where the
+       browser can interpolate to a content-sized height. */
+    @supports (interpolate-size: allow-keywords) {
+      .faq details { interpolate-size: allow-keywords; }
+      .faq details::details-content {
+        block-size: 0;
+        overflow: hidden;
+        opacity: 0;
+        transition: block-size 0.4s var(--ease-out), content-visibility 0.4s allow-discrete, opacity 0.3s ease;
+      }
+      .faq details[open]::details-content { block-size: auto; opacity: 1; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .faq summary .mark::before, .faq summary .mark::after { transition: none; }
+      @supports (interpolate-size: allow-keywords) {
+        .faq details::details-content { transition: none; }
+      }
     }
 
     /* ---------- Privacy ---------- */
@@ -713,10 +903,16 @@
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 50;
-      background: color-mix(in srgb, var(--bg) 88%, transparent);
-      backdrop-filter: saturate(150%) blur(14px);
-      -webkit-backdrop-filter: saturate(150%) blur(14px);
-      border-bottom: 1px solid var(--border-soft);
+      /* Deliberately transparent: the blur is the point, so what passes
+         underneath stays legible as movement without ever being readable.
+         The tint floor is set by contrast, not taste. At 70% paper over the
+         darkest thing on the page (a dark-mode screenshot) the bar still
+         resolves to roughly #BC on which the label ink runs about 7:1. */
+      background: color-mix(in srgb, var(--bg) 74%, transparent);
+      backdrop-filter: saturate(180%) blur(48px);
+      -webkit-backdrop-filter: saturate(180%) blur(48px);
+      border-bottom: 1px solid color-mix(in srgb, var(--band-border) 70%, transparent);
+      box-shadow: 0 1px 24px -12px rgba(47, 38, 30, 0.35);
       transform: translateY(-101%);
       /* visibility, not just transform: a translated-away bar keeps its links
          in the tab order, and focus lands on something nobody can see. */
@@ -725,6 +921,10 @@
       will-change: transform;
     }
     @supports not (background: color-mix(in srgb, red 50%, transparent)) {
+      .subnav { background: var(--bg); }
+    }
+    /* Without a blur behind it, a 70% bar is just text over a screenshot. */
+    @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
       .subnav { background: var(--bg); }
     }
     .subnav.in {
@@ -755,7 +955,9 @@
       font-size: 13.5px;
     }
     .subnav-links a {
-      color: var(--ink-3);
+      /* Warm dark rather than grey: the bar is translucent, so the label has
+         to clear 4.5:1 over a dark screenshot passing under it too. */
+      color: var(--ink-2);
       font-weight: 500;
       position: relative;
       padding: 4px 0;
@@ -788,16 +990,41 @@
     .subnav .btn svg { width: 14px; height: 14px; }
 
     /* A jump must not land the heading under the bar. */
-    #read, #study, #quiet-time, #memorize, #ask,
-    #translations, #privacy, #pricing { scroll-margin-top: 66px; }
+    #read, #study, #quiet-time, #memorize, #ask, #path,
+    #translations, #privacy, #pricing, #reviews, #faq { scroll-margin-top: 66px; }
 
     @media (max-width: 860px) {
-      /* Too many labels to fit honestly; the bar keeps the one job that
-         still matters on a phone, which is the download. */
-      .subnav-links { display: none; }
-      .subnav-inner { grid-template-columns: 1fr auto; height: 56px; }
-      .subnav .btn { grid-column: 2; min-height: 44px; }
-      .subnav .brand { min-height: 44px; }
+      /* The wordmark is the one thing the bar can lose: the page is a single
+         page, so it was only ever decoration there. The section links are
+         what the bar is for, so they stay and scroll instead. */
+      .subnav .brand { display: none; }
+      .subnav-inner {
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: var(--s-3);
+        height: 58px;
+        padding-left: max(var(--s-4), env(safe-area-inset-left));
+        padding-right: max(var(--s-4), env(safe-area-inset-right));
+      }
+      .subnav-links {
+        grid-column: 1;
+        min-width: 0;
+        overflow-x: auto;
+        scrollbar-width: none;
+        gap: var(--s-4);
+        /* The last label fades out rather than being clipped, so the rail
+           reads as scrollable without a scrollbar or an arrow. */
+        -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 44px), transparent);
+        mask-image: linear-gradient(to right, #000 calc(100% - 44px), transparent);
+      }
+      .subnav-links::-webkit-scrollbar { display: none; }
+      .subnav-links a {
+        white-space: nowrap; flex: none;
+        /* 44px of target, with the rule still sitting on the word. */
+        padding: 13px 0;
+      }
+      .subnav-links a::after { bottom: 11px; }
+      .subnav .btn { grid-column: 2; min-height: 40px; padding: 8px 14px; font-size: 13px; }
+      .subnav .btn svg { width: 13px; height: 13px; }
     }
     @media (prefers-reduced-motion: reduce) {
       .subnav { transition: none; }
@@ -928,14 +1155,28 @@
 
     /* ---------- Responsive ---------- */
     @media (max-width: 900px) {
-      .hero, .chapter, .why { grid-template-columns: 1fr; }
+      /* .chapter.flip carries its own two-track rule at (0,2,0), so a plain
+         .chapter override never reaches it and the flipped chapters stayed
+         two columns wide on a phone. */
+      .hero, .chapter, .chapter.flip, .why { grid-template-columns: 1fr; }
       .hero { gap: var(--s-7); padding-top: var(--s-5); }
       /* Proposition and action first; the screenshot follows as a scroll cue. */
       .hero .shot { max-width: 190px; }
       .chapter { gap: var(--s-6); }
-      .chapter.flip .copy, .chapter.flip .shot-col { order: 0; }
-      .chapter .shot-col { justify-content: flex-start; }
-      .chapter .shot { max-width: 230px; }
+      /* Stacked, the chapter reads best as headline, screen, then the detail:
+         a screenshot parked under four bullets is a footnote to them. The copy
+         column dissolves so its children can be ordered against the shot.
+         .chapter.flip .shot-col outranks .chapter .shot-col, so both are named. */
+      .chapter .copy { display: contents; }
+      .chapter .kicker { order: 1; }
+      .chapter h2 { order: 2; }
+      .chapter .shot-col,
+      .chapter.flip .shot-col { order: 3; margin: var(--s-2) 0 var(--s-4); }
+      .chapter .sub { order: 4; }
+      .chapter .points { order: 5; }
+      .chapter .aside { order: 6; }
+      .chapter .shot-col { justify-content: center; }
+      .chapter .shot { max-width: 250px; }
       .nav-links { display: none; }
       .quote-band .band-inner { grid-template-columns: 1fr; gap: var(--s-3); }
       .quote-mark { font-size: 3.5rem; }
@@ -944,6 +1185,92 @@
       .hero h1 { max-width: 100%; }
       .chapter .shot-col { justify-content: center; }
       .cta-row .btn { width: 100%; }
+    }
+
+    /* ---------- Phones ----------------------------------------------------
+       A phone is not a narrow desktop. Below 700px the page stops being a
+       stack of two-column chapters cut in half and becomes its own layout:
+       the screenshot leads each chapter, long lists fold behind one tap,
+       the tile and review grids become swipe rails, and the bar that follows
+       you down the page carries the section links the top nav cannot. */
+    @media (max-width: 700px) {
+      :root {
+        --section-y: clamp(3.25rem, 11vw, 4.75rem);
+        --maxw: 100%;
+      }
+      .wrap { padding-left: max(var(--s-5), env(safe-area-inset-left)); padding-right: max(var(--s-5), env(safe-area-inset-right)); }
+
+      /* The screen is the strongest thing on the page. Give it room, and put
+         it under the headline rather than after four paragraphs of list. */
+      .hero { gap: var(--s-6); }
+      .hero .shot { max-width: min(58vw, 250px); }
+      .chapter .shot { max-width: min(62vw, 265px); }
+
+      .hero h1 { font-size: clamp(2.3rem, 10.5vw, 3.1rem); }
+      .head p, .chapter .sub { font-size: 16.5px; }
+
+      /* Folded lists. The button is written by script, so with JS off every
+         point stays on the page exactly as before. */
+      .points.folded > li[hidden] { display: none; }
+      .more-toggle {
+        order: 5;
+        margin-top: var(--s-4);
+        min-height: 44px;
+        display: inline-flex; align-items: center; gap: var(--s-2);
+        justify-self: start;
+        background: none; border: 0; padding: 0;
+        font-family: var(--font-ui);
+        font-size: 15px; font-weight: 600;
+        color: var(--red-ink);
+        cursor: pointer;
+      }
+      .more-toggle .chev {
+        width: 9px; height: 9px;
+        border-right: 1.8px solid currentColor;
+        border-bottom: 1.8px solid currentColor;
+        transform: translateY(-2px) rotate(45deg);
+        transition: transform 0.3s var(--ease-out);
+      }
+      .more-toggle[aria-expanded="true"] .chev { transform: translateY(1px) rotate(-135deg); }
+
+      /* Rails. Full-bleed so a card can sit against the edge of the screen
+         and the next one shows through, which is what says "swipe". */
+      .grid:not(.two), .review-grid, .showcase {
+        display: grid;
+        grid-template-columns: none;
+        grid-auto-flow: column;
+        grid-auto-columns: 82%;
+        gap: var(--s-4);
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: none;
+        margin-left: calc(-1 * max(var(--s-5), env(safe-area-inset-left)));
+        margin-right: calc(-1 * max(var(--s-5), env(safe-area-inset-right)));
+        padding: var(--s-2) max(var(--s-5), env(safe-area-inset-right)) var(--s-5) max(var(--s-5), env(safe-area-inset-left));
+        /* Without this the snapport is the padding box, so the first card
+           snaps itself flush to the screen edge the moment the page loads. */
+        scroll-padding-left: max(var(--s-5), env(safe-area-inset-left));
+        overscroll-behavior-x: contain;
+      }
+      .grid:not(.two)::-webkit-scrollbar,
+      .review-grid::-webkit-scrollbar,
+      .showcase::-webkit-scrollbar { display: none; }
+      .grid:not(.two) > *, .review-grid > *, .showcase > * { scroll-snap-align: start; }
+      .showcase { grid-auto-columns: 74%; }
+      /* A hover lift on a rail card only ever fires as a stuck touch state. */
+      .showcase figure:hover img { transform: none; }
+
+      .faq { border-radius: var(--r-lg); padding: var(--s-1) var(--s-5); }
+      .faq summary { padding: var(--s-4) 0; }
+      .band { padding: var(--s-6) var(--s-5); border-radius: var(--r-lg); }
+      .quote-card { padding: var(--s-6) var(--s-5); }
+      #read, #study, #quiet-time, #memorize, #ask, #path,
+      #translations, #privacy, #pricing, #reviews, #faq { scroll-margin-top: 70px; }
+    }
+
+    @media (max-width: 380px) {
+      .subnav .btn { padding: 8px 12px; font-size: 13px; }
+      .subnav-links { gap: var(--s-3); font-size: 13px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -1025,13 +1352,14 @@
         <p class="cta-note">Reading the Bible is free, always. No account, no sign-in.</p>
       </div>
       <div class="shot-col">
-        <img class="shot" src="img/today.webp" width="620" height="1348" decoding="async" alt="Cardinal's Reflect tab, showing Psalm 121:1 as day 76 of the 90-Day Starter path, a Begin Quiet Time button, and a prayer list with five active prayers." />
+        <img class="shot" src="img/reader.webp" width="620" height="1348" decoding="async" fetchpriority="high" alt="Psalm 23 open in Cardinal's reader, headed by a large red chapter numeral and a drop cap. Two phrases are highlighted, the second running across four lines as a single continuous marker stroke with every corner rounded." />
       </div>
     </header>
   </div>
 
   <!-- ---------- Why it exists ---------- -->
-  <section class="band" aria-labelledby="why-h">
+  <div class="wrap">
+    <section class="band" aria-labelledby="why-h">
     <div class="band-inner">
       <div class="why">
         <div>
@@ -1049,6 +1377,7 @@
       </div>
     </div>
   </section>
+  </div>
 
   <!-- ---------- Read ---------- -->
   <div class="wrap">
@@ -1062,10 +1391,11 @@
           <li><span><strong>Highlight the exact words.</strong> Long-press and drag across a phrase and only those words are marked, not the whole verse around them. Where the phrase runs past a line break the mark stays one continuous stroke instead of stacked rectangles, rounded at every corner and set on the letters rather than floating above them.</span></li>
           <li><span><strong>Search that respects the wording.</strong> Every translation carries its own index, because the words they choose are not the same.</span></li>
           <li><span><strong>Favorites and margins.</strong> Save a verse, or write a note that stays with the passage and is searchable in Bible order.</span></li>
+          <li><span><strong>It remembers where you stopped.</strong> The book grid carries a pill back to the chapter you were last in, so picking the Bible up again is one tap rather than a hunt.</span></li>
         </ul>
       </div>
       <div class="shot-col">
-        <img class="shot" src="img/reader.webp" loading="lazy" width="620" height="1348" decoding="async" alt="Psalm 23 open in Cardinal's reader, headed by a large red chapter numeral and a drop cap. Two phrases are highlighted, the second running across four lines as a single continuous marker stroke with every corner rounded." />
+        <img class="shot" src="img/bible.webp" loading="lazy" width="620" height="1348" decoding="async" alt="Cardinal's Bible tab: a search field reading Search by word or reference above the thirty-nine books of the Old Testament as a grid of cards, each naming its author, with a Continue reading John Ch. 15 pill resting above the tab bar." />
       </div>
     </section>
   </div>
@@ -1107,6 +1437,8 @@
           </figcaption>
         </figure>
       </div>
+    </section>
+  </div>
 
   <!-- ---------- Ask ---------- -->
   <div class="wrap">
@@ -1128,9 +1460,30 @@
     </section>
   </div>
 
+  <!-- ---------- A path made for you ---------- -->
+  <div class="wrap">
+    <section class="chapter flip reveal" id="path" aria-labelledby="path-h">
+      <div class="copy">
+        <p class="kicker">Your own path</p>
+        <h2 id="path-h">Or describe what you are facing, and have a path <em>built for it.</em></h2>
+        <p class="sub">Curated paths cover the ground most people want. When none of them is the thing you are actually carrying, say what it is in your own words and Cardinal shapes a reading path around it. This is free.</p>
+        <ul class="points">
+          <li><span><strong>In your own words.</strong> &ldquo;Walking through grief.&rdquo; &ldquo;Waiting for news.&rdquo; &ldquo;A new baby, and no sleep.&rdquo; &ldquo;The Gospel of John, slowly.&rdquo; Then choose how long, from a week to a year, and how much to read at a sitting.</span></li>
+          <li><span><strong>You see the whole path before you start.</strong> Every day, its passage and why it is there, listed in full. Swap a day for a different passage, reorder them, or take one out. The days renumber themselves.</span></li>
+          <li><span><strong>Built on your phone, where it can be.</strong> On an iPhone with Apple Intelligence the whole thing is shaped on the device. Your words and the path they produce never leave it.</span></li>
+          <li><span><strong>Checked against the text.</strong> The titles and notes are written by AI. Every reference in the path is verified against the Bible itself before you see it.</span></li>
+          <li><span><strong>It waits for you.</strong> A path moves forward when you finish a reading, never when the calendar does. Put it down for three weeks and you pick it up on the next day, not behind.</span></li>
+        </ul>
+      </div>
+      <div class="shot-col">
+        <img class="shot" src="img/today.webp" loading="lazy" width="620" height="1348" decoding="async" alt="Cardinal's Reflect tab on day 76 of the 90-Day Starter path, showing Psalm 121:1 and a Begin Quiet Time button, with a row underneath reading A path made for you, shaped for what you're facing." />
+      </div>
+    </section>
+  </div>
+
   <!-- ---------- Quiet Time ---------- -->
   <div class="wrap">
-    <section class="chapter flip reveal" id="quiet-time" aria-labelledby="qt-h">
+    <section class="chapter reveal" id="quiet-time" aria-labelledby="qt-h">
       <div class="copy">
         <p class="kicker">Quiet Time</p>
         <h2 id="qt-h">One sitting a day, about fifteen minutes.</h2>
@@ -1152,7 +1505,7 @@
 
   <!-- ---------- Memorize ---------- -->
   <div class="wrap">
-    <section class="chapter reveal" id="memorize" aria-labelledby="mem-h">
+    <section class="chapter flip reveal" id="memorize" aria-labelledby="mem-h">
       <div class="copy">
         <p class="kicker">Memorize</p>
         <h2 id="mem-h">Learn it by heart, without a scoreboard.</h2>
@@ -1218,6 +1571,43 @@
           <h3>Works offline</h3>
           <p>The eight bundled translations read and search with no connection at all. Memorizing, highlighting and note-taking work anywhere. Audio, the streamed translations and Ask need a signal.</p>
         </article>
+      </div>
+    </section>
+  </div>
+
+  <!-- ---------- Reviews ---------- -->
+  <div class="wrap">
+    <section class="reviews" id="reviews" aria-labelledby="reviews-h">
+      <div class="head reveal">
+        <h2 id="reviews-h">Five stars, from the people reading it.</h2>
+        <p>Every rating Cardinal has on the App Store is a five. Here are three of them, in full.</p>
+      </div>
+
+      <div class="rating reveal">
+        <span class="rating-score">5.0</span>
+        <span class="stars" role="img" aria-label="Rated 5 out of 5 stars"><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.9 5.88 6.49.95-4.7 4.58 1.11 6.46L12 17.42 6.2 20.47l1.11-6.46-4.7-4.58 6.49-.95z"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.9 5.88 6.49.95-4.7 4.58 1.11 6.46L12 17.42 6.2 20.47l1.11-6.46-4.7-4.58 6.49-.95z"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.9 5.88 6.49.95-4.7 4.58 1.11 6.46L12 17.42 6.2 20.47l1.11-6.46-4.7-4.58 6.49-.95z"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.9 5.88 6.49.95-4.7 4.58 1.11 6.46L12 17.42 6.2 20.47l1.11-6.46-4.7-4.58 6.49-.95z"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.9 5.88 6.49.95-4.7 4.58 1.11 6.46L12 17.42 6.2 20.47l1.11-6.46-4.7-4.58 6.49-.95z"/></svg></span>
+        <span class="rating-count">13 ratings on the App&nbsp;Store</span>
+      </div>
+
+      <div class="review-grid reveal">
+        <figure class="review">
+          <span class="stars" role="img" aria-label="Five stars"><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.9 5.88 6.49.95-4.7 4.58 1.11 6.46L12 17.42 6.2 20.47l1.11-6.46-4.7-4.58 6.49-.95z"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.9 5.88 6.49.95-4.7 4.58 1.11 6.46L12 17.42 6.2 20.47l1.11-6.46-4.7-4.58 6.49-.95z"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.9 5.88 6.49.95-4.7 4.58 1.11 6.46L12 17.42 6.2 20.47l1.11-6.46-4.7-4.58 6.49-.95z"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.9 5.88 6.49.95-4.7 4.58 1.11 6.46L12 17.42 6.2 20.47l1.11-6.46-4.7-4.58 6.49-.95z"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.9 5.88 6.49.95-4.7 4.58 1.11 6.46L12 17.42 6.2 20.47l1.11-6.46-4.7-4.58 6.49-.95z"/></svg></span>
+          <h3>The best bible app</h3>
+          <blockquote>This thing is 3.6MB runs entirely on device, no cloud, no sub. This is the bible app for you, it will really help you memorize scripture, finally.</blockquote>
+          <figcaption>swlkr <span>&middot; 30 January</span></figcaption>
+        </figure>
+        <figure class="review">
+          <span class="stars" role="img" aria-label="Five stars"><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.9 5.88 6.49.95-4.7 4.58 1.11 6.46L12 17.42 6.2 20.47l1.11-6.46-4.7-4.58 6.49-.95z"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.9 5.88 6.49.95-4.7 4.58 1.11 6.46L12 17.42 6.2 20.47l1.11-6.46-4.7-4.58 6.49-.95z"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.9 5.88 6.49.95-4.7 4.58 1.11 6.46L12 17.42 6.2 20.47l1.11-6.46-4.7-4.58 6.49-.95z"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.9 5.88 6.49.95-4.7 4.58 1.11 6.46L12 17.42 6.2 20.47l1.11-6.46-4.7-4.58 6.49-.95z"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.9 5.88 6.49.95-4.7 4.58 1.11 6.46L12 17.42 6.2 20.47l1.11-6.46-4.7-4.58 6.49-.95z"/></svg></span>
+          <h3>This app is amazing</h3>
+          <blockquote>Very well designed and makes studying and memorizing scripture very easy. Would love to be able to add my own verses someday.</blockquote>
+          <figcaption>HanzJames <span>&middot; 6 February</span></figcaption>
+        </figure>
+        <figure class="review">
+          <span class="stars" role="img" aria-label="Five stars"><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.9 5.88 6.49.95-4.7 4.58 1.11 6.46L12 17.42 6.2 20.47l1.11-6.46-4.7-4.58 6.49-.95z"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.9 5.88 6.49.95-4.7 4.58 1.11 6.46L12 17.42 6.2 20.47l1.11-6.46-4.7-4.58 6.49-.95z"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.9 5.88 6.49.95-4.7 4.58 1.11 6.46L12 17.42 6.2 20.47l1.11-6.46-4.7-4.58 6.49-.95z"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.9 5.88 6.49.95-4.7 4.58 1.11 6.46L12 17.42 6.2 20.47l1.11-6.46-4.7-4.58 6.49-.95z"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.9 5.88 6.49.95-4.7 4.58 1.11 6.46L12 17.42 6.2 20.47l1.11-6.46-4.7-4.58 6.49-.95z"/></svg></span>
+          <h3>It&rsquo;s an amazing app</h3>
+          <blockquote>Personally, sometimes I just need something quick while I&rsquo;m on the go. The practice verse challenge is the best, I just learned how to flip back and forth with the simple button layout when a hard one comes up!</blockquote>
+          <figcaption>20 February</figcaption>
+        </figure>
       </div>
     </section>
   </div>
@@ -1306,7 +1696,8 @@
   </div>
 
   <!-- ---------- Privacy ---------- -->
-  <section class="band" id="privacy" aria-labelledby="pr-h">
+  <div class="wrap">
+    <section class="band" id="privacy" aria-labelledby="pr-h">
     <div class="band-inner">
       <div class="why">
         <div>
@@ -1323,6 +1714,7 @@
       </div>
     </div>
   </section>
+  </div>
 
   <!-- ---------- Pricing ---------- -->
   <div class="wrap">
@@ -1366,6 +1758,72 @@
     </section>
   </div>
 
+  <!-- ---------- Questions ---------- -->
+  <div class="wrap">
+    <section style="padding: 0 0 var(--section-y);" id="faq" aria-labelledby="faq-h">
+      <div class="head reveal">
+        <h2 id="faq-h">Questions people ask first.</h2>
+        <p>The short answers, without having to install anything to find them out.</p>
+      </div>
+      <div class="faq reveal">
+        <details name="faq" open>
+          <summary>Is Cardinal free?<span class="mark" aria-hidden="true"></span></summary>
+          <div class="faq-body">
+            <p>Yes. Cardinal is free to download and free to use, with no account and no sign-in. Reading the Bible is free in thirteen translations and always will be. Quiet Time, Memorize, Journeys, audio, notes, widgets and the Apple Watch app are all included for everyone. Cardinal Pro is an optional subscription covering the four translations licensed from their publishers, unlimited use of Ask, side-by-side reading, and editing your own studies. The App Store shows what it costs where you are.</p>
+          </div>
+        </details>
+        <details name="faq">
+          <summary>Do I have to make an account?<span class="mark" aria-hidden="true"></span></summary>
+          <div class="faq-body">
+            <p>No. There is no name, no email, no password and no sign-in anywhere in Cardinal. You open the app and you are reading. Your sittings, notes, prayers and highlights live on your device, and with iCloud turned on, in your own private iCloud.</p>
+          </div>
+        </details>
+        <details name="faq">
+          <summary>Does Cardinal work offline?<span class="mark" aria-hidden="true"></span></summary>
+          <div class="faq-body">
+            <p>Eight translations are bundled with the app and read and search with no connection at all: the King James, Berean Standard, World English and Majority Standard Bibles, Reina-Valera 1909, Louis Segond 1910, Almeida 1911, and 和合本 (简体). Highlighting, notes and memorizing work anywhere. Audio, the streamed translations and Ask need a signal.</p>
+          </div>
+        </details>
+        <details name="faq">
+          <summary>Are there streaks, badges or a feed?<span class="mark" aria-hidden="true"></span></summary>
+          <div class="faq-body">
+            <p>None of them. No feed, no comments, no profiles, no streaks, no badges, and no notification telling you that you missed a day. Nothing in Cardinal keeps score, because nothing in it is performed for anyone else.</p>
+          </div>
+        </details>
+        <details name="faq">
+          <summary>Which translations are included?<span class="mark" aria-hidden="true"></span></summary>
+          <div class="faq-body">
+            <p>Seventeen. Eight are free and fully offline, five more are free and streamed (Luther 1912, Elberfelder 1871, Menge-Bibel, Синодальный перевод and 和合本 (繁體)), and four come with Cardinal Pro: the New King James, New American Standard, Christian Standard and New Living Translation. Each Pro translation includes one free day to try it, once.</p>
+          </div>
+        </details>
+        <details name="faq">
+          <summary>Can I build my own reading plan?<span class="mark" aria-hidden="true"></span></summary>
+          <div class="faq-body">
+            <p>Yes, and it is free. Describe what you are facing in your own words, choose a length from a week to a year, and choose how much to read at a sitting. Cardinal builds a day-by-day path and shows you the whole thing before you begin, so you can swap a passage, reorder the days or remove one. On an iPhone with Apple Intelligence the path is built entirely on the device. A path advances when you finish a reading rather than when the calendar does, so a gap never leaves you behind.</p>
+          </div>
+        </details>
+        <details name="faq">
+          <summary>Does Cardinal track me or show ads?<span class="mark" aria-hidden="true"></span></summary>
+          <div class="faq-body">
+            <p>There are no ads, no advertising identifiers and no tracking across other apps, which is why Cardinal never shows you the permission prompt asking to follow you. What you underline, pray about and ask is not on a server anyone here can read. Photos you scan for a verse are read on your device and never uploaded, and payment is handled entirely by Apple. There is anonymous, aggregate product analytics and Apple Search Ads install attribution; neither identifies you.</p>
+          </div>
+        </details>
+        <details name="faq">
+          <summary>Which devices does it run on?<span class="mark" aria-hidden="true"></span></summary>
+          <div class="faq-body">
+            <p>iPhone, iPad and Apple Watch, on iOS 17 or later. The iPad layout uses the larger screen, including reading two translations side by side. The Watch app has four glances and works with your phone nowhere nearby. Cardinal is not on Android today.</p>
+          </div>
+        </details>
+        <details name="faq">
+          <summary>Is what I read sent to an AI company?<span class="mark" aria-hidden="true"></span></summary>
+          <div class="faq-body">
+            <p>Only what you deliberately ask. When you use Ask, your question and the surrounding passage are sent to be answered. Text licensed from a publisher is never sent: the model reads a public-domain rendering, and only the name of your translation travels with the question. Your notes, prayers, highlights and reading history are not part of it.</p>
+          </div>
+        </details>
+      </div>
+    </section>
+  </div>
+
   <!-- ---------- Closing ---------- -->
   <div class="wrap">
     <section class="closing reveal" aria-labelledby="closing-h">
@@ -1394,17 +1852,193 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": "Cardinal",
-  "applicationCategory": "LifestyleApplication",
-  "operatingSystem": "iOS 17.0 or later",
-  "description": "A Bible app built for being alone with Scripture. Read, listen, memorize, and sit with a guided quiet time. No feed, no streaks, no account.",
-  "url": "https://apps.apple.com/app/id6758185643",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD"
-  }
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://cardinalbible.app/#publisher",
+      "name": "Cardinal",
+      "url": "https://cardinalbible.app/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://cardinalbible.app/icon-512.png",
+        "width": 512,
+        "height": 512
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://cardinalbible.app/#website",
+      "url": "https://cardinalbible.app/",
+      "name": "Cardinal",
+      "description": "A Bible app built for being alone with Scripture.",
+      "publisher": { "@id": "https://cardinalbible.app/#publisher" },
+      "inLanguage": "en"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://cardinalbible.app/#webpage",
+      "url": "https://cardinalbible.app/",
+      "name": "Cardinal · Bible, Quiet Time & Scripture Memory",
+      "isPartOf": { "@id": "https://cardinalbible.app/#website" },
+      "about": { "@id": "https://cardinalbible.app/#app" },
+      "primaryImageOfPage": "https://cardinalbible.app/img/og.png",
+      "inLanguage": "en"
+    },
+    {
+      "@type": ["SoftwareApplication", "MobileApplication"],
+      "@id": "https://cardinalbible.app/#app",
+      "name": "Cardinal",
+      "alternateName": "Cardinal Bible",
+      "applicationCategory": "LifestyleApplication",
+      "applicationSubCategory": "Bible",
+      "operatingSystem": "iOS 17.0 or later",
+      "url": "https://cardinalbible.app/",
+      "sameAs": "https://apps.apple.com/app/id6758185643",
+      "downloadUrl": "https://apps.apple.com/app/id6758185643",
+      "installUrl": "https://apps.apple.com/app/id6758185643",
+      "publisher": { "@id": "https://cardinalbible.app/#publisher" },
+      "image": "https://cardinalbible.app/icon-512.png",
+      "description": "Cardinal is a Bible app for iPhone, iPad and Apple Watch, built for being alone with Scripture. It has no feed, no streaks, no badges and no account, and reading the Bible in it is always free. Seventeen translations, of which thirteen are free and eight read fully offline. A guided quiet time in six steps, nine curated paths, and a free custom path built from whatever you describe. Scripture memory with two practice modes. Narrated audio with the words lighting up as they are read. Seventeen journeys over 3D satellite terrain. Thirty common Bible questions answered in full for free, plus three questions of your own each month.",
+      "featureList": [
+        "Read seventeen Bible translations, thirteen of them free and eight fully offline",
+        "Highlight the exact words of a phrase rather than the whole verse",
+        "Offline search with a separate index per translation",
+        "Word study with Greek and Hebrew parsing and a tappable interlinear",
+        "Cross-reference map, compare translations side by side, and a written brief on each chapter",
+        "Guided Quiet Time in six steps: pause, read, reflect, apply, pray, close",
+        "Nine curated reading paths, plus a shorter evening sitting after 7pm",
+        "Build a custom reading path free by describing what you are facing",
+        "Scripture memory with first-letter and hidden-word practice and more than fifty verse packs",
+        "Narrated audio from six narrators with words lighting up in time, a sleep timer and AirPlay",
+        "Seventeen guided journeys over real 3D satellite terrain",
+        "Sermon notes, verse notes, study workspace and a prayer list",
+        "Home and lock screen widgets and an Apple Watch app with four glances",
+        "No account, no ads, no cross-app tracking, no feed and no streaks"
+      ],
+      "screenshot": [
+        "https://cardinalbible.app/img/reader.webp",
+        "https://cardinalbible.app/img/bible.webp",
+        "https://cardinalbible.app/img/quiet-time-read.webp",
+        "https://cardinalbible.app/img/ask.webp",
+        "https://cardinalbible.app/img/memorize.webp",
+        "https://cardinalbible.app/img/today.webp"
+      ],
+      "availableOnDevice": "iPhone, iPad, Apple Watch",
+      "inLanguage": ["en", "es", "pt", "fr", "de", "ru", "ko", "zh-Hans", "zh-Hant"],
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD",
+        "category": "free",
+        "description": "Cardinal is free to download and free to use, with no account. Cardinal Pro is an optional subscription covering four publisher-licensed translations, unlimited use of Ask, side-by-side reading and editing your own studies. Reading the Bible is never gated.",
+        "availability": "https://schema.org/InStock",
+        "url": "https://apps.apple.com/app/id6758185643"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5",
+        "bestRating": "5",
+        "worstRating": "1",
+        "ratingCount": "13"
+      },
+      "review": [
+        {
+          "@type": "Review",
+          "name": "The best bible app",
+          "reviewBody": "This thing is 3.6MB runs entirely on device, no cloud, no sub. This is the bible app for you, it will really help you memorize scripture, finally.",
+          "author": { "@type": "Person", "name": "swlkr" },
+          "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" }
+        },
+        {
+          "@type": "Review",
+          "name": "This app is amazing",
+          "reviewBody": "Very well designed and makes studying and memorizing scripture very easy. Would love to be able to add my own verses someday.",
+          "author": { "@type": "Person", "name": "HanzJames" },
+          "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" }
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://cardinalbible.app/#faq",
+      "isPartOf": { "@id": "https://cardinalbible.app/#webpage" },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is Cardinal free?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Cardinal is free to download and free to use, with no account and no sign-in. Reading the Bible is free in thirteen translations and always will be. Quiet Time, Memorize, Journeys, audio, notes, widgets and the Apple Watch app are all included for everyone. Cardinal Pro is an optional subscription covering the four translations licensed from their publishers, unlimited use of Ask, side-by-side reading, and editing your own studies. The App Store shows what it costs where you are."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I have to make an account to use Cardinal?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. There is no name, no email, no password and no sign-in anywhere in Cardinal. You open the app and you are reading. Your sittings, notes, prayers and highlights live on your device, and with iCloud turned on, in your own private iCloud."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does Cardinal work offline?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Eight translations are bundled with the app and read and search with no connection at all: the King James, Berean Standard, World English and Majority Standard Bibles, Reina-Valera 1909, Louis Segond 1910, Almeida 1911, and the Chinese Union Version in simplified characters. Highlighting, notes and memorizing work anywhere. Audio, the streamed translations and Ask need a signal."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does Cardinal have streaks, badges or a feed?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "None of them. No feed, no comments, no profiles, no streaks, no badges, and no notification telling you that you missed a day. Nothing in Cardinal keeps score, because nothing in it is performed for anyone else."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which Bible translations does Cardinal include?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Seventeen. Eight are free and fully offline: King James, Berean Standard, World English, Majority Standard, Reina-Valera 1909, Louis Segond 1910, Almeida 1911, and the Chinese Union Version in simplified characters. Five more are free and streamed: Luther 1912, Elberfelder 1871, Menge-Bibel, the Russian Synodal translation, and the Chinese Union Version in traditional characters. Four come with Cardinal Pro: the New King James, New American Standard, Christian Standard and New Living Translation. Each Pro translation includes one free day to try it, once."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I build my own Bible reading plan in Cardinal?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, and it is free. Describe what you are facing in your own words, choose a length from a week to a year, and choose how much to read at a sitting. Cardinal builds a day-by-day path and shows you the whole thing before you begin, so you can swap a passage, reorder the days or remove one. On an iPhone with Apple Intelligence the path is built entirely on the device. A path advances when you finish a reading rather than when the calendar does, so a gap never leaves you behind."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does Cardinal track me or show ads?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "There are no ads, no advertising identifiers and no tracking across other apps, which is why Cardinal never shows you the permission prompt asking to follow you. What you underline, pray about and ask is not on a server anyone here can read. Photos you scan for a verse are read on your device and never uploaded, and payment is handled entirely by Apple. There is anonymous, aggregate product analytics and Apple Search Ads install attribution; neither identifies you."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which devices does Cardinal run on?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "iPhone, iPad and Apple Watch, on iOS 17 or later. The iPad layout uses the larger screen, including reading two translations side by side. The Watch app has four glances and works with your phone nowhere nearby. Cardinal is not on Android today."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is what I read in Cardinal sent to an AI company?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Only what you deliberately ask. When you use Ask, your question and the surrounding passage are sent to be answered. Text licensed from a publisher is never sent: the model reads a public-domain rendering, and only the name of your translation travels with the question. Your notes, prayers, highlights and reading history are not part of it."
+          }
+        }
+      ]
+    }
+  ]
 }
 </script>
 
@@ -1426,6 +2060,22 @@
     }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
     items.forEach(function (el) { io.observe(el); });
   }
+
+  // ---- Rating stars strike in sequence ----------------------------------
+  (function () {
+    var groups = document.querySelectorAll('.stars');
+    if (!groups.length) return;
+    if (reduce || !hasIO) {
+      groups.forEach(function (el) { el.classList.add('lit'); });
+      return;
+    }
+    var sio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('lit'); sio.unobserve(e.target); }
+      });
+    }, { threshold: 0.6 });
+    groups.forEach(function (el) { sio.observe(el); });
+  })();
 
   // ---- Staggered groups ------------------------------------------------
   // The refusal ledger, the showcase and the chip rows each deal in rather
@@ -1610,6 +2260,78 @@
       btn.addEventListener('pointerleave', function () { btn.style.transform = ''; });
     });
   }
+
+  // ---- Phone: long point lists fold behind one tap ----------------------
+  // Built in script on purpose. With JS off, or on a wide screen, every point
+  // is simply on the page, which is what a crawler and a reader both want.
+  (function () {
+    var phone = window.matchMedia('(max-width: 700px)');
+    var built = false;
+
+    // The kicker, not the headline: "2 more on Read" reads as a label, where
+    // "2 more on Plain modern English, from the first tap" reads as a mistake.
+    function labelFor(section) {
+      var k = section && section.querySelector('.kicker');
+      return k ? k.textContent.trim() : null;
+    }
+
+    function build() {
+      if (built) return;
+      built = true;
+      document.querySelectorAll('.chapter .points').forEach(function (list) {
+        var items = Array.prototype.slice.call(list.children);
+        if (items.length <= 4) return;
+        var hidden = items.slice(3);
+        var id = 'pts-' + Math.random().toString(36).slice(2, 8);
+        list.id = id;
+        list.classList.add('folded');
+
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'more-toggle';
+        btn.setAttribute('aria-expanded', 'false');
+        btn.setAttribute('aria-controls', id);
+        var label = labelFor(list.closest('.chapter'));
+        var shut = hidden.length + (label ? ' more on ' + label : ' more');
+        var word = document.createElement('span');
+        word.textContent = shut;
+        btn.appendChild(word);
+        btn.appendChild(Object.assign(document.createElement('span'), { className: 'chev' }));
+        list.parentNode.insertBefore(btn, list.nextSibling);
+
+        function apply(open) {
+          hidden.forEach(function (li) { li.hidden = !open; });
+          btn.setAttribute('aria-expanded', String(open));
+          word.textContent = open ? 'Show fewer' : shut;
+        }
+        apply(false);
+        btn.addEventListener('click', function () {
+          apply(btn.getAttribute('aria-expanded') !== 'true');
+        });
+      });
+    }
+
+    // One-way: once a reader has opened a list, collapsing it again on a
+    // rotate back to landscape would take words off the screen they asked for.
+    if (phone.matches) build();
+    phone.addEventListener
+      ? phone.addEventListener('change', function (e) { if (e.matches) build(); })
+      : phone.addListener(function (e) { if (e.matches) build(); });
+  })();
+
+  // ---- Phone: keep the current section visible in the scrolling rail ----
+  (function () {
+    var rail = document.querySelector('.subnav-links');
+    if (!rail) return;
+    var last = null;
+    new MutationObserver(function () {
+      var active = rail.querySelector('a[aria-current]');
+      if (!active || active === last || rail.scrollWidth <= rail.clientWidth) return;
+      last = active;
+      var want = active.offsetLeft - (rail.clientWidth - active.offsetWidth) / 2;
+      rail.scrollTo({ left: Math.max(0, want), behavior: reduce ? 'auto' : 'smooth' });
+    }).observe(rail, { subtree: true, attributes: true, attributeFilter: ['aria-current'] });
+  })();
 </script>
 
 </body>

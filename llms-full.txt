@@ -1,0 +1,371 @@
+# Cardinal
+
+> Cardinal is a Bible app for iPhone, iPad and Apple Watch, built for being alone
+> with Scripture. No feed, no streaks, no badges, no account. Reading the Bible in
+> it is free and always will be.
+>
+> App Store: https://apps.apple.com/app/id6758185643
+> Site: https://cardinalbible.app/
+> Requires iOS 17.0 or later. Rated 5.0 out of 5 from 13 App Store ratings.
+
+This file is the full text of cardinalbible.app in one plain-text document, for
+assistants and answer engines. Everything in it is a claim the app can be held to.
+A shorter map lives at https://cardinalbible.app/llms.txt.
+
+## The one-line answer
+
+Cardinal is the Bible app you reach for when you want to read Scripture and be
+left alone: no social feed, no streak to protect, no account to create, and no
+paywall in front of the text.
+
+---
+
+## Why Cardinal exists
+
+Bible apps have become social platforms, full of feeds and features that distract
+you from simply reading the Bible.
+
+Cardinal is different. It was built for one person, alone with Scripture, for as
+long as they want to stay there. Everything in it is judged by whether it helps you
+read, or pulls you away from reading.
+
+That is why so much is missing on purpose:
+
+- No feed, comments, or profiles. Nothing you do here is performed for anyone.
+- No streaks, badges, or missed-day guilt. Nothing keeps score. Missing a day is
+  not a failure.
+- No ads, and no tracking you across apps. You are not the product being sold.
+- No gate on reading. The Bible itself never sits behind a subscription.
+
+---
+
+## Read
+
+**Plain modern English, from the first tap.** Cardinal opens on the Berean Standard
+Bible. No setup, no account, no choosing a plan before you are allowed to read a
+verse.
+
+- **Seventeen translations.** Eight of them live on your phone and read offline,
+  including the King James, Berean Standard, World English and Majority Standard
+  Bibles.
+- **Highlight the exact words.** Long-press and drag across a phrase and only those
+  words are marked, not the whole verse around them. Where the phrase runs past a
+  line break the mark stays one continuous stroke instead of stacked rectangles,
+  rounded at every corner and set on the letters rather than floating above them.
+- **Search that respects the wording.** Every translation carries its own index,
+  because the words they choose are not the same.
+- **Favorites and margins.** Save a verse, or write a note that stays with the
+  passage and is searchable in Bible order.
+- **It remembers where you stopped.** The book grid carries a pill back to the
+  chapter you were last in, so picking the Bible up again is one tap rather than a
+  hunt.
+
+### What a tap opens
+
+The study tools are not in a separate mode you have to go and find. Tap a word, a
+verse, or the chapter title, and they are already there. Three of the four need no
+connection at all.
+
+- **Word study.** The Hebrew or Greek behind a tapped word, with the whole verse as
+  an interlinear underneath. When a word cannot be matched with confidence, it says
+  so rather than guessing.
+- **One sheet, one verse.** Highlight, note, copy, share. Then the study tools: ask
+  about it, open its cross-references, or hold it against another translation.
+- **Compare translations.** One verse across the English translations at once, with
+  the words that differ from yours picked out. For the moment a verse reads
+  strangely and you want to know whether that is the translator or the text.
+- **Chapter context.** Where the chapter sits, how long it is, the places named in
+  it, and a brief on the book. None of it is written by an AI. The facts are
+  computed and the prose is written by a person.
+
+---
+
+## Ask
+
+**"What does that actually mean?"** Everyone hits a verse they do not understand.
+Ask, and get an answer drawn from the passage in front of you: cross-references,
+word studies, historical context.
+
+- **Thirty questions, answered in full, free.** Why is there suffering. Did Jesus
+  claim to be God. What happens when we die. No subscription, nothing to unlock.
+- **Three of your own each month.** Free, and they come back every month rather
+  than running out for good.
+- **Honest about uncertainty.** "This passage is often interpreted as" rather than
+  "this means." Every answer shows the verses it rests on, so you can read the text
+  yourself.
+- **Your licensed translations stay private.** Publisher-licensed text is never
+  sent to the model. It reads a public-domain rendering, and only the name of your
+  translation travels.
+
+Ask beyond the free monthly questions is part of Cardinal Pro.
+
+---
+
+## Build your own reading path
+
+**Describe what you are facing, and have a path built for it.** Curated paths cover
+the ground most people want. When none of them is the thing you are actually
+carrying, say what it is in your own words and Cardinal shapes a reading path around
+it. This is free: there is no subscription and no monthly allowance on it.
+
+- **In your own words.** "Walking through grief." "Waiting for news." "A new baby,
+  and no sleep." "The Gospel of John, slowly." Then choose how long, from a week to
+  a year, and how much to read at a sitting.
+- **You see the whole path before you start.** Every day, its passage and why it is
+  there, listed in full. Swap a day for a different passage, reorder them, or take
+  one out. The days renumber themselves.
+- **Built on your phone, where it can be.** On an iPhone with Apple Intelligence
+  the whole thing is shaped on the device. Your words and the path they produce
+  never leave it.
+- **Checked against the text.** The titles and notes are written by AI. Every
+  reference in the path is verified against the Bible itself before you see it.
+- **It waits for you.** A path moves forward when you finish a reading, never when
+  the calendar does. Put it down for three weeks and you pick it up on the next
+  day, not behind.
+
+---
+
+## Quiet Time
+
+**One sitting a day, about fifteen minutes.** You are never handed a chapter and
+left to it. Each day is a curated passage of fifteen to twenty-five verses, the
+natural scene the text is built around.
+
+- **Six steps.** Pause, read, reflect, apply, pray, close. The same shape every
+  day, so you stop having to decide how to begin.
+- **Nine curated paths.** From the Story of Jesus in John, to thirty days in the
+  Psalms, to the whole Bible in a year.
+- **An evening sitting.** After seven in the evening a shorter one appears to close
+  the day. It never moves your place in the path.
+- **A prayer list that remembers.** Add what you prayed for at the close, and mark
+  it answered when God shows up.
+- **New to reading on your own?** Start here. The whole thing is designed for
+  someone who has never done this alone before.
+
+Your archive is searchable, and it is private. Nothing keeps score.
+
+---
+
+## Memorize
+
+**Learn it by heart, without a scoreboard.** Two ways to practice, and a deck that
+quietly works out which verses you are still learning.
+
+- **First letters.** The shape of the verse stays on screen. The words go.
+- **Hidden words.** Blanks out more of the verse on each pass, until you can say it
+  from the reference alone.
+- **It asks how that went.** Verses you are still learning come back sooner,
+  waiting under "Ready to come back" rather than as a streak you broke.
+- **More than fifty curated packs.** Grouped by what you are carrying: grief,
+  anxiety, wisdom, thanksgiving. Or build a pack from your own verses.
+
+---
+
+## And the rest of it
+
+Everything below is included for everyone, with no subscription, unless it says
+otherwise.
+
+- **Listen.** Scripture read aloud, with the words lighting up in time with the
+  narration and the page following on its own. Six narrators, a sleep timer,
+  adjustable pace, AirPlay, and it keeps playing on the lock screen.
+- **Journeys.** Seventeen journeys flown place to place over real 3D satellite
+  terrain. Paul's voyages, Abraham's road, the Exodus, Passion Week. Read each
+  stop's story, hear it narrated, share it as a card of the place itself.
+- **Sermon notes.** Structured the way sermons are actually preached: big idea,
+  main points with their own verses, application, ways to serve. Group them by
+  series. For sermons you hear and sermons you give.
+- **Studies.** A workspace for preparing one. Gather verses, illustrations and
+  quotes as you read, shape an outline, keep an archive. Editing a study is part of
+  Pro; reading and exporting one never is.
+- **Widgets.** A Verse of the Day, today's Quiet Time passage, or your Memorize
+  progress, pinned to the home and lock screen.
+- **Apple Watch.** Four glances: the verse, the next passage, what is playing, and
+  a recall drill. It works cold, with your phone nowhere nearby. The complication
+  is just the verse, not a number telling you how you are doing.
+- **iPad.** The same app, laid out for the larger screen. Good for a long sitting
+  at a desk, or for reading two translations side by side.
+- **Works offline.** The eight bundled translations read and search with no
+  connection at all. Memorizing, highlighting and note-taking work anywhere. Audio,
+  the streamed translations and Ask need a signal.
+
+A promise kept in the source code: **Cardinal will not write your sermon. The
+study, the structure, and the words stay yours.**
+
+---
+
+## Reviews
+
+Every rating Cardinal has on the App Store is a five: 5.0 out of 5 from 13 ratings.
+
+- **"The best bible app"**, swlkr, 30 January, 5 stars. "This thing is 3.6MB runs
+  entirely on device, no cloud, no sub. This is the bible app for you, it will
+  really help you memorize scripture, finally."
+- **"This app is amazing"**, HanzJames, 6 February, 5 stars. "Very well designed
+  and makes studying and memorizing scripture very easy. Would love to be able to
+  add my own verses someday."
+- **"It's an amazing app"**, 20 February, 5 stars. "Personally, sometimes I just
+  need something quick while I'm on the go. The practice verse challenge is the
+  best, I just learned how to flip back and forth with the simple button layout
+  when a hard one comes up!"
+
+---
+
+## Translations
+
+Seventeen in total. Thirteen of them are free, and they always will be. Reading
+Scripture never requires a subscription.
+
+**Free, and read fully offline (8):** King James, Berean Standard, World English,
+Majority Standard, Reina-Valera 1909, Louis Segond 1910, Almeida 1911,
+和合本 (简体).
+
+**Free, streamed (5):** Luther 1912, Elberfelder 1871, Menge-Bibel,
+Синодальный перевод, 和合本 (繁體).
+
+**With Cardinal Pro (4):** New King James, New American Standard, Christian
+Standard, New Living Translation. Licensed from their publishers. Each one comes
+with a free day to try, once, so you can read it before deciding. Read two side by
+side and see where they differ.
+
+---
+
+## Languages
+
+Nine interface languages: English, Español, Português, Français, Deutsch, Русский,
+한국어, 简体中文, 繁體中文. Every menu, book name and answer follows the language your
+phone is set to.
+
+Eight of the nine also read a Bible in that language. A Korean translation is not
+licensed yet, so Korean currently reads with an English text.
+
+---
+
+## Privacy
+
+**Nobody is watching you read.** What you underline, what you pray about, and what
+you ask are some of the most private things a person has. Cardinal is built so that
+they stay that way.
+
+1. **No account.** No name, no email, no sign-in. Nothing to create before you can
+   read.
+2. **No ads, and no cross-app tracking.** No advertising identifiers, and no
+   permission prompt asking to follow you elsewhere.
+3. **Your writing is yours.** Sittings, notes, prayers and highlights stay on your
+   device, and with iCloud on, in your own private iCloud. They are not on a server
+   anyone here can read.
+4. **Nothing sent that does not need to be.** Photos you scan are read on your
+   device and never uploaded. Payment is handled entirely by Apple.
+
+There is anonymous, aggregate product analytics and Apple Search Ads install
+attribution. Neither identifies a person and neither follows anyone across apps,
+which is why the app never shows the App Tracking Transparency prompt.
+
+Full policy: https://cardinalbible.app/privacy-policy.html
+
+---
+
+## Free, and what Pro adds
+
+Cardinal is free to download and free to use. Reading the Bible is free and stays
+free. A subscription covers the two things that cost money to run: the translations
+licensed from their publishers, and the AI behind Ask.
+
+**Cardinal, free:**
+
+- The whole Bible in thirteen translations
+- Quiet Time, and every curated path
+- Describe your own reading path and have it built for you
+- Memorize, and every verse pack
+- All seventeen Journeys
+- Sermon notes, verse notes and the prayer list
+- Audio, widgets and the Apple Watch app
+- Thirty questions answered in full, plus three of your own each month
+
+**Cardinal Pro, a subscription. Everything in the free version, plus:**
+
+- Ask, beyond the free monthly questions
+- The NKJV, NASB, CSB and NLT
+- Two translations side by side
+- A deeper reflection on any sermon point
+- Build and edit your own studies
+
+The App Store shows what Cardinal Pro costs where you are. A study you have already
+written stays readable and exportable even if a subscription lapses.
+
+---
+
+## Questions people ask first
+
+**Is Cardinal free?**
+Yes. Cardinal is free to download and free to use, with no account and no sign-in.
+Reading the Bible is free in thirteen translations and always will be. Quiet Time,
+Memorize, Journeys, audio, notes, widgets and the Apple Watch app are all included
+for everyone. Cardinal Pro is an optional subscription covering the four
+translations licensed from their publishers, unlimited use of Ask, side-by-side
+reading, and editing your own studies. The App Store shows what it costs where you
+are.
+
+**Do I have to make an account?**
+No. There is no name, no email, no password and no sign-in anywhere in Cardinal.
+You open the app and you are reading. Your sittings, notes, prayers and highlights
+live on your device, and with iCloud turned on, in your own private iCloud.
+
+**Does Cardinal work offline?**
+Eight translations are bundled with the app and read and search with no connection
+at all: the King James, Berean Standard, World English and Majority Standard
+Bibles, Reina-Valera 1909, Louis Segond 1910, Almeida 1911, and 和合本 (简体).
+Highlighting, notes and memorizing work anywhere. Audio, the streamed translations
+and Ask need a signal.
+
+**Are there streaks, badges or a feed?**
+None of them. No feed, no comments, no profiles, no streaks, no badges, and no
+notification telling you that you missed a day. Nothing in Cardinal keeps score,
+because nothing in it is performed for anyone else.
+
+**Which translations are included?**
+Seventeen. Eight are free and fully offline, five more are free and streamed
+(Luther 1912, Elberfelder 1871, Menge-Bibel, Синодальный перевод and 和合本 (繁體)),
+and four come with Cardinal Pro: the New King James, New American Standard,
+Christian Standard and New Living Translation. Each Pro translation includes one
+free day to try it, once.
+
+**Can I build my own reading plan?**
+Yes, and it is free. Describe what you are facing in your own words, choose a
+length from a week to a year, and choose how much to read at a sitting. Cardinal
+builds a day-by-day path and shows you the whole thing before you begin, so you can
+swap a passage, reorder the days or remove one. On an iPhone with Apple
+Intelligence the path is built entirely on the device. A path advances when you
+finish a reading rather than when the calendar does, so a gap never leaves you
+behind.
+
+**Does Cardinal track me or show ads?**
+There are no ads, no advertising identifiers and no tracking across other apps,
+which is why Cardinal never shows you the permission prompt asking to follow you.
+What you underline, pray about and ask is not on a server anyone here can read.
+Photos you scan for a verse are read on your device and never uploaded, and payment
+is handled entirely by Apple. There is anonymous, aggregate product analytics and
+Apple Search Ads install attribution; neither identifies you.
+
+**Which devices does it run on?**
+iPhone, iPad and Apple Watch, on iOS 17 or later. The iPad layout uses the larger
+screen, including reading two translations side by side. The Watch app has four
+glances and works with your phone nowhere nearby. Cardinal is not on Android today.
+
+**Is what I read sent to an AI company?**
+Only what you deliberately ask. When you use Ask, your question and the surrounding
+passage are sent to be answered. Text licensed from a publisher is never sent: the
+model reads a public-domain rendering, and only the name of your translation
+travels with the question. Your notes, prayers, highlights and reading history are
+not part of it.
+
+---
+
+## In closing
+
+Read Scripture, sit with it, and talk to God. That is the whole app. Everything else
+was left out on purpose.
+
+Download: https://apps.apple.com/app/id6758185643
+Privacy policy: https://cardinalbible.app/privacy-policy.html
+Terms of use: https://cardinalbible.app/terms-of-use.html

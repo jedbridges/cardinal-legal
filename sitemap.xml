@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://cardinalbible.app/</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://cardinalbible.app/img/reader.webp</image:loc>
+      <image:title>Cardinal's Bible reader</image:title>
+      <image:caption>Psalm 23 open in Cardinal, with two phrases highlighted as continuous marker strokes.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://cardinalbible.app/img/quiet-time-read.webp</image:loc>
+      <image:title>A Cardinal Quiet Time</image:title>
+      <image:caption>The Read step of a guided quiet time in Cardinal.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://cardinalbible.app/img/ask.webp</image:loc>
+      <image:title>Ask in Cardinal</image:title>
+      <image:caption>Cardinal's Ask tab, with a library of common questions answered in full.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://cardinalbible.app/img/memorize.webp</image:loc>
+      <image:title>Scripture memory packs</image:title>
+      <image:caption>Cardinal's curated verse packs for memorizing Scripture.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://cardinalbible.app/privacy-policy.html</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://cardinalbible.app/terms-of-use.html</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+</urlset>
