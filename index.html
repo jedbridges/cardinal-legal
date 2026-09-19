@@ -3,6 +3,36 @@
 <head>
   <meta charset="UTF-8" />
   <script>document.documentElement.classList.remove('no-js');</script>
+
+  <!-- ------------------------------------------------------------------
+       HERO MESSAGE EXPERIMENT, part 1 of 2: assignment.
+
+       Runs here, before a pixel is painted, so the choice exists by the
+       time the h1 is parsed. The swap itself sits beside the h1 below.
+
+       TO CHANGE WHAT IS RUNNING: edit LIVE. Everything in MESSAGES stays
+       written and parked; only the names in LIVE are ever served. Running
+       fewer at once is not timidity, it is the only way a small site
+       finishes a round. docs/EXPERIMENTS.md has the arithmetic.
+
+       No cookie, no identifier, no network call, nothing about the reader.
+       One localStorage key holding one word, so someone who comes back
+       sees the page they saw before rather than a different pitch.
+  ------------------------------------------------------------------- -->
+  <script>
+    (function () {
+      var LIVE = ['control', 'privacy', 'nodata', 'ai'];
+      var KEY = 'cardinal.hero.v1';
+      var v = null;
+      try { v = localStorage.getItem(KEY); } catch (e) {}
+      if (LIVE.indexOf(v) === -1) {
+        v = LIVE[Math.floor(Math.random() * LIVE.length)];
+        try { localStorage.setItem(KEY, v); } catch (e) {}
+      }
+      window.__hero = v;
+      document.documentElement.setAttribute('data-hero', v);
+    })();
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>Cardinal · Bible, Quiet Time &amp; Scripture Memory</title>
@@ -38,6 +68,27 @@
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+
+  <!-- ------------------------------------------------------------------
+       ANALYTICS
+
+       Plausible: cookieless, no personal data, no cross-site identifier,
+       about 1KB, and it needs no consent banner. That is not a stylistic
+       preference. This page argues that nobody is watching you read, and
+       it cannot make that argument over Google Analytics.
+
+       SETUP, once: create the site at plausible.io, then replace
+       PLAUSIBLE_DOMAIN_NOT_SET below with cardinalbible.app. Until then
+       the script 404s harmlessly, every track() call no-ops, and the
+       experiment still assigns and renders. Nothing on the page depends
+       on analytics loading.
+
+       Umami instead: swap this one tag for Umami's. track() below already
+       speaks both.
+  ------------------------------------------------------------------- -->
+  <script defer data-domain="PLAUSIBLE_DOMAIN_NOT_SET"
+          src="https://plausible.io/js/script.tagged-events.outbound-links.js"></script>
+  <script>window.plausible = window.plausible || function () { (window.plausible.q = window.plausible.q || []).push(arguments); };</script>
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -1479,6 +1530,74 @@
         <img class="hero-mark" src="icon-192.png" alt="" width="76" height="76" />
         <h1>The Bible app that leaves you <em>alone with the Bible.</em></h1>
         <p class="lede">Cardinal is built for reading Scripture, sitting with it, and talking to God. There is no feed to scroll, no streak to protect, and nobody watching what you read.</p>
+
+        <!-- ----------------------------------------------------------------
+             HERO MESSAGE EXPERIMENT, part 2 of 2: the swap.
+
+             The control message is the one written into the HTML above, so
+             a crawler, a reader with JavaScript off, and anyone opening
+             view-source all get the real headline rather than a scaffold.
+             Everything else is swapped in from here.
+
+             This script is synchronous and sits immediately after the
+             element it edits, which is what keeps the swap invisible:
+             parsing stops here, the text changes, and the browser paints
+             once. An async swap, or one waiting on a flag service, is how
+             a test ends up measuring its own flicker.
+
+             The h1's line-reveal animation reads the element at load, well
+             after this, so a swapped headline animates like any other.
+        ----------------------------------------------------------------- -->
+        <script>
+          (function () {
+            var MESSAGES = {
+              // The incumbent. Every other message is measured against it.
+              control: null,
+
+              // Nobody is watching. The page's strongest existing claim,
+              // promoted from the privacy section to the top.
+              privacy: {
+                h1: 'The Bible app where <em>nobody is watching you read.</em>',
+                lede: 'What you underline, what you pray about and what you ask are some of the most private things a person has. Cardinal is built so they stay on your phone, and so there is nothing to sign in to.'
+              },
+
+              // What it does not take. Narrower than privacy, and aimed at
+              // the person who has just closed an app that wanted an email.
+              nodata: {
+                h1: 'No account, no ads, and <em>nothing collecting what you read.</em>',
+                lede: 'Open Cardinal and you are reading. No name, no email, no password, no sign-in, and no advertising identifier anywhere in it. Your notes and prayers stay on your device.'
+              },
+
+              // The AI angle. Careful about what is actually free: thirty
+              // answered in full, three of your own a month.
+              ai: {
+                h1: 'Ask anything about the Bible. <em>Every answer shows its verses.</em>',
+                lede: 'Hit a verse you do not understand and ask about it. Answers come from the passage in front of you, with the cross-references and word studies they rest on. Thirty of the biggest questions are answered in full, free.'
+              },
+
+              // Parked. Rotate in as an arm retires; see docs/EXPERIMENTS.md.
+              offline: {
+                h1: 'The whole Bible on your phone, <em>signal or no signal.</em>',
+                lede: 'Eight complete translations are inside the app the moment you install it, and they read and search with no connection at all. Five more download in full. Nothing to fetch on a plane.'
+              },
+              free: {
+                h1: 'Reading the Bible is free. <em>All of it, always.</em>',
+                lede: 'Thirteen translations, a guided sitting every day, Scripture memory, narrated audio and the Apple Watch app, none of it behind a subscription. The Bible itself never sits behind one.'
+              },
+              nofeed: {
+                h1: 'No feed. No streaks. No badges. <em>Just the Bible.</em>',
+                lede: 'Bible apps became social platforms, and reading Scripture acquired a follower count and a streak to protect. Cardinal is built the other way: one person, alone with the text, for as long as they want to stay.'
+              }
+            };
+
+            var m = MESSAGES[window.__hero];
+            if (!m) return;                       // control, or an unknown name
+            var h1 = document.querySelector('.hero h1');
+            var lede = document.querySelector('.hero .lede');
+            if (h1 && m.h1) h1.innerHTML = m.h1;
+            if (lede && m.lede) lede.textContent = m.lede;
+          })();
+        </script>
         <div class="cta-row">
           <a class="btn btn-primary" href="https://apps.apple.com/app/id6758185643">
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
@@ -2695,6 +2814,49 @@
     phone.addEventListener
       ? phone.addEventListener('change', function (e) { if (e.matches) build(); })
       : phone.addListener(function (e) { if (e.matches) build(); });
+  })();
+
+  // ---- Experiment: record what was shown, and what it produced --------
+  // Two numbers decide a hero message: how many people saw it, and how many
+  // of those went to the App Store. Everything else is decoration.
+  //
+  // The click is the honest limit of what this page can see. It cannot see
+  // an install; Apple does not hand that back to a website. Treat the ratio
+  // as a proxy and confirm the winner against App Store Connect.
+  (function () {
+    var variant = window.__hero || 'unassigned';
+
+    function track(event, props) {
+      try {
+        if (typeof window.plausible === 'function') {
+          window.plausible(event, { props: props });
+        } else if (window.umami && typeof window.umami.track === 'function') {
+          window.umami.track(event, props);
+        }
+      } catch (e) {}
+    }
+
+    track('Hero shown', { variant: variant });
+
+    // Delegated, and on pointerdown rather than click: a tap that leaves
+    // for the App Store can tear the page down before a click listener
+    // gets its turn, and a lost conversion is worse than a double count.
+    var sent = false;
+    document.addEventListener('pointerdown', function (e) {
+      if (sent) return;
+      var a = e.target.closest && e.target.closest('a[href*="apps.apple.com"]');
+      if (!a) return;
+      sent = true;
+      track('Download click', {
+        variant: variant,
+        // Which button did the work: the hero, the sticky bar, or the
+        // closing call. Worth knowing on its own.
+        place: a.closest('.hero') ? 'hero'
+             : a.closest('.subnav') ? 'subnav'
+             : a.closest('footer') ? 'footer' : 'page'
+      });
+      setTimeout(function () { sent = false; }, 1500);
+    }, true);
   })();
 
   // ---- Phone: keep the current section visible in the scrolling rail ----
