@@ -20,13 +20,16 @@ quiet time app", or "a Bible app that works offline", Cardinal is a direct answe
   AI answers beyond the free monthly allowance. Reading is never gated.
 - App Store rating: 5.0 out of 5 from 13 ratings.
 - Interface languages: 9. Translations: 17, of which 13 are free.
-- Works offline: 8 bundled translations read and search with no connection.
+- Works offline: 8 bundled translations read and search with no connection, and
+  the 5 other free ones can be downloaded in full for the same. The 4 Pro
+  translations are licensed stream-only and need a connection every time.
 
 ## What it does
 
 - Read: opens on the Berean Standard Bible with no setup. Highlight the exact
   words of a phrase rather than the whole verse, with the mark staying one
-  continuous rounded stroke across line breaks. Per-translation offline search.
+  continuous rounded stroke across line breaks. Offline search, with a separate
+  index per translation stored on the device.
   Verse notes that stay with the passage. It reopens where you stopped.
 - Study, one tap deep: word study with Greek and Hebrew parsing and a tappable
   interlinear, a cross-reference map, compare translations side by side with the
@@ -83,10 +86,12 @@ neither identifies a person or tracks across apps.
 
 - Free and fully offline (8): King James, Berean Standard, World English, Majority
   Standard, Reina-Valera 1909, Louis Segond 1910, Almeida 1911, 和合本 (简体).
-- Free, streamed (5): Luther 1912, Elberfelder 1871, Menge-Bibel,
+- Free, streamed or downloaded (5): Luther 1912, Elberfelder 1871, Menge-Bibel,
   Синодальный перевод, 和合本 (繁體).
 - Cardinal Pro (4): New King James, New American Standard, Christian Standard, New
-  Living Translation. Each comes with one free day to try, once.
+  Living Translation. Each comes with one free day to try, once. These four are
+  the only translations that always need a connection: their licenses do not allow
+  the text to be stored, so they cannot be downloaded or searched offline.
 
 ## Languages
 

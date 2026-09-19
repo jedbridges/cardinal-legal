@@ -45,15 +45,18 @@ That is why so much is missing on purpose:
 Bible. No setup, no account, no choosing a plan before you are allowed to read a
 verse.
 
-- **Seventeen translations.** Eight of them live on your phone and read offline,
-  including the King James, Berean Standard, World English and Majority Standard
-  Bibles.
+- **Seventeen translations.** Eight live on your phone from the first launch and
+  read offline, including the King James, Berean Standard, World English and
+  Majority Standard Bibles. Five more are free and can be downloaded in full.
 - **Highlight the exact words.** Long-press and drag across a phrase and only those
   words are marked, not the whole verse around them. Where the phrase runs past a
   line break the mark stays one continuous stroke instead of stacked rectangles,
   rounded at every corner and set on the letters rather than floating above them.
-- **Search that respects the wording.** Every translation carries its own index,
-  because the words they choose are not the same.
+- **Search that respects the wording.** The words each translation chooses are
+  not the same, so each one carries its own index rather than searching a shared
+  text. The five free streamed translations build theirs once downloaded. The four
+  licensed translations are never indexed, so a search runs against the
+  public-domain text and shows the licensed wording for each result.
 - **Favorites and margins.** Save a verse, or write a note that stays with the
   passage and is searchable in Bible order.
 - **It remembers where you stopped.** The book grid carries a pill back to the
@@ -186,8 +189,10 @@ otherwise.
 - **iPad.** The same app, laid out for the larger screen. Good for a long sitting
   at a desk, or for reading two translations side by side.
 - **Works offline.** The eight bundled translations read and search with no
-  connection at all. Memorizing, highlighting and note-taking work anywhere. Audio,
-  the streamed translations and Ask need a signal.
+  connection at all, and the five free streamed ones can be downloaded in full for
+  the same. Memorizing, highlighting and note-taking work anywhere. Audio and Ask
+  need a signal, and so do the four Pro translations, which their licenses keep
+  stream-only.
 
 A promise kept in the source code: **Cardinal will not write your sermon. The
 study, the structure, and the words stay yours.**
@@ -220,13 +225,15 @@ Scripture never requires a subscription.
 Majority Standard, Reina-Valera 1909, Louis Segond 1910, Almeida 1911,
 和合本 (简体).
 
-**Free, streamed (5):** Luther 1912, Elberfelder 1871, Menge-Bibel,
+**Free, streamed or downloaded (5):** Luther 1912, Elberfelder 1871, Menge-Bibel,
 Синодальный перевод, 和合本 (繁體).
 
 **With Cardinal Pro (4):** New King James, New American Standard, Christian
 Standard, New Living Translation. Licensed from their publishers. Each one comes
 with a free day to try, once, so you can read it before deciding. Read two side by
-side and see where they differ.
+side and see where they differ. These four are the only translations that always
+need a connection: their licenses do not allow Cardinal to store the text, so they
+cannot be downloaded or searched offline.
 
 ---
 
@@ -312,11 +319,14 @@ You open the app and you are reading. Your sittings, notes, prayers and highligh
 live on your device, and with iCloud turned on, in your own private iCloud.
 
 **Does Cardinal work offline?**
-Eight translations are bundled with the app and read and search with no connection
-at all: the King James, Berean Standard, World English and Majority Standard
-Bibles, Reina-Valera 1909, Louis Segond 1910, Almeida 1911, and 和合本 (简体).
-Highlighting, notes and memorizing work anywhere. Audio, the streamed translations
-and Ask need a signal.
+Thirteen of the seventeen translations can be. Eight are bundled with the app and
+read and search with no connection at all: the King James, Berean Standard, World
+English and Majority Standard Bibles, Reina-Valera 1909, Louis Segond 1910,
+Almeida 1911, and 和合本 (简体). The five other free translations stream a chapter at
+a time and keep it, and any of them can be downloaded in full from the translation
+picker. The four Pro translations are the exception: their publishers do not permit
+storing the text, so those read from a connection every time and are never
+searchable offline. Highlighting, notes and memorizing work anywhere.
 
 **Are there streaks, badges or a feed?**
 None of them. No feed, no comments, no profiles, no streaks, no badges, and no
