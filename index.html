@@ -667,7 +667,13 @@
     .chip {
       font-family: var(--font-ui);
       font-size: 14.5px;
-      padding: 8px 15px;
+      /* Asymmetric on purpose. A line box reserves room under the baseline for
+         descenders, so padding the pill evenly centres the em box and leaves
+         the word's actual body sitting high. Measured here, cap top to
+         baseline landed 1.5px above the pill's centre, so that much padding
+         moves from the bottom to the top. Sub-pixel is deliberate: it lands
+         on a whole device pixel at 2x and 3x, which is where this is read. */
+      padding: 9.5px 15px 6.5px;
       border-radius: var(--r-full);
       /* No stroke, so the fill has to close the shape by itself. This tan
          sits at 1.37:1 against the page, level with the Pro chips' 1.40:1,
