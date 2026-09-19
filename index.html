@@ -836,15 +836,19 @@
     }
     /* Native <details> snaps open. Give it the page's ease instead, where the
        browser can interpolate to a content-sized height. */
+    /* interpolate-size and ::details-content are Chromium-only today, so on
+       Safari this animates for nobody. The script below drives the height
+       instead, which works everywhere; this path is the fallback for a page
+       with no JavaScript, and switches off when the script takes over. */
     @supports (interpolate-size: allow-keywords) {
-      .faq details { interpolate-size: allow-keywords; }
-      .faq details::details-content {
+      html:not(.js-accordion) .faq details { interpolate-size: allow-keywords; }
+      html:not(.js-accordion) .faq details::details-content {
         block-size: 0;
         overflow: hidden;
         opacity: 0;
         transition: block-size 0.4s var(--ease-out), content-visibility 0.4s allow-discrete, opacity 0.3s ease;
       }
-      .faq details[open]::details-content { block-size: auto; opacity: 1; }
+      html:not(.js-accordion) .faq details[open]::details-content { block-size: auto; opacity: 1; }
     }
     @media (prefers-reduced-motion: reduce) {
       .faq summary .mark::before, .faq summary .mark::after { transition: none; }
@@ -1248,6 +1252,10 @@
       /* Folded lists. The button is written by script, so with JS off every
          point stays on the page exactly as before. */
       .points.folded > li[hidden] { display: none; }
+      /* Spacing moves from the grid gap onto the rows: a gap belongs to the
+         track, so it survives the row collapsing and the fold jumps. */
+      .points.folded { gap: 0; }
+      .points.folded > li { margin-bottom: var(--s-5); }
       .more-toggle {
         order: 5;
         margin-top: var(--s-4);
@@ -2301,6 +2309,86 @@
     });
   }
 
+  // ---- Accordion -------------------------------------------------------
+  // <details> still cannot be transitioned in Safari: interpolate-size and
+  // ::details-content are Chromium-only, and this is an iOS app's site, so
+  // the CSS version animates for almost none of the people who visit. The
+  // height is driven here instead, which works everywhere, and the CSS path
+  // switches itself off against .js-accordion so the two never fight.
+  (function () {
+    var groups = document.querySelectorAll('.faq');
+    if (!groups.length || !document.body.animate) return;
+    document.documentElement.classList.add('js-accordion');
+
+    // Opening is the slower, softer half: exponential ease-out, the page's
+    // own curve. Closing gets out of the way faster.
+    var OPEN = { duration: 440, easing: 'cubic-bezier(0.16, 1, 0.3, 1)' };
+    var SHUT = { duration: 300, easing: 'cubic-bezier(0.4, 0, 0.7, 1)' };
+
+    groups.forEach(function (group) {
+      var items = Array.prototype.slice.call(group.querySelectorAll('details'));
+
+      items.forEach(function (d) {
+        // The browser's own exclusive accordion snaps the sibling shut with no
+        // animation at all, so take the behaviour over and close it properly.
+        d.removeAttribute('name');
+
+        var summary = d.querySelector('summary');
+        var body = d.querySelector('.faq-body');
+        if (!summary || !body) return;
+        var running = null;
+
+        function pad() { return getComputedStyle(body).paddingBottom; }
+
+        // box-sizing is border-box, so a height of 0 still renders the
+        // padding. It has to travel with the height or the row never closes.
+        function run(frames, opts, done) {
+          if (running) running.cancel();
+          body.style.overflow = 'hidden';
+          running = body.animate(frames, opts);
+          running.onfinish = running.oncancel = function () {
+            body.style.overflow = '';
+            running = null;
+            if (done) done();
+          };
+        }
+
+        d.collapse = function () {
+          if (!d.open) return;
+          if (reduce) { d.open = false; return; }
+          var from = body.offsetHeight, p = pad();
+          run(
+            [{ height: from + 'px', paddingBottom: p, opacity: 1 },
+             { height: '0px', paddingBottom: '0px', opacity: 0 }],
+            SHUT,
+            function () { d.open = false; }
+          );
+        };
+
+        d.expand = function () {
+          if (reduce) { d.open = true; return; }
+          d.open = true;
+          var to = body.offsetHeight, p = pad();
+          run(
+            // Opacity finishes early so the words are never read while the
+            // row is still squashing them.
+            [{ height: '0px', paddingBottom: '0px', opacity: 0, offset: 0 },
+             { opacity: 1, offset: 0.45 },
+             { height: to + 'px', paddingBottom: p, opacity: 1, offset: 1 }],
+            OPEN
+          );
+        };
+
+        summary.addEventListener('click', function (e) {
+          e.preventDefault();
+          if (d.open) { d.collapse(); return; }
+          items.forEach(function (other) { if (other !== d) other.collapse(); });
+          d.expand();
+        });
+      });
+    });
+  })();
+
   // ---- The marker draws itself, once ------------------------------------
   // Held back until the sentence it marks is on screen and has settled, so it
   // reads as a hand passing over the words rather than as a page load.
@@ -2359,14 +2447,48 @@
         btn.appendChild(Object.assign(document.createElement('span'), { className: 'chev' }));
         list.parentNode.insertBefore(btn, list.nextSibling);
 
-        function apply(open) {
-          hidden.forEach(function (li) { li.hidden = !open; });
+        // First call sets the closed state; every later one is a tap, and a
+        // tap should move. The rows carry their own spacing here (see the
+        // .points.folded rule), so height and margin can travel together.
+        function apply(open, animate) {
+          if (!animate || reduce || !document.body.animate) {
+            hidden.forEach(function (li) { li.hidden = !open; });
+          } else if (open) {
+            hidden.forEach(function (li, i) {
+              li.hidden = false;
+              var h = li.offsetHeight;
+              var m = getComputedStyle(li).marginBottom;
+              li.animate(
+                [{ height: '0px', marginBottom: '0px', opacity: 0 },
+                 { height: h + 'px', marginBottom: m, opacity: 1 }],
+                { duration: 380, delay: i * 70, easing: 'cubic-bezier(0.16, 1, 0.3, 1)',
+                  fill: 'backwards' }
+              );
+            });
+          } else {
+            var last = null;
+            hidden.forEach(function (li, i) {
+              var h = li.offsetHeight;
+              var m = getComputedStyle(li).marginBottom;
+              last = li.animate(
+                [{ height: h + 'px', marginBottom: m, opacity: 1 },
+                 { height: '0px', marginBottom: '0px', opacity: 0 }],
+                { duration: 260, delay: (hidden.length - 1 - i) * 45,
+                  easing: 'cubic-bezier(0.4, 0, 0.7, 1)', fill: 'forwards' }
+              );
+            });
+            if (last) {
+              last.onfinish = function () {
+                hidden.forEach(function (li) { li.hidden = true; });
+              };
+            }
+          }
           btn.setAttribute('aria-expanded', String(open));
           word.textContent = open ? 'Show fewer' : shut;
         }
-        apply(false);
+        apply(false, false);
         btn.addEventListener('click', function () {
-          apply(btn.getAttribute('aria-expanded') !== 'true');
+          apply(btn.getAttribute('aria-expanded') !== 'true', true);
         });
       });
     }

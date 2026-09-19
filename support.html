@@ -202,13 +202,40 @@
     .faq-body { padding: 0 0 var(--s-5); max-width: 68ch; }
     .faq-body p { font-size: 16.5px; line-height: 1.72; color: var(--ink-3); text-wrap: pretty; }
     .faq-body p + p { margin-top: var(--s-3); }
+    /* interpolate-size and ::details-content are Chromium-only today, so this
+       path animates for almost nobody on an iOS app's site. The script drives
+       the height instead; this is the no-JavaScript fallback and stands down
+       once the script takes over. */
     @supports (interpolate-size: allow-keywords) {
-      .faq details { interpolate-size: allow-keywords; }
-      .faq details::details-content {
+      html:not(.js-accordion) .faq details { interpolate-size: allow-keywords; }
+      html:not(.js-accordion) .faq details::details-content {
         block-size: 0; overflow: hidden; opacity: 0;
         transition: block-size 0.4s var(--ease-out), content-visibility 0.4s allow-discrete, opacity 0.3s ease;
       }
-      .faq details[open]::details-content { block-size: auto; opacity: 1; }
+      html:not(.js-accordion) .faq details[open]::details-content { block-size: auto; opacity: 1; }
+    }
+
+    /* The landing page earns its way down the screen; this one arrived with
+       nothing, so the same reveal, at the same curve. */
+    html:not(.no-js) .reveal {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+    }
+    html:not(.no-js) .reveal.in { opacity: 1; transform: none; }
+
+    .status {
+      /* Entrance, so an answer to a tap never just appears. */
+      animation: status-in 0.42s var(--ease-out) both;
+    }
+    @keyframes status-in {
+      from { opacity: 0; transform: translateY(-6px); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html:not(.no-js) .reveal { opacity: 1; transform: none; transition: none; }
+      .status { animation: none; }
     }
 
     /* ---------- Form ---------- */
@@ -380,7 +407,7 @@
     <h1>Help with Cardinal.</h1>
     <p class="lede">Most of what people write in about is answered below. If yours is not there, use the form and a person will read it.</p>
 
-    <section aria-labelledby="q-h">
+    <section aria-labelledby="q-h" class="reveal">
       <h2 id="q-h">Before you write</h2>
       <p class="sub">The eight questions that come up most, answered properly.</p>
 
@@ -447,7 +474,7 @@
       </div>
     </section>
 
-    <section aria-labelledby="w-h">
+    <section aria-labelledby="w-h" class="reveal">
       <h2 id="w-h">Write to us</h2>
       <p class="sub">This goes straight to a person, not a ticket queue. If something is broken, saying which iPhone and which iOS version usually saves a round trip.</p>
 
@@ -540,6 +567,105 @@
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var hasIO = 'IntersectionObserver' in window;
+
+  // ---- Scroll reveals ---------------------------------------------------
+  (function () {
+    var items = document.querySelectorAll('.reveal');
+    if (reduce || !hasIO) {
+      items.forEach(function (el) { el.classList.add('in'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    items.forEach(function (el) { io.observe(el); });
+  })();
+
+  // ---- Accordion -------------------------------------------------------
+  // <details> still cannot be transitioned in Safari: interpolate-size and
+  // ::details-content are Chromium-only, and this is an iOS app's site, so
+  // the CSS version animates for almost none of the people who visit. The
+  // height is driven here instead, which works everywhere, and the CSS path
+  // switches itself off against .js-accordion so the two never fight.
+  (function () {
+    var groups = document.querySelectorAll('.faq');
+    if (!groups.length || !document.body.animate) return;
+    document.documentElement.classList.add('js-accordion');
+
+    // Opening is the slower, softer half: exponential ease-out, the page's
+    // own curve. Closing gets out of the way faster.
+    var OPEN = { duration: 440, easing: 'cubic-bezier(0.16, 1, 0.3, 1)' };
+    var SHUT = { duration: 300, easing: 'cubic-bezier(0.4, 0, 0.7, 1)' };
+
+    groups.forEach(function (group) {
+      var items = Array.prototype.slice.call(group.querySelectorAll('details'));
+
+      items.forEach(function (d) {
+        // The browser's own exclusive accordion snaps the sibling shut with no
+        // animation at all, so take the behaviour over and close it properly.
+        d.removeAttribute('name');
+
+        var summary = d.querySelector('summary');
+        var body = d.querySelector('.faq-body');
+        if (!summary || !body) return;
+        var running = null;
+
+        function pad() { return getComputedStyle(body).paddingBottom; }
+
+        // box-sizing is border-box, so a height of 0 still renders the
+        // padding. It has to travel with the height or the row never closes.
+        function run(frames, opts, done) {
+          if (running) running.cancel();
+          body.style.overflow = 'hidden';
+          running = body.animate(frames, opts);
+          running.onfinish = running.oncancel = function () {
+            body.style.overflow = '';
+            running = null;
+            if (done) done();
+          };
+        }
+
+        d.collapse = function () {
+          if (!d.open) return;
+          if (reduce) { d.open = false; return; }
+          var from = body.offsetHeight, p = pad();
+          run(
+            [{ height: from + 'px', paddingBottom: p, opacity: 1 },
+             { height: '0px', paddingBottom: '0px', opacity: 0 }],
+            SHUT,
+            function () { d.open = false; }
+          );
+        };
+
+        d.expand = function () {
+          if (reduce) { d.open = true; return; }
+          d.open = true;
+          var to = body.offsetHeight, p = pad();
+          run(
+            // Opacity finishes early so the words are never read while the
+            // row is still squashing them.
+            [{ height: '0px', paddingBottom: '0px', opacity: 0, offset: 0 },
+             { opacity: 1, offset: 0.45 },
+             { height: to + 'px', paddingBottom: p, opacity: 1, offset: 1 }],
+            OPEN
+          );
+        };
+
+        summary.addEventListener('click', function (e) {
+          e.preventDefault();
+          if (d.open) { d.collapse(); return; }
+          items.forEach(function (other) { if (other !== d) other.collapse(); });
+          d.expand();
+        });
+      });
+    });
+  })();
+
 
   (function () {
     var form   = document.getElementById('contact');
