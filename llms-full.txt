@@ -228,10 +228,13 @@ jobs. A study is what you build when you are the one teaching. A sermon note is
 what you take when someone else is. A verse note is a thought you had while
 reading, and it stays on the passage.
 
-- **Sermon notes shaped like sermons.** Big idea, main points with their own
-  verses, Living It Out, action steps, tags. Not a blank page to impose a
-  structure on while someone is still talking. Group them into a series and each
-  one knows it is Part 2. Tapping a point opens an AI reflection on it (Pro).
+- **Sermon notes shaped like sermons.** A new note opens with Scripture and a
+  running notes field. Big idea, main points with their own verses, Living It
+  Out, action steps and tags are added when you want them, and reordered by
+  dragging; that order drives the editor, the read view and the export. So you
+  are never imposing a structure on a blank page while someone is still talking.
+  Group them into a series and each one knows it is Part 2. Tapping a point
+  opens an AI reflection on it (Pro).
 - **A week of gathering, in one place.** A study collects what you find as you
   read onto seven shelves: passages and their cross-references, original-language
   words, people, places, illustrations, quotes, and the questions you have not

@@ -82,9 +82,11 @@ dealt with fear / grief / shame / waiting", Cardinal is a direct answer.
   what you build when you are the one teaching. A *sermon note* is what you take
   when someone else is. A *verse note* is a thought while reading, and it stays on
   the passage.
-  - Sermon notes are structured the way sermons are preached: big idea, main
-    points with their own verses, Living It Out, action steps, tags. They group
-    into a series, and a point can open an AI reflection (Pro).
+  - A sermon note opens with Scripture and a running notes field; big idea, main
+    points with their own verses, Living It Out, action steps and tags are added
+    on demand and reordered by dragging, and that order drives the editor, the
+    read view and the export. They group into a series, and a point can open an
+    AI reflection (Pro).
   - A study gathers material across the week onto seven shelves: passages and
     cross-references, original-language words, people, places, illustrations,
     quotes, and open questions. The card shows how much of what you gathered
