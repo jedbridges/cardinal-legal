@@ -358,10 +358,10 @@
     .setup-notice {
       margin-bottom: var(--s-6);
       padding: var(--s-4) var(--s-5);
-      border: 1px dashed var(--red);
+      border: 1px solid var(--band-border);
       border-radius: var(--r-md);
-      background: var(--red-soft);
-      color: var(--red-ink);
+      background: var(--band-bg);
+      color: var(--ink-2);
       font-family: var(--font-ui);
       font-size: 14.5px;
       line-height: 1.6;
@@ -528,9 +528,9 @@
           Formbricks both do this and both need a server; that is the tradeoff.
         -->
         <div class="setup-notice" id="setup-notice" hidden>
-          <strong>This form is not connected yet.</strong> Paste a Web3Forms access key into
-          <code>support.html</code> (see the comment above the form) and this notice disappears.
-          Until then nothing sent here is delivered.
+          <strong>This form is not taking messages yet.</strong> It is being set up, and until
+          it is, anything sent here would not reach anyone, so it is better to say so than to
+          show you a thank-you. The answers above cover most of what people write in about.
         </div>
 
         <form id="contact" action="https://api.web3forms.com/submit" method="POST" novalidate>
@@ -768,7 +768,7 @@
         return;
       }
       if (unconfigured) {
-        show('error', 'This form is not connected to an inbox yet, so nothing would reach us. Please try again shortly.');
+        show('error', 'This form is not taking messages yet, so nothing would reach us. Please try again in a day or two.');
         return;
       }
 
