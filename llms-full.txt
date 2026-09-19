@@ -165,6 +165,60 @@ quietly works out which verses you are still learning.
 
 ---
 
+## Threads
+
+**Someone in here has already been where you are.** Twenty-four lives from
+Scripture, each told as the handful of moments that actually made it. You find
+them by what they are about rather than by name, because you usually arrive
+carrying a situation and not a person.
+
+- **Filed under what you are carrying.** "The room you are afraid to walk into"
+  is how you find Esther. "Burned out under a tree" is how you find Elijah.
+  "Four days too late" is Martha.
+- **The whole Bible, drawn to scale.** Each life is flown across a strip of the
+  entire canon, all 31,102 verses of it, with every moment plotted where it truly
+  falls. Nothing is squashed to look tidy: Obadiah is the sliver it really is,
+  and the Psalms are a slab.
+- **Including the moments that land centuries later.** Abraham's last beat is in
+  Hebrews, written some two thousand years after the rest of his life. The strip
+  shows you that distance instead of tucking it away.
+- **Every moment opens the text.** A few lines of writing, then one to three
+  verses with a reason each is there. The writing never quotes them, because its
+  job is to send you to the passage rather than to stand in for it.
+- **A hundred and forty moments, free.** Written for Cardinal, checked against
+  the Bible reference by reference, and on your phone whether or not you have a
+  signal.
+
+Eight themes in all, and every life sits under two or three of them: fear,
+loneliness, grief, shame, waiting, purpose, belonging, mercy. David is under
+shame, mercy and purpose. The twenty-four are Abraham, Daniel, David, Elijah,
+Esther, Gideon, Hagar, Hannah, Hosea, Jacob, Jeremiah, Job, Jonah, Joseph,
+Martha, Mary, Moses, Naomi, Nehemiah, Paul, Peter, Rahab, Ruth and Solomon.
+
+The written moments are in English for every interface language; unlike Journeys,
+localized versions have not shipped.
+
+---
+
+## Journeys
+
+**Seventeen journeys, over the ground they happened on.** Paul's voyages,
+Abraham's road, the Exodus, Passion Week. Each one flies stop to stop across real
+3D satellite terrain, so the distance between two places is the distance it was.
+
+- **The actual ground.** Not an illustrated map. Lystra is the hill Lystra sits
+  on, seen from above, with the route drawn across it.
+- **Every stop says what happened there.** A short piece of writing, then the
+  verses it rests on, which open straight into the reader.
+- **Or have it read to you.** Each stop's narration can be spoken aloud while the
+  camera flies, for the times you would rather watch than read.
+- **Keep a place.** Any stop shares as a card of the place itself, which is a
+  better thing to send someone than a screenshot.
+- **All seventeen, for everyone.** No subscription. The journeys themselves ship
+  inside the app; only the satellite imagery needs a connection.
+
+---
+
 ## And the rest of it
 
 All of it is included for everyone, with no subscription. Where one part of
@@ -173,9 +227,6 @@ something needs Pro, it says so below.
 - **Listen.** Scripture read aloud, with the words lighting up in time with the
   narration and the page following on its own. Six narrators, a sleep timer,
   adjustable pace, AirPlay, and it keeps playing on the lock screen.
-- **Journeys.** Seventeen journeys flown place to place over real 3D satellite
-  terrain. Paul's voyages, Abraham's road, the Exodus, Passion Week. Read each
-  stop's story, hear it narrated, share it as a card of the place itself.
 - **Sermon notes.** Structured the way sermons are actually preached: big idea,
   main points with their own verses, application, ways to serve. Group them by
   series. For sermons you hear and sermons you give.
@@ -285,6 +336,7 @@ licensed from their publishers, and the AI behind Ask.
 - Quiet Time, and every curated path
 - Describe your own reading path and have it built for you
 - Memorize, and every verse pack
+- Threads, all twenty-four lives and a hundred and forty moments
 - All seventeen Journeys
 - Sermon notes, verse notes and the prayer list
 - Audio, widgets and the Apple Watch app
@@ -308,11 +360,19 @@ written stays readable and exportable even if a subscription lapses.
 **Is Cardinal free?**
 Yes. Cardinal is free to download and free to use, with no account and no sign-in.
 Reading the Bible is free in thirteen translations and always will be. Quiet Time,
-Memorize, Journeys, audio, notes, widgets and the Apple Watch app are all included
-for everyone. Cardinal Pro is an optional subscription covering the four
+Memorize, Threads, Journeys, audio, notes, widgets and the Apple Watch app are
+all included for everyone. Cardinal Pro is an optional subscription covering the four
 translations licensed from their publishers, unlimited use of Ask, side-by-side
 reading, and editing your own studies. The App Store shows what it costs where you
 are.
+
+**Can I study the people in the Bible?**
+Yes, and it is free. Threads tells twenty-four lives of Scripture as the handful
+of moments that made them, browsed by what they are about rather than by name:
+fear, loneliness, grief, shame, waiting, purpose, belonging and mercy. Esther is
+under "the room you are afraid to walk into," Elijah under "burned out under a
+tree." Each life is flown across a strip of the whole Bible with its moments
+plotted where they actually fall, and every moment offers the verses it rests on.
 
 **Do I have to make an account?**
 No. There is no name, no email, no password and no sign-in anywhere in Cardinal.
