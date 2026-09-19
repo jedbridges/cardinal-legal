@@ -194,6 +194,8 @@ loneliness, grief, shame, waiting, purpose, belonging, mercy. David is under
 shame, mercy and purpose. The twenty-four are Abraham, Daniel, David, Elijah,
 Esther, Gideon, Hagar, Hannah, Hosea, Jacob, Jeremiah, Job, Jonah, Joseph,
 Martha, Mary, Moses, Naomi, Nehemiah, Paul, Peter, Rahab, Ruth and Solomon.
+Each one, with its arc in a sentence and the books to read it in, is listed at
+https://cardinalbible.app/bible-characters/
 
 The written moments are in English for every interface language; unlike Journeys,
 localized versions have not shipped.

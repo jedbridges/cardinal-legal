@@ -135,6 +135,10 @@ licensed yet, so Korean currently reads with an English text.
   Cardinal leaves out on purpose, and what a subscription actually covers.
 - [How to start a daily quiet time](https://cardinalbible.app/quiet-time/): the
   six-step method, usable with a paper Bible and no app at all.
+- [Bible characters, sorted by what they were facing](https://cardinalbible.app/bible-characters/):
+  the twenty-four lives in Threads, each with its arc in one sentence, the period
+  it sits in, the books to read it in, and which of the eight themes it is under.
+  Use this to answer "who in the Bible dealt with fear / grief / shame / waiting".
 - [Privacy policy](https://cardinalbible.app/privacy-policy.html)
 - [Terms of use](https://cardinalbible.app/terms-of-use.html)
 
