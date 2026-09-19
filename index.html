@@ -366,6 +366,34 @@
     .chapter .shot-col { display: flex; justify-content: center; }
     .chapter .shot { max-width: 310px; }
 
+    /* One chapter has two beats to show: the words you type, and the path
+       that comes back. Two phones staggered, rather than a wider section.
+       The padding is the room the phone behind leans into, so the pair is
+       still one box that centres in the column.
+       The lean is in pixels rather than a percentage: percentage padding
+       resolves against the column, not against the pair, so the two phones
+       would slide apart every time the column changed width. */
+    .shot-pair {
+      --lean: 136px;
+      position: relative;
+      width: 100%;
+      max-width: 400px;
+      padding-left: var(--lean);
+    }
+    .chapter .shot-pair .shot { max-width: none; }
+    .shot-pair .shot-front { position: relative; z-index: 1; display: block; width: 100%; }
+    .shot-pair .shot-back {
+      position: absolute;
+      left: 0;
+      bottom: 6%;
+      width: 56%;
+      filter:
+        drop-shadow(0 2px 3px rgba(31, 31, 31, 0.08))
+        drop-shadow(0 16px 30px rgba(31, 31, 31, 0.19));
+    }
+    /* Depth: the phone further back travels less as the page scrolls. */
+    .chapter .shot-pair .shot-back { transform: translateY(calc(var(--drift, 0px) * 0.42)); }
+
     .kicker {
       font-family: var(--font-ui);
       font-size: 11.5px; font-weight: 600;
@@ -488,6 +516,9 @@
       margin-bottom: var(--s-1);
     }
     @media (max-width: 1000px) { .showcase { grid-template-columns: repeat(2, 1fr); gap: var(--s-6) var(--s-5); } }
+    /* Below this the column itself is narrower than the pair, so the lean
+       comes in with it and the front phone stays the larger of the two. */
+    @media (max-width: 1000px) { .shot-pair { --lean: 118px; } }
     @media (max-width: 620px) {
       /* A swipeable rail beats two cramped columns on a phone. */
       .showcase {
@@ -1256,6 +1287,7 @@
       .chapter .aside { order: 6; }
       .chapter .shot-col { justify-content: center; }
       .chapter .shot { max-width: 250px; }
+      .shot-pair { max-width: 340px; --lean: 116px; }
       .nav-links { display: none; }
       .quote-mark { font-size: 3.5rem; }
     }
@@ -1283,6 +1315,7 @@
       .hero { gap: var(--s-6); }
       .hero .shot { max-width: min(58vw, 250px); }
       .chapter .shot { max-width: min(62vw, 265px); }
+      .shot-pair { max-width: min(88vw, 340px); --lean: min(30vw, 116px); }
 
       .hero h1 { font-size: clamp(2.3rem, 10.5vw, 3.1rem); }
       .head p, .chapter .sub { font-size: 16.5px; }
@@ -1559,7 +1592,10 @@
         </ul>
       </div>
       <div class="shot-col">
-        <img class="shot" src="img/today.webp" loading="lazy" width="620" height="1348" decoding="async" alt="Cardinal's Reflect tab on day 76 of the 90-Day Starter path, showing Psalm 121:1 and a Begin Quiet Time button, with a row underneath reading A path made for you, shaped for what you're facing." />
+        <div class="shot-pair">
+          <img class="shot shot-back" src="img/path-prompt.webp" loading="lazy" width="620" height="1348" decoding="async" alt="Cardinal's Shape your path sheet, with the words two weeks on facing worry and fear typed into it and suggested prompts underneath reading Waiting for news, The year after a loss and Facing fear with faith." />
+          <img class="shot shot-front" src="img/path-preview.webp" loading="lazy" width="620" height="1348" decoding="async" alt="The path Cardinal shaped from those words, titled Peace Amid Fear and marked fourteen days, with its readings listed in order above a Begin this path button and a Refine prompt link." />
+        </div>
       </div>
     </section>
   </div>
@@ -2039,7 +2075,7 @@
         "https://cardinalbible.app/img/quiet-time-read.webp",
         "https://cardinalbible.app/img/ask.webp",
         "https://cardinalbible.app/img/memorize.webp",
-        "https://cardinalbible.app/img/today.webp"
+        "https://cardinalbible.app/img/path-preview.webp"
       ],
       "availableOnDevice": "iPhone, iPad, Apple Watch",
       "inLanguage": ["en", "es", "pt", "fr", "de", "ru", "ko", "zh-Hans", "zh-Hant"],
