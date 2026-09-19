@@ -5,7 +5,7 @@
   <script>document.documentElement.classList.remove('no-js');</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Support &middot; Cardinal</title>
+  <title>Cardinal Support: Help With the Bible App</title>
   <meta name="description" content="Help with Cardinal, the Bible app. Answers to the questions people ask most, and a form that reaches a person." />
   <link rel="canonical" href="https://cardinalbible.app/support.html" />
   <meta name="theme-color" content="#FAF7F2" />
@@ -371,6 +371,37 @@
       font-size: 13px;
     }
 
+    .foot-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: var(--s-6) var(--s-5);
+      margin-bottom: var(--s-7);
+      font-family: var(--font-ui);
+    }
+    .foot-grid h2 {
+      font-family: var(--font-ui);
+      font-size: 12.5px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--muted);
+      margin: 0 0 var(--s-3);
+    }
+    .foot-grid ul { list-style: none; display: grid; gap: var(--s-1); }
+    .foot-grid a {
+      color: var(--ink-3);
+      font-size: 14.5px;
+      display: inline-flex; align-items: center;
+      min-height: 34px;
+    }
+    .foot-grid a:hover { color: var(--red-ink); text-decoration: none; }
+    .foot-base {
+      display: flex; flex-wrap: wrap; gap: var(--s-3) var(--s-5);
+      justify-content: space-between; align-items: center;
+      padding-top: var(--s-5);
+      border-top: 1px solid var(--border-soft);
+      color: var(--muted);
+      font-size: 13.5px;
+    }
+
     footer {
       margin-top: var(--s-8);
       padding: var(--s-6) 0 var(--s-8);
@@ -555,12 +586,42 @@
   </main>
 
   <footer>
-    <div>&copy; <span id="year">2026</span> Cardinal</div>
-    <div class="foot-links">
-      <a href="/">Home</a>
-      <a href="privacy-policy.html">Privacy policy</a>
-      <a href="terms-of-use.html">Terms</a>
-      <a href="https://apps.apple.com/app/id6758185643">App Store</a>
+    <nav class="foot-grid" aria-label="Footer">
+      <div>
+        <h2>Cardinal</h2>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/#read">Read</a></li>
+          <li><a href="/#ask">Ask</a></li>
+          <li><a href="/#pricing">What&rsquo;s free</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Written</h2>
+        <ul>
+          <li><a href="/offline-bible-app/">Offline reading</a></li>
+          <li><a href="/bible-app-no-ads/">No ads, no account</a></li>
+          <li><a href="/quiet-time/">Quiet time guide</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Help</h2>
+        <ul>
+          <li><a href="/support.html">Support</a></li>
+          <li><a href="https://apps.apple.com/app/id6758185643">App Store</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Legal</h2>
+        <ul>
+          <li><a href="privacy-policy.html">Privacy policy</a></li>
+          <li><a href="terms-of-use.html">Terms of use</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="foot-base">
+      <div>&copy; <span id="year">2026</span> Cardinal</div>
+      <div>A Bible app for iPhone, iPad and Apple Watch.</div>
     </div>
   </footer>
 </div>

@@ -30,6 +30,10 @@
   <meta name="twitter:description" content="Just you, God and Scripture. No noise." />
   <meta name="twitter:image" content="https://cardinalbible.app/img/og.png" />
 
+  <!-- The hero screenshot is what Largest Contentful Paint measures here, so
+       it is requested before the parser reaches the markup that needs it. -->
+  <link rel="preload" as="image" href="img/reader.webp" type="image/webp" fetchpriority="high" />
+
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png" />
@@ -883,8 +887,34 @@
     /* ---------- Footer ---------- */
     footer {
       border-top: 1px solid var(--border-soft);
-      padding: var(--s-6) 0 var(--s-8);
+      padding: var(--s-7) 0 var(--s-8);
     }
+    /* A real footer, not a legal strip: it is the only place every written
+       page is reachable from, which is how the rest of the site gets crawled
+       and how a reader finds the answer they came for. */
+    .foot-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: var(--s-6) var(--s-5);
+      margin-bottom: var(--s-7);
+      font-family: var(--font-ui);
+    }
+    .foot-grid h2 {
+      font-family: var(--font-ui);
+      font-size: 12.5px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--muted);
+      margin: 0 0 var(--s-3);
+    }
+    .foot-grid ul { list-style: none; display: grid; gap: var(--s-1); }
+    .foot-grid a {
+      color: var(--ink-3);
+      font-size: 14.5px;
+      display: inline-flex; align-items: center;
+      min-height: 34px;
+    }
+    .foot-grid a:hover { color: var(--red-ink); text-decoration: none; }
+    .foot { padding-top: var(--s-5); border-top: 1px solid var(--border-soft); }
     .foot {
       font-family: var(--font-ui);
       display: flex; flex-wrap: wrap;
@@ -1888,13 +1918,45 @@
 </main>
 
 <footer>
-  <div class="wrap foot">
-    <div>&copy; <span id="year">2026</span> Cardinal</div>
-    <div class="foot-links">
-      <a href="support.html">Support</a>
-      <a href="privacy-policy.html">Privacy policy</a>
-      <a href="terms-of-use.html">Terms</a>
-      <a href="https://apps.apple.com/app/id6758185643">App Store</a>
+  <div class="wrap">
+    <nav class="foot-grid" aria-label="Footer">
+      <div>
+        <h2>Cardinal</h2>
+        <ul>
+          <li><a href="#read">Read</a></li>
+          <li><a href="#ask">Ask</a></li>
+          <li><a href="#quiet-time">Reflect</a></li>
+          <li><a href="#memorize">Memorize</a></li>
+          <li><a href="#pricing">What&rsquo;s free</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Written</h2>
+        <ul>
+          <li><a href="/offline-bible-app/">Offline reading</a></li>
+          <li><a href="/bible-app-no-ads/">No ads, no account</a></li>
+          <li><a href="/quiet-time/">Quiet time guide</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Help</h2>
+        <ul>
+          <li><a href="support.html">Support</a></li>
+          <li><a href="#faq">Questions</a></li>
+          <li><a href="https://apps.apple.com/app/id6758185643">App Store</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Legal</h2>
+        <ul>
+          <li><a href="privacy-policy.html">Privacy policy</a></li>
+          <li><a href="terms-of-use.html">Terms of use</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="foot">
+      <div>&copy; <span id="year">2026</span> Cardinal</div>
+      <div>A Bible app for iPhone, iPad and Apple Watch.</div>
     </div>
   </div>
 </footer>

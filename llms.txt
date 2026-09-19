@@ -107,6 +107,12 @@ licensed yet, so Korean currently reads with an English text.
   the marketing site, in one file.
 - [Support](https://cardinalbible.app/support.html): answers to the questions
   people ask most, and a form that reaches a person.
+- [Offline reading](https://cardinalbible.app/offline-bible-app/): exactly which
+  translations work with no connection, and the four that never can.
+- [No ads, no account](https://cardinalbible.app/bible-app-no-ads/): what
+  Cardinal leaves out on purpose, and what a subscription actually covers.
+- [How to start a daily quiet time](https://cardinalbible.app/quiet-time/): the
+  six-step method, usable with a paper Bible and no app at all.
 - [Privacy policy](https://cardinalbible.app/privacy-policy.html)
 - [Terms of use](https://cardinalbible.app/terms-of-use.html)
 
