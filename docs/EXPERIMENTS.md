@@ -50,6 +50,12 @@ something else.
 Anyone already assigned to a message you removed is reassigned on their next
 visit, which is correct: a retired message should stop being served.
 
+**If you rewrite a message that is already running, bump `KEY`** (currently
+`cardinal.hero.v2`). Everyone is then reassigned, and the round starts clean.
+Without that bump, visitors keep their old assignment while seeing new words,
+so their clicks are recorded against a headline they were never shown, and
+the round's numbers mean nothing. Start counting from the bump, not before.
+
 Always keep `control` in the list. It is the message the page is wearing
 today, and without it a round tells you which challenger beat the others but
 not whether any of them beat what you already had.
@@ -87,19 +93,23 @@ assumes, and the bar is where the work should go.
 Eleven are written; four run at a time. In `index.html`, `MESSAGES` holds
 all of them and `LIVE` holds the ones being served.
 
-| Name | Angle | Running |
+| Name | Headline | Running |
 | --- | --- | --- |
-| `control` | The incumbent, and the only one in the HTML itself | yes |
-| `ai` | Ask a question, every answer shows its verses | yes |
-| `ai-grounded` | It quotes the text, not its memory of it | yes |
-| `ai-path` | Say what you are going through, it builds the plan | yes |
-| `ai-free` | The biggest questions, answered in full, free | parked |
-| `ai-private` | A Bible AI that never reads your notes | parked |
-| `privacy` | Nobody is watching you read | parked |
-| `nodata` | No account, no ads, nothing collected | parked |
-| `offline` | The whole Bible, signal or not | parked |
-| `free` | Reading is free, all of it | parked |
-| `nofeed` | No feed, no streaks, no badges | parked |
+| `control` | Just you, God and Scripture. | yes |
+| `ai` | Ask anything. Every answer shows its verses. | yes |
+| `ai-grounded` | A Bible AI that quotes the text itself. | yes |
+| `ai-path` | Say what you are facing. It builds the plan. | yes |
+| `ai-free` | Hard questions. Full answers. Free. | parked |
+| `ai-private` | A Bible AI that never reads your notes. | parked |
+| `privacy` | Nobody sees what you underline. | parked |
+| `nodata` | No account. No ads. No data. | parked |
+| `offline` | The whole Bible, signal or not. | parked |
+| `free` | Reading is free. All of it, always. | parked |
+| `nofeed` | No feed. No streaks. Just the Bible. | parked |
+
+All eleven sit between 28 and 44 characters, so every one lands in two or
+three lines of display type at every width. They were up to 65 before, which
+cost the hero a line and the headline its punch.
 
 The current round tests one hypothesis: that the AI is the reason to
 download. Three framings of it against the incumbent, chosen to be as
@@ -133,7 +143,10 @@ does not exist.
 ### Writing another one
 
 Put it in `MESSAGES` and add its name to `LIVE`. Keep the same shape: an `h1`
-carrying one `<em>` phrase, and a `lede` of one or two sentences.
+carrying one `<em>` phrase, and a `lede` of one or two sentences. Stay under
+about 45 characters, and bind short sentences with `&nbsp;` so `text-wrap:
+balance` can only break between them. Without it a three-beat headline breaks
+mid-beat, as "No account. No / ads. No data." did.
 
 Every claim in a message has to be true. These are marketing lines on a page
 whose whole argument is that it does not exaggerate, and a headline is the
