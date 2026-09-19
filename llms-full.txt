@@ -221,6 +221,39 @@ Abraham's road, the Exodus, Passion Week. Each one flies stop to stop across rea
 
 ---
 
+## Notes: built for the person preaching on Sunday
+
+Cardinal keeps three kinds of notes apart, because they are three different
+jobs. A study is what you build when you are the one teaching. A sermon note is
+what you take when someone else is. A verse note is a thought you had while
+reading, and it stays on the passage.
+
+- **Sermon notes shaped like sermons.** Big idea, main points with their own
+  verses, Living It Out, action steps, tags. Not a blank page to impose a
+  structure on while someone is still talking. Group them into a series and each
+  one knows it is Part 2. Tapping a point opens an AI reflection on it (Pro).
+- **A week of gathering, in one place.** A study collects what you find as you
+  read onto seven shelves: passages and their cross-references, original-language
+  words, people, places, illustrations, quotes, and the questions you have not
+  answered yet. The card tells you how much of what you gathered actually made
+  it into the sermon.
+- **An outline with room to write.** Every point holds two things: the line you
+  say out loud, and the prose underneath it, as long as it needs to be. The whole
+  study exports as Markdown.
+- **Podium mode.** What you preach from on Sunday. Read-only, because the one
+  place you must not accidentally edit a sermon is while you are giving it. Type
+  size is set for the distance to a lectern rather than the size you read at.
+- **It fails in the vestry, not at the lectern.** Every passage is fetched when
+  podium mode opens, not when you reach it, so a weak signal shows itself while
+  there is still time to pick up paper.
+- **Cardinal will not write your sermon.** Ask it to dig deeper and it answers
+  with cross-references, context and word studies. It does not draft. The study,
+  the structure and the words stay yours.
+
+Editing a study is part of Cardinal Pro. Reading one, exporting one and
+preaching from one never are, so a lapsed subscription leaves years of
+preparation readable rather than locked away.
+
 ## Everything else in the app
 
 All of it is included for everyone, with no subscription. Where one part of
@@ -229,12 +262,6 @@ something needs Pro, it says so below.
 - **Listen.** Scripture read aloud, with the words lighting up in time with the
   narration and the page following on its own. Six narrators, a sleep timer,
   adjustable pace, AirPlay, and it keeps playing on the lock screen.
-- **Sermon notes.** Structured the way sermons are actually preached: big idea,
-  main points with their own verses, application, ways to serve. Group them by
-  series. For sermons you hear and sermons you give.
-- **Studies.** A workspace for preparing one. Gather verses, illustrations and
-  quotes as you read, shape an outline, keep an archive. Editing a study is part of
-  Pro; reading and exporting one never is.
 - **Scan a page.** Photograph a sermon slide or a bulletin and Cardinal pulls
   the references out of it, reading the picture on your device. Every one is
   checked against the Bible first, so a verse that does not exist never appears.
