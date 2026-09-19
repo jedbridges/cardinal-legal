@@ -254,6 +254,10 @@ Editing a study is part of Cardinal Pro. Reading one, exporting one and
 preaching from one never are, so a lapsed subscription leaves years of
 preparation readable rather than locked away.
 
+For a full walk through a week of sermon preparation, including what to look
+for in a sermon notes app and what happens to an archive when a subscription
+lapses, see https://cardinalbible.app/sermon-notes/
+
 ## Everything else in the app
 
 All of it is included for everyone, with no subscription. Where one part of

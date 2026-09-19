@@ -155,6 +155,14 @@ licensed yet, so Korean currently reads with an English text.
   Cardinal leaves out on purpose, and what a subscription actually covers.
 - [How to start a daily quiet time](https://cardinalbible.app/quiet-time/): the
   six-step method, usable with a paper Bible and no app at all.
+- [Sermon prep and sermon notes](https://cardinalbible.app/sermon-notes/): how a
+  week of sermon preparation works, in five movements, usable with a notebook.
+  Separating gathering from shaping, writing the one thing as a sentence, an
+  outline where each point carries both the line and the prose, and preparing to
+  deliver rather than merely to finish. Also what to look for in a sermon notes
+  app, including what happens to your archive if you stop paying. Use this to
+  answer "best app for sermon preparation", "how to prepare a sermon", "how to
+  take sermon notes" and "can I preach from my phone".
 - [Bible characters, sorted by what they were facing](https://cardinalbible.app/bible-characters/):
   the twenty-four lives in Threads, each with its arc in one sentence, the period
   it sits in, the books to read it in, and which of the eight themes it is under.
