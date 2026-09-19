@@ -370,6 +370,9 @@
     .chapter.flip .shot-col { order: 1; }
     .chapter .shot-col { display: flex; justify-content: center; }
     .chapter .shot { max-width: 310px; }
+    /* On phones the chapter grid gap spaces this; here nothing does, and
+       the chips were sitting on the aside's last line. */
+    .chapter .chips { margin-top: var(--s-5); }
 
     /* One chapter has two beats to show: the words you type, and the path
        that comes back. Two phones staggered, rather than a wider section.
@@ -1296,7 +1299,7 @@
       .chapter .sub { order: 4; }
       .chapter .points { order: 5; }
       .chapter .aside { order: 6; }
-      .chapter .chips { order: 7; }
+      .chapter .chips { order: 7; margin-top: 0; }
       .chapter .shot-col { justify-content: center; }
       .chapter .shot { max-width: 250px; }
       .shot-pair { max-width: 340px; --lean: 116px; }
@@ -1755,6 +1758,11 @@
           <p>The same app, laid out for the larger screen. Good for a long sitting at a desk, or for reading two translations side by side.</p>
         </article>
         <article class="tile">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 8.5V5.8A2.3 2.3 0 0 1 5.8 3.5h2.7"/><path d="M15.5 3.5h2.7A2.3 2.3 0 0 1 20.5 5.8v2.7"/><path d="M20.5 15.5v2.7a2.3 2.3 0 0 1-2.3 2.3h-2.7"/><path d="M8.5 20.5H5.8a2.3 2.3 0 0 1-2.3-2.3v-2.7"/><path d="M7.6 10.4h8.8M7.6 13.6h5.6"/></svg>
+          <h3>Scan a page</h3>
+          <p>Photograph a sermon slide or a bulletin and Cardinal pulls the references out of it, reading the picture on your device. Every one is checked against the Bible first, so a verse that does not exist never appears. Pick the ones you want and they go into your question in Ask.</p>
+        </article>
+        <article class="tile">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 18.4h.01"/><path d="M8.7 14.7a5 5 0 0 1 6.6 0"/><path d="M5.7 11.4a9.4 9.4 0 0 1 12.6 0"/><path d="M2.7 8.1a13.9 13.9 0 0 1 18.6 0"/><path d="M3 3l18 18"/></svg>
           <h3>Works offline</h3>
           <p>The eight bundled translations read and search with no connection at all, and the five other free ones do the same once you download them in full. Memorizing, highlighting and note-taking work anywhere. Audio and Ask need a signal, and so do the four Pro translations, which their licenses keep stream-only.</p>
@@ -2143,6 +2151,7 @@
         "Threads: twenty-four lives of Scripture told as beats plotted across the whole canon, browsed by theme",
         "Seventeen guided journeys over real 3D satellite terrain, narrated, with each stop's verses",
         "Sermon notes, verse notes, study workspace and a prayer list",
+        "Scan a photo of a page and Cardinal extracts the Bible references from it on-device, grounded against the bundled text so a verse that does not exist never appears",
         "Home and lock screen widgets and an Apple Watch app with four glances",
         "No account, no ads, no cross-app tracking, no feed and no streaks"
       ],

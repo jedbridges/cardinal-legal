@@ -79,6 +79,10 @@ fear / grief / shame / waiting", Cardinal is a direct answer.
 - Notes and Studies: sermon notes structured the way sermons are preached, and a
   study workspace. Editing a study is part of Pro; reading and exporting one never
   is, so a lapsed subscription leaves years of preparation readable.
+- Scan a page: photograph a sermon slide or a bulletin and Cardinal extracts the
+  Bible references from it. Vision OCR runs on-device and every candidate is
+  grounded against the bundled text, so a reference that does not resolve to a
+  real verse never appears. The chosen verses go into a question in Ask.
 - Everywhere else: home and lock screen widgets, and an Apple Watch app with four
   glances that works with no phone nearby.
 

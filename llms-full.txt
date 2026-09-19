@@ -233,6 +233,10 @@ something needs Pro, it says so below.
 - **Studies.** A workspace for preparing one. Gather verses, illustrations and
   quotes as you read, shape an outline, keep an archive. Editing a study is part of
   Pro; reading and exporting one never is.
+- **Scan a page.** Photograph a sermon slide or a bulletin and Cardinal pulls
+  the references out of it, reading the picture on your device. Every one is
+  checked against the Bible first, so a verse that does not exist never appears.
+  Pick the ones you want and they go into your question in Ask.
 - **Widgets.** A Verse of the Day, today's Quiet Time passage, or your Memorize
   progress, pinned to the home and lock screen.
 - **Apple Watch.** Four glances: the verse, the next passage, what is playing, and
