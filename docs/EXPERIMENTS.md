@@ -76,25 +76,64 @@ assumes, and the bar is where the work should go.
 
 ## The messages
 
-Seven are written; four run at a time. In `index.html`, `MESSAGES` holds all
-of them and `LIVE` holds the ones being served.
+Eleven are written; four run at a time. In `index.html`, `MESSAGES` holds
+all of them and `LIVE` holds the ones being served.
 
-| Name | Angle |
-| --- | --- |
-| `control` | The incumbent, and the only one in the HTML itself |
-| `privacy` | Nobody is watching you read |
-| `nodata` | No account, no ads, nothing collected |
-| `ai` | Ask a question, get the verses |
-| `offline` | The whole Bible, signal or not |
-| `free` | Reading is free, all of it |
-| `nofeed` | No feed, no streaks, no badges |
+| Name | Angle | Running |
+| --- | --- | --- |
+| `control` | The incumbent, and the only one in the HTML itself | yes |
+| `ai` | Ask a question, every answer shows its verses | yes |
+| `ai-grounded` | It quotes the text, not its memory of it | yes |
+| `ai-path` | Say what you are going through, it builds the plan | yes |
+| `ai-free` | The biggest questions, answered in full, free | parked |
+| `ai-private` | A Bible AI that never reads your notes | parked |
+| `privacy` | Nobody is watching you read | parked |
+| `nodata` | No account, no ads, nothing collected | parked |
+| `offline` | The whole Bible, signal or not | parked |
+| `free` | Reading is free, all of it | parked |
+| `nofeed` | No feed, no streaks, no badges | parked |
 
-To add one, put it in `MESSAGES` and add its name to `LIVE`. Keep the same
-shape: an `h1` with one `<em>` phrase, and a `lede` of one or two sentences.
+The current round tests one hypothesis: that the AI is the reason to
+download. Three framings of it against the incumbent, chosen to be as
+unalike as possible, because two similar messages split the traffic and
+answer nothing.
+
+- `ai` is **capability**: it can answer.
+- `ai-grounded` is **trust**: it will not invent a verse.
+- `ai-path` is **personalisation**: it makes something for you.
+
+If all three lose to `control`, AI is not the reason people download, and
+that is worth knowing in one round rather than six.
+
+### On the grounded claim
+
+`ai-grounded` is the one no generic AI Bible app can copy, so it is worth
+saying exactly what backs it. From `AskAboutView.swift` in the app:
+
+> when a question names a passage, Cardinal sends that passage's exact text
+> so the wording is the text and not a memory of it
+
+Licensed translations never leave the device, so with one selected Ask quotes
+the nearest public-domain edition rather than the licensed wording. Custom
+paths verify every reference against the bundled Bible before you see it, and
+a scanned photo only surfaces references that resolve to a real verse.
+
+Do not stretch this into "the AI cannot be wrong". It can be wrong about
+interpretation. What it does not do is misquote the text or cite a verse that
+does not exist.
+
+### Writing another one
+
+Put it in `MESSAGES` and add its name to `LIVE`. Keep the same shape: an `h1`
+carrying one `<em>` phrase, and a `lede` of one or two sentences.
 
 Every claim in a message has to be true. These are marketing lines on a page
 whose whole argument is that it does not exaggerate, and a headline is the
-easiest place to accidentally promise something the app does not do.
+easiest place to accidentally promise something the app does not do. Two that
+were considered and rejected for exactly that reason: "the AI runs on your
+phone", which is true of custom paths and photo scanning but not of Ask, and
+"AI that never sees what you are reading", when asking about a passage sends
+that passage.
 
 ## How it works, and why it is built this way
 

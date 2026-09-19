@@ -21,7 +21,7 @@
   ------------------------------------------------------------------- -->
   <script>
     (function () {
-      var LIVE = ['control', 'privacy', 'nodata', 'ai'];
+      var LIVE = ['control', 'ai', 'ai-grounded', 'ai-path'];
       var KEY = 'cardinal.hero.v1';
       var v = null;
       try { v = localStorage.getItem(KEY); } catch (e) {}
@@ -1575,7 +1575,32 @@
                 lede: 'Hit a verse you do not understand and ask about it. Answers come from the passage in front of you, with the cross-references and word studies they rest on. Thirty of the biggest questions are answered in full, free.'
               },
 
+              // The claim no generic "AI Bible app" can make. AskAboutView
+              // states it plainly: when a question names a passage, the app
+              // sends that passage's exact text, "so the wording is the text
+              // and not a memory of it".
+              'ai-grounded': {
+                h1: 'A Bible AI that quotes the text, <em>not its memory of it.</em>',
+                lede: 'Ask about a passage and Cardinal sends the passage itself, so the wording in the answer is the wording in the Bible. Every answer shows the verses it rests on, and says a passage is often interpreted a certain way rather than pretending the question is settled.'
+              },
+
+              // The feature nothing else has. Also the most honest use of
+              // "on device": the path really is built on the phone where
+              // Apple Intelligence is available.
+              'ai-path': {
+                h1: 'Say what you are going through. <em>It builds the reading plan.</em>',
+                lede: 'Describe it in your own words, pick a length from a week to a year, and Cardinal shapes a day-by-day path through Scripture around it. On an iPhone with Apple Intelligence it is built on the device, so your words never leave it. Free, with nothing to unlock.'
+              },
+
               // Parked. Rotate in as an arm retires; see docs/EXPERIMENTS.md.
+              'ai-free': {
+                h1: 'The biggest questions about Christianity, <em>answered in full. Free.</em>',
+                lede: 'Why is there suffering. Did Jesus claim to be God. What happens when we die. Thirty of them answered properly rather than briefly, each showing the verses it rests on, plus three questions of your own every month.'
+              },
+              'ai-private': {
+                h1: 'A Bible AI that <em>never reads your notes.</em>',
+                lede: 'Ask sends your question and the passage in front of you, and nothing else. Your notes, prayers, highlights and reading history are not part of it, and text licensed from a publisher is never sent at all.'
+              },
               offline: {
                 h1: 'The whole Bible on your phone, <em>signal or no signal.</em>',
                 lede: 'Eight complete translations are inside the app the moment you install it, and they read and search with no connection at all. Five more download in full. Nothing to fetch on a plane.'
