@@ -1886,6 +1886,7 @@
         <ul class="points">
           <li><span><strong>Sermon notes shaped like sermons.</strong> A new one opens with Scripture and running notes. Big idea, main points with their own verses, Living It Out and action steps are there when you add them, dragged into whatever order suits how you listen. Not a blank page to impose a structure on while someone is still talking. Group them into a series and each one knows it is Part&nbsp;2.</span></li>
           <li><span><strong>A week of gathering, in one place.</strong> Whatever you find as you read goes onto one of seven shelves in the study, and the card tells you how much of it actually made it into the sermon.</span></li>
+          <li><span><strong>Or start the week in one step.</strong> Name the passage, say what you are teaching in your own words, and Cardinal proposes the cross-references, places, key verses and original-language words it already holds, each with a line on why it belongs. The finding is done on your phone against bundled data, so the model only ranks and captions what is already there and cannot cite a verse Cardinal cannot point at. Nothing enters the study until you tick it.</span></li>
           <li><span><strong>An outline with room to write.</strong> Every point holds two things: the line you say out loud, and the prose underneath it, as long as it needs to be. Export the whole study as Markdown whenever you want it somewhere else.</span></li>
           <li><span><strong>Podium mode, for the ten minutes that matter.</strong> Sunday morning at a lectern, one hand, a glance under a second. It is read-only, because the one place you must not accidentally edit a sermon is while you are giving it, and type size is set for the distance to your eyes rather than the size you read at.</span></li>
           <li><span><strong>It fails in the vestry, not at the lectern.</strong> Every passage is fetched when podium mode opens, not when you reach it, so a weak signal shows itself while there is still time to pick up paper.</span></li>
@@ -2337,6 +2338,7 @@
         "Seventeen guided journeys over real 3D satellite terrain, narrated, with each stop's verses",
         "Sermon notes with reorderable sections: Scripture, running notes, big idea, main points with their own verses, application, action steps and tags, groupable into a series",
         "Studies: a sermon preparation workspace that collects passages, cross-references, original-language words, people, places, illustrations, quotes and open questions across the week, with an outline and Markdown export",
+        "Gather material: name a passage and a theme and Cardinal proposes relevant cross-references, places, key verses and original-language words, each captioned with why it belongs; retrieval is deterministic and on-device, the model only ranks and captions, references the app cannot resolve are discarded, and nothing is added to a study until the user accepts it",
         "Podium mode for preaching from a prepared study: read-only, lectern-sized type, and every passage resolved when it opens rather than mid-sermon",
         "Verse notes that stay on the passage, and a prayer list",
         "Scan a photo of a page and Cardinal extracts the Bible references from it on-device, grounded against the bundled text so a verse that does not exist never appears",
@@ -2347,6 +2349,7 @@
         "https://cardinalbible.app/img/reader.webp",
         "https://cardinalbible.app/img/sermon-notes.webp",
         "https://cardinalbible.app/img/studies.webp",
+        "https://cardinalbible.app/img/study-material.webp",
         "https://cardinalbible.app/img/bible.webp",
         "https://cardinalbible.app/img/quiet-time-read.webp",
         "https://cardinalbible.app/img/ask.webp",
@@ -2483,6 +2486,14 @@
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "Yes. Studies is a preparation workspace: across the week you collect passages and cross-references, original-language words, people, places, illustrations, quotes and the questions you have not settled, then shape them into an outline where every point has both the line you say out loud and the prose underneath it. Podium mode is what you preach from on Sunday, read-only so nothing can be edited mid-sermon, with type sized for the distance to a lectern and every passage resolved when the screen opens rather than when you reach it. Editing a study is part of Cardinal Pro; reading a study, exporting it as Markdown and preaching from it are never gated, so a lapsed subscription leaves years of preparation readable."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can AI find cross-references for a sermon without making them up?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "In Cardinal, yes, and the safeguard is structural rather than a request made of the model. You name a passage and say what you are teaching, and the app retrieves candidates itself: cross-references, biblical places, the book's key verses, thematically near passages and the original-language words in the text. That retrieval is deterministic and runs on the device against bundled data, so no model is involved in finding anything. The model's only job is to rank those candidates and write the one-line reason each appears, and any identifier it returns that the app did not issue is discarded, so it cannot cite a verse or a reference Cardinal cannot point at in its own data. If the device is offline or the ranking step fails, the candidates still appear, captioned from the corpus instead. Nothing is added to the study until the teacher accepts it, item by item."
           }
         },
         {

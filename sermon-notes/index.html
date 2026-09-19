@@ -129,7 +129,7 @@
         <li><strong>Is there room to write under a point?</strong> One line per point is the most common and most costly limitation.</li>
         <li><strong>Can you get your work out?</strong> Plain text or Markdown export, without asking permission. Years of preparation inside a format you cannot open elsewhere is a risk that only becomes obvious at the worst moment.</li>
         <li><strong>What happens if you stop paying?</strong> This is the one to ask first. There is a real difference between losing the ability to write new studies and losing access to a decade of old ones.</li>
-        <li><strong>Does it write sermons for you?</strong> Decide deliberately whether you want that. An assistant that explains a passage is a different thing from one that drafts your points, and the second one is doing the part that was supposed to change you.</li>
+        <li><strong>Does it write sermons for you?</strong> Decide deliberately whether you want that. An assistant that explains a passage is a different thing from one that drafts your points, and the second one is doing the part that was supposed to change you. If a tool does use AI, ask where the safeguard lives: a prompt that asks a model not to invent references is a hope, and a parser that discards anything the app cannot point at in its own data is a guarantee.</li>
         <li><strong>Does it work with no signal?</strong> See above, re: church buildings.</li>
       </ul>
 
@@ -137,6 +137,7 @@
       <p>Cardinal keeps three kinds of notes apart, because the jobs are different. A <strong>study</strong> is what you build when you are the one teaching. A <strong>sermon note</strong> is what you take when someone else is. A <strong>verse note</strong> is a thought you had while reading, and it stays on the passage.</p>
       <ul>
         <li><strong>Gathering has its own place.</strong> A study collects across the week onto seven shelves: passages and cross-references, words, people, places, illustrations, quotes, and open questions. The card shows how much of what you gathered actually made it in, which is a more honest number than it sounds.</li>
+        <li><strong>And a way to start it in one step.</strong> Name the passage, say what you are teaching in your own words, and Cardinal proposes what it already knows: cross-references, the places involved, the book&rsquo;s own key verses, thematically near passages, and the original-language words in the text. Each one arrives with a line saying why it belongs. Nothing is added until you tick it.</li>
         <li><strong>Every outline point has both halves.</strong> The line you say out loud, and the prose underneath it, as long as it needs to be.</li>
         <li><strong>Podium mode is a separate screen.</strong> Read-only, because the one place you must not accidentally edit a sermon is while you are giving it. Type size is set for the distance to a lectern rather than the size you read at. Every passage is resolved when it opens, so a weak signal shows itself in the vestry rather than at the lectern.</li>
         <li><strong>Sermon notes start shaped, and stay yours.</strong> A new one opens with Scripture and running notes. Big idea, main points with their own verses, living it out and action steps are added when you want them, and dragged into whatever order suits how you listen. That order drives the editor, the read view and the export. Group them into a series, and tap a point for a deeper reflection on it.</li>
@@ -144,6 +145,32 @@
         <li><strong>It exports as Markdown</strong>, whenever you want it somewhere else.</li>
         <li><strong>Cardinal will not write your sermon.</strong> Ask it to dig deeper into a passage and it answers with cross-references, context and word studies. It does not draft. The study, the structure and the words stay yours.</li>
       </ul>
+      <h3>What &ldquo;gather&rdquo; actually does, and what it refuses to do</h3>
+      <p>This is the part worth being precise about, because &ldquo;AI sermon helper&rdquo; usually means something a careful preacher should be wary of. Three things are true of it, and they are properties of how it is built rather than promises about how it behaves.</p>
+      <p><strong>The retrieval is deterministic, and it runs on your phone.</strong> Every candidate comes out of a bundled corpus or an on-device index. The same passage and the same theme produce the same list in the same order. No model is involved in finding anything.</p>
+      <p><strong>The model only ranks and captions what retrieval already found.</strong> Each candidate goes to it with an identifier, and anything that comes back with an identifier the app did not issue is dropped. So it cannot cite a verse that does not exist, or a cross-reference Cardinal cannot point at in its own data. That guarantee is in the parser, not in the wording of a prompt, which is the difference between a safeguard and a hope.</p>
+      <p><strong>It gathers; it does not write.</strong> That is the app&rsquo;s own line on the screen where you start: <em>It gathers. It never writes your message.</em></p>
+      <p>There is a fourth thing that falls out of the first: with no signal, or if the AI step fails, you still get the candidates. They just arrive captioned from the corpus instead of by the model. Retrieval never needed it.</p>
+
+      <div class="shots">
+        <figure>
+          <img src="/img/study-gather.webp" width="620" height="1348" loading="lazy" decoding="async" alt="Cardinal asking What are you teaching? The explanation reads: Cardinal will gather what it already knows, cross-references, places, key verses, the words behind the text. It gathers. It never writes your message. Below, the passage John 3:16 with its opening words, a field reading Gods love demonstrated, a Gather material button, and a link to start with a blank study." />
+          <figcaption>You give it the passage and, in your own words, what you are teaching.</figcaption>
+        </figure>
+        <figure>
+          <img src="/img/study-material.webp" width="620" height="1348" loading="lazy" decoding="async" alt="A sheet titled Material with Cancel and Add 2 buttons, under the line Nothing is added until you say so. A Passages list offers seven cross-references, each with a reason: Romans 5:8 shows the same love proven while we were still sinners, John 3:15 is the verse immediately preceding, John 11:25-26 shows the eternal life promised embodied in the risen Christ. Two are ticked." />
+          <figcaption>Each suggestion says why it belongs, and none of it enters the study until you tick it.</figcaption>
+        </figure>
+      </div>
+
+
+      <div class="shots">
+        <figure style="max-width: 320px; margin: 0 auto;">
+          <img src="/img/study-podium.webp" width="620" height="1348" loading="lazy" decoding="async" alt="A study open at its menu, which offers Podium mode, Export a copy and Delete study. Behind it the study shows a Big Idea prompt reading In one sentence, say it plainly first, you can make it beautiful later, a Gather material button, the main passage John 3:16, and a Passages shelf holding Romans 5:8 marked as a cross-reference." />
+          <figcaption>Podium mode and a Markdown export sit in the study&rsquo;s own menu. Neither needs a subscription.</figcaption>
+        </figure>
+      </div>
+
       <p>Editing a study is part of Cardinal Pro. Reading one, exporting it and preaching from it are never gated, so a lapsed subscription leaves years of preparation readable rather than locked away. Reading the Bible, <a href="/quiet-time/">the guided quiet time</a> and sermon notes are all free, and most of it <a href="/offline-bible-app/">works with no connection</a>.</p>
     </article>
 
@@ -257,6 +284,14 @@
           "@type": "Question",
           "name": "How should you take notes on a sermon you are listening to?",
           "acceptedAnswer": { "@type": "Answer", "text": "Not on a blank page, because you end up inventing a structure while the speaker is still talking. Decide on a few named places before you sit down: the Scripture as it comes up, running notes for everything else, the big idea in one sentence, the main points with their verses attached, what it asks of you specifically, and the action steps you actually intend to take. In Cardinal a new sermon note starts with Scripture and Notes, and the rest are added when you want them and reordered to suit how you listen. Grouping notes by series keeps a sermon from week two findable in week six." }
+        },
+        {
+          "@type": "Question",
+          "name": "Can AI find cross-references for a sermon without making them up?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "In Cardinal the safeguard is structural rather than a request made of the model. You name a passage and say what you are teaching, and the app retrieves the candidates itself: cross-references, the places involved, the book's own key verses, thematically near passages and the original-language words in the text. That retrieval is deterministic and runs on the device against bundled data, so no model finds anything. The model only ranks those candidates and writes the one-line reason each appears, and any identifier it returns that the app did not issue is discarded, so it cannot cite a verse or a reference the app cannot point at in its own data. The guarantee lives in the parser rather than in the wording of a prompt. Offline, or if the ranking step fails, the candidates still appear captioned from the corpus. Nothing enters the study until you accept it."
+          }
         },
         {
           "@type": "Question",

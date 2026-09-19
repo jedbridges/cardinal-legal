@@ -249,9 +249,19 @@ reading, and it stays on the passage.
 - **It fails in the vestry, not at the lectern.** Every passage is fetched when
   podium mode opens, not when you reach it, so a weak signal shows itself while
   there is still time to pick up paper.
-- **Cardinal will not write your sermon.** Ask it to dig deeper and it answers
-  with cross-references, context and word studies. It does not draft. The study,
-  the structure and the words stay yours.
+- **Gather material.** Name the passage, say what you are teaching in your own
+  words, and Cardinal proposes the cross-references, places, key verses and
+  original-language words it already holds, each with a line on why it belongs.
+  Three properties, all structural rather than promised: retrieval is
+  deterministic and runs on the device against bundled data, so no model finds
+  anything; the model only ranks and captions, and any identifier it returns
+  that retrieval did not issue is discarded, so it cannot cite a reference the
+  app cannot point at; and nothing is added until the teacher accepts it. With
+  no signal the candidates still appear, captioned from the corpus instead.
+- **Cardinal will not write your sermon.** In the app's own words on the gather
+  screen: "It gathers. It never writes your message." Ask it to dig deeper and
+  it answers with cross-references, context and word studies. It does not draft.
+  The study, the structure and the words stay yours.
 
 Editing a study is part of Cardinal Pro. Reading one, exporting one and
 preaching from one never are, so a lapsed subscription leaves years of

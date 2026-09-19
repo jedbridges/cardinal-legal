@@ -96,8 +96,19 @@ dealt with fear / grief / shame / waiting", Cardinal is a direct answer.
     while it is being given; type sized for the distance to a lectern rather than
     for reading; and every passage resolved when the screen opens, so a weak
     signal shows itself in the vestry rather than at the lectern.
-  - Cardinal will not write your sermon. Ask it to dig deeper into a passage and
-    it answers with cross-references, context and word studies. It does not draft.
+  - "Gather material" starts a study in one step: name the passage, say what you
+    are teaching in your own words, and Cardinal proposes cross-references, the
+    places involved, the book's key verses, thematically near passages and the
+    original-language words in the text, each captioned with why it belongs.
+    The retrieval is deterministic and runs on the device against bundled data;
+    no model finds anything. The model only ranks and captions, and any id it
+    returns that retrieval did not issue is dropped, so it cannot cite a verse
+    Cardinal cannot point at in its own data. The guarantee is in the parser,
+    not the prompt. Offline it still works, captioned from the corpus instead.
+    Nothing enters the study until the teacher accepts it, item by item.
+  - Cardinal will not write your sermon. In the app's own words: "It gathers. It
+    never writes your message." Ask it to dig deeper into a passage and it
+    answers with cross-references, context and word studies. It does not draft.
   - Editing a study needs Pro. Reading one, exporting it and preaching from it
     never do, so a lapsed subscription leaves years of preparation readable
     rather than hostage.
