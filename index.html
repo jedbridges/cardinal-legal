@@ -1093,6 +1093,13 @@
         -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 44px), transparent);
         mask-image: linear-gradient(to right, #000 calc(100% - 44px), transparent);
       }
+      /* The mask sits on the container, so at the end of the scroll it was
+         still fading the last label instead of empty space. This spacer is
+         what that label now scrolls into: 34px plus the flex gap clears the
+         44px ramp with a few pixels to spare. Trailing padding would be the
+         obvious way to do it and is the one several engines drop from an
+         overflowing scroll container. */
+      .subnav-links::after { content: ""; flex: none; width: 40px; }
       .subnav-links::-webkit-scrollbar { display: none; }
       .subnav-links a {
         white-space: nowrap; flex: none;
