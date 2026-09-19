@@ -56,12 +56,19 @@ not whether any of them beat what you already had.
 
 ## Reading the results
 
-In Umami, both events carry a `variant` property. Open the site, then
-Events, and break each one down by `variant`.
+Both signals carry a `variant` parameter.
 
-- **Hero shown** fires once per page view.
-- **Download click** fires when someone taps through to the App Store, and
-  also records `place`: `hero`, `subnav`, `footer` or `page`.
+- **`web.hero_shown`** fires once per page view.
+- **`web.download_clicked`** fires when someone taps through to the App
+  Store, and also carries `place`: `hero`, `subnav`, `footer` or `page`.
+
+Names follow the app's own convention from `AnalyticsEvent.swift`: dotted,
+lowercase, underscores inside a word. The `web.` prefix keeps the site's
+signals separable from the app's at a glance.
+
+In TelemetryDeck, build one insight counting `web.hero_shown` grouped by
+`variant`, and another counting `web.download_clicked` grouped the same way.
+The click-through rate is the second divided by the first.
 
 Click-through rate for a message is its `Download click` count divided by its
 `Hero shown` count. Compare those rates, not the raw click counts: an unlucky
@@ -152,11 +159,16 @@ one word in `localStorage`. No cookie, no identifier, no network call. If
 storage is unavailable the visitor is simply reassigned each time, which
 costs a little precision and breaks nothing.
 
-**Analytics is Umami Cloud**, on its free tier: cookieless, no personal
-data, open source, no consent banner. That last part is not a preference.
-This page argues that nobody is watching you read, and it cannot make that
-argument over Google Analytics. Section 13 of the privacy policy describes
-both the analytics and this test.
+**Analytics is TelemetryDeck**, which the app already reports to. That is
+the reason to prefer it over a web analytics tool: the site introduces no
+new company into the handling of anything, so section 13 of the privacy
+policy names one processor rather than two. On a site whose argument is that
+nobody is watching you read, that is worth more than a nicer funnel chart.
+
+The cost is that TelemetryDeck is built for apps. It will not hand you a
+conversion rate; you build two insights and divide. `track()` is
+provider-agnostic, so if that becomes annoying, Umami and Plausible are one
+commented-out script tag away.
 
 The tag is `defer`, which keeps it off the critical path and guarantees it
 has executed before `DOMContentLoaded`. That is what lets the events fire
@@ -166,13 +178,34 @@ is still parsing is simply lost. The impression waits for
 
 ## Setup, once
 
-The analytics tag in `index.html` ships with `UMAMI_WEBSITE_ID_NOT_SET`.
-Create the site at cloud.umami.is, copy the website ID it gives you, and
-replace that string with it.
+The tag in `index.html` ships with `TELEMETRYDECK_APP_ID_NOT_SET`.
 
-Free tier, so there is nothing to cancel and no card to add. If it ever
-outgrows the free limits, swapping the one tag for Plausible's is the whole
-migration: `track()` already speaks both.
+**Create a separate TelemetryDeck app for the website. Do not reuse the iOS
+app's ID.** Web visitors and app users in one bucket means every app metric
+quietly counts people who only ever read a web page, and that is not a
+mistake you notice, it is one you act on.
+
+Then replace that string with the new app's ID.
+
+### Checking it actually works
+
+Load the site with `?debug=analytics` and open the browser console. It
+prints which provider it found and what it sent:
+
+```
+[analytics] via telemetrydeck web.hero_shown {variant: 'ai-grounded'}
+[analytics] variant=ai-grounded | provider=telemetrydeck
+```
+
+If it says `NO PROVIDER FOUND`, the app ID is still unset, the script is
+blocked, or an ad blocker ate it. Worth doing once after setup: silent
+analytics that records nothing looks exactly like analytics that works
+until you go looking for the data weeks later.
+
+The adapter finds the SDK by looking for a `signal` function on `td`,
+`TelemetryDeck` or `telemetrydeck`, rather than hardcoding one. That is
+deliberate: this was written somewhere their CDN and docs were unreachable,
+so the integration detects the API instead of assuming it.
 
 Until you do, the script 404s harmlessly, every event is a no-op, and the
 experiment still assigns and renders. Nothing on the page depends on
