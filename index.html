@@ -665,15 +665,17 @@
       font-size: 14.5px;
       padding: 8px 15px;
       border-radius: var(--r-full);
-      background: #EADFC8;
-      border: 1px solid #D9C8A6;
+      /* No stroke, so the fill has to close the shape by itself. This tan
+         sits at 1.37:1 against the page, level with the Pro chips' 1.40:1,
+         which is what makes the two rows read as one family. Body ink on it
+         runs 7.7:1. */
+      background: #E3D4B4;
       color: var(--ink-2);
     }
-    /* The old fill measured 1.05:1 against the page, so the badge never
-       read as a badge. Deeper tint, darker ink, 6.9:1 on it. */
+    /* The original fill measured 1.05:1 against the page, so the badge never
+       read as a badge. Deeper tint, darker ink, 6.5:1 on it. */
     .chip.pro {
       background: #F0CBC5;
-      border-color: transparent;
       color: #871620;
       font-weight: 500;
     }
