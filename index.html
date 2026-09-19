@@ -1340,7 +1340,11 @@
       .points.folded > li { margin-bottom: var(--s-5); }
       .more-toggle {
         order: 5;
-        margin-top: var(--s-4);
+        /* The button is a grid item of the chapter, so the last row's margin
+           and the chapter's row gap both land above it before its own margin
+           does. Undo those two and leave a deliberate 12px, or the control
+           floats 72px clear of the list it belongs to. */
+        margin-top: calc(var(--s-3) - var(--s-5) - var(--s-6));
         min-height: 44px;
         display: inline-flex; align-items: center; gap: var(--s-2);
         justify-self: start;
@@ -2532,13 +2536,6 @@
     var phone = window.matchMedia('(max-width: 700px)');
     var built = false;
 
-    // The kicker, not the headline: "2 more on Read" reads as a label, where
-    // "2 more on Plain modern English, from the first tap" reads as a mistake.
-    function labelFor(section) {
-      var k = section && section.querySelector('.kicker');
-      return k ? k.textContent.trim() : null;
-    }
-
     function build() {
       if (built) return;
       built = true;
@@ -2555,8 +2552,7 @@
         btn.className = 'more-toggle';
         btn.setAttribute('aria-expanded', 'false');
         btn.setAttribute('aria-controls', id);
-        var label = labelFor(list.closest('.chapter'));
-        var shut = hidden.length + (label ? ' more on ' + label : ' more');
+        var shut = hidden.length + ' more';
         var word = document.createElement('span');
         word.textContent = shut;
         btn.appendChild(word);
