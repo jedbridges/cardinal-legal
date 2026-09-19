@@ -105,6 +105,8 @@ licensed yet, so Korean currently reads with an English text.
   current price in your region, and the full rating history.
 - [Full site as plain text](https://cardinalbible.app/llms-full.txt): every claim on
   the marketing site, in one file.
+- [Support](https://cardinalbible.app/support.html): answers to the questions
+  people ask most, and a form that reaches a person.
 - [Privacy policy](https://cardinalbible.app/privacy-policy.html)
 - [Terms of use](https://cardinalbible.app/terms-of-use.html)
 

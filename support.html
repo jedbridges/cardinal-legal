@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="UTF-8" />
+  <script>document.documentElement.classList.remove('no-js');</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Support &middot; Cardinal</title>
+  <meta name="description" content="Help with Cardinal, the Bible app. Answers to the questions people ask most, and a form that reaches a person." />
+  <link rel="canonical" href="https://cardinalbible.app/support.html" />
+  <meta name="theme-color" content="#FAF7F2" />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+
+  <meta property="og:title" content="Support &middot; Cardinal" />
+  <meta property="og:description" content="Help with Cardinal, the Bible app." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://cardinalbible.app/support.html" />
+  <meta property="og:image" content="https://cardinalbible.app/img/og.png" />
+
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* Same tokens as the landing page. This site has no shared stylesheet, so
+       they are repeated rather than imported; keep the two in step. */
+    :root {
+      color-scheme: light;
+
+      --red: #BD2630;
+      --red-ink: #A81C26;
+      --red-soft: #FBF0EE;
+
+      --ink: #1F1F1F;
+      --ink-2: #47382E;
+      --ink-3: #5C5C5C;
+      --muted: #706962;
+
+      --bg: #FAF7F2;
+      --card: #FCFAF5;
+      --border: #E6E0D5;
+      --border-soft: #EFEAE0;
+      --band-bg: #F2EADC;
+      --band-border: #E2D7C4;
+      --icon: #96763F;
+
+      --ok: #2F6B4F;
+      --ok-soft: #EAF3EE;
+
+      --s-1: 0.25rem; --s-2: 0.5rem;  --s-3: 0.75rem; --s-4: 1rem;
+      --s-5: 1.5rem;  --s-6: 2rem;    --s-7: 3rem;    --s-8: 4rem;
+
+      --r-sm: 12px; --r-md: 16px; --r-lg: 24px; --r-xl: 28px; --r-full: 999px;
+
+      --font-display: ui-serif, 'New York', 'Iowan Old Style', 'Palatino Linotype', Palatino, 'Charter', Georgia, serif;
+      --font-text: ui-serif, 'New York', 'Iowan Old Style', 'Palatino Linotype', Palatino, 'Charter', Georgia, serif;
+      --font-ui: ui-rounded, 'SF Pro Rounded', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+      /* Cardinal's marker, the same amber at the same 26% the app uses while
+         the stroke is under your finger. Here it draws the focus ring. */
+      --marker: 245, 184, 87;
+      --marker-drag: rgba(var(--marker), 0.26);
+    }
+
+    body {
+      font-family: var(--font-text);
+      font-optical-sizing: auto;
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 17px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+
+    body::before {
+      content: "";
+      position: fixed; inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.68' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.10  0 0 0 0 0.075  0 0 0 0 0.03  0 0 0 0.105 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+      background-size: 260px 260px;
+      mix-blend-mode: multiply;
+    }
+
+    ::selection { background: var(--marker-drag); color: var(--ink); }
+    ::-moz-selection { background: var(--marker-drag); color: var(--ink); }
+
+    a { color: var(--red-ink); text-decoration: none; }
+    a:hover { text-decoration: underline; text-underline-offset: 3px; }
+    :focus-visible {
+      outline: 2px solid var(--red);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    .wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 max(var(--s-5), env(safe-area-inset-left));
+    }
+
+    .skip {
+      position: fixed;
+      top: 10px; left: 10px;
+      z-index: 99;
+      transform: translateY(-160%);
+      background: var(--ink); color: #fff;
+      padding: 10px 16px; border-radius: var(--r-sm);
+      font-family: var(--font-ui); font-size: 14px;
+    }
+    .skip:focus { transform: translateY(0); text-decoration: none; }
+
+    header.top { padding: var(--s-6) 0 var(--s-5); }
+    .brand {
+      display: inline-flex; align-items: center;
+      min-height: 44px;
+      font-family: var(--font-display);
+      font-weight: 600; font-size: 21px;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+    .brand:hover { text-decoration: none; color: var(--red-ink); }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.1rem, 6vw, 3rem);
+      font-weight: 600;
+      line-height: 1.12;
+      letter-spacing: -0.025em;
+      margin-bottom: var(--s-4);
+      text-wrap: balance;
+    }
+    .lede {
+      font-size: 1.1rem;
+      color: var(--ink-2);
+      max-width: 60ch;
+      text-wrap: pretty;
+    }
+
+    h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 3vw, 1.75rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      margin-bottom: var(--s-3);
+      text-wrap: balance;
+    }
+    section { padding: var(--s-8) 0 0; }
+    .sub { color: var(--ink-3); max-width: 62ch; margin-bottom: var(--s-6); text-wrap: pretty; }
+
+    /* ---------- Questions ---------- */
+    .faq {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--r-xl);
+      padding: var(--s-2) clamp(1.25rem, 3vw, 2rem);
+    }
+    .faq details { border-top: 1px solid var(--border-soft); }
+    .faq details:first-child { border-top: 0; }
+    .faq summary {
+      list-style: none;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: var(--s-5);
+      min-height: 44px;
+      padding: var(--s-4) 0;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: clamp(16.5px, 1.5vw, 18.5px);
+      letter-spacing: -0.012em;
+      line-height: 1.35;
+      color: var(--ink);
+      transition: color 0.2s ease;
+    }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary:hover { color: var(--red-ink); }
+    .faq summary .mark {
+      flex: none; position: relative;
+      width: 18px; height: 18px;
+      color: var(--icon);
+    }
+    .faq summary .mark::before, .faq summary .mark::after {
+      content: "";
+      position: absolute; left: 50%; top: 50%;
+      width: 15px; height: 1.6px;
+      background: currentColor; border-radius: 2px;
+      transform: translate(-50%, -50%);
+      transition: transform 0.35s var(--ease-out), opacity 0.2s ease;
+    }
+    .faq summary .mark::after { transform: translate(-50%, -50%) rotate(90deg); }
+    .faq details[open] summary .mark::after { transform: translate(-50%, -50%) rotate(0deg); opacity: 0; }
+    .faq-body { padding: 0 0 var(--s-5); max-width: 68ch; }
+    .faq-body p { font-size: 16.5px; line-height: 1.72; color: var(--ink-3); text-wrap: pretty; }
+    .faq-body p + p { margin-top: var(--s-3); }
+    @supports (interpolate-size: allow-keywords) {
+      .faq details { interpolate-size: allow-keywords; }
+      .faq details::details-content {
+        block-size: 0; overflow: hidden; opacity: 0;
+        transition: block-size 0.4s var(--ease-out), content-visibility 0.4s allow-discrete, opacity 0.3s ease;
+      }
+      .faq details[open]::details-content { block-size: auto; opacity: 1; }
+    }
+
+    /* ---------- Form ---------- */
+    .form-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--r-xl);
+      padding: clamp(1.5rem, 4vw, 2.5rem);
+    }
+    .field { margin-bottom: var(--s-5); }
+    .field:last-of-type { margin-bottom: var(--s-6); }
+    label {
+      display: block;
+      font-family: var(--font-ui);
+      font-size: 14.5px; font-weight: 600;
+      color: var(--ink-2);
+      margin-bottom: var(--s-2);
+    }
+    label .opt { font-weight: 500; color: var(--muted); }
+    .hint {
+      font-family: var(--font-ui);
+      font-size: 13.5px; color: var(--muted);
+      margin-top: var(--s-2);
+      line-height: 1.55;
+    }
+    input, select, textarea {
+      width: 100%;
+      font-family: var(--font-ui);
+      font-size: 16px;               /* 16px keeps iOS from zooming the page */
+      line-height: 1.5;
+      color: var(--ink);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 13px 15px;
+      min-height: 48px;
+      transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    textarea { min-height: 150px; resize: vertical; }
+    select {
+      /* The chevron the appearance reset removed, drawn rather than a glyph. */
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'><path d='M1 1.5 7 7.5 13 1.5' fill='none' stroke='%2396763F' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      padding-right: 44px;
+    }
+    input::placeholder, textarea::placeholder { color: #9A938A; }
+    input:hover, select:hover, textarea:hover { border-color: var(--band-border); }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      background: var(--card);
+      border-color: var(--icon);
+      /* The app's own marker, used as the focus wash. */
+      box-shadow: 0 0 0 3px var(--marker-drag);
+    }
+    input:user-invalid, textarea:user-invalid {
+      border-color: var(--red);
+      box-shadow: 0 0 0 3px rgba(189, 38, 48, 0.14);
+    }
+    input:disabled, select:disabled, textarea:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+      background: var(--band-bg);
+    }
+
+    /* Honeypot. Off-screen rather than display:none, which some bots skip. */
+    .hp {
+      position: absolute !important;
+      left: -9999px;
+      width: 1px; height: 1px;
+      overflow: hidden;
+    }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: var(--s-2);
+      min-height: 52px;
+      padding: 14px 30px;
+      border: 0;
+      border-radius: var(--r-full);
+      background: var(--red);
+      color: #fff;
+      font-family: var(--font-ui);
+      font-size: 16px; font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 8px 22px -8px rgba(189, 38, 48, 0.55);
+      transition: transform 0.25s var(--ease-out), box-shadow 0.25s var(--ease-out), background 0.2s ease;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 14px 30px -10px rgba(189, 38, 48, 0.6); }
+    .btn:active { transform: translateY(0); }
+    .btn[disabled] {
+      background: var(--muted);
+      box-shadow: none;
+      transform: none;
+      cursor: progress;
+    }
+    .spinner {
+      width: 15px; height: 15px;
+      border: 2px solid rgba(255, 255, 255, 0.45);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .status {
+      margin-top: var(--s-5);
+      padding: var(--s-4) var(--s-5);
+      border-radius: var(--r-md);
+      font-family: var(--font-ui);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+    .status.ok    { background: var(--ok-soft); color: var(--ok); border: 1px solid #CFE3D7; }
+    .status.error { background: var(--red-soft); color: var(--red-ink); border: 1px solid #F0D5D2; }
+
+    /* Shown only while the endpoint key is still the placeholder, so the form
+       can never ship silently broken. Invisible once the key is set. */
+    .setup-notice {
+      margin-bottom: var(--s-6);
+      padding: var(--s-4) var(--s-5);
+      border: 1px dashed var(--red);
+      border-radius: var(--r-md);
+      background: var(--red-soft);
+      color: var(--red-ink);
+      font-family: var(--font-ui);
+      font-size: 14.5px;
+      line-height: 1.6;
+    }
+    .setup-notice code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 13px;
+    }
+
+    footer {
+      margin-top: var(--s-8);
+      padding: var(--s-6) 0 var(--s-8);
+      border-top: 1px solid var(--border-soft);
+      font-family: var(--font-ui);
+      font-size: 14px;
+      color: var(--muted);
+      display: flex; flex-wrap: wrap; gap: var(--s-3) var(--s-5);
+      justify-content: space-between; align-items: center;
+    }
+    .foot-links { display: flex; flex-wrap: wrap; gap: var(--s-5); }
+    footer a { color: var(--ink-3); }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      html { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="/">Cardinal</a>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <h1>Help with Cardinal.</h1>
+    <p class="lede">Most of what people write in about is answered below. If yours is not there, use the form and a person will read it.</p>
+
+    <section aria-labelledby="q-h">
+      <h2 id="q-h">Before you write</h2>
+      <p class="sub">The eight questions that come up most, answered properly.</p>
+
+      <div class="faq">
+        <details name="support">
+          <summary>How do I restore a purchase?<span class="mark" aria-hidden="true"></span></summary>
+          <div class="faq-body">
+            <p>Open Settings inside Cardinal and tap <strong>Restore purchases</strong>. The same button sits on the Cardinal Pro screen. Restoring only works from the Apple Account that bought the subscription, so if you have more than one, sign in with the one you used.</p>
+          </div>
+        </details>
+
+        <details name="support">
+          <summary>How do I cancel Cardinal Pro?<span class="mark" aria-hidden="true"></span></summary>
+          <div class="faq-body">
+            <p>Apple handles every subscription, so cancelling happens in iOS rather than in Cardinal: open the Settings app, tap your name at the top, then <strong>Subscriptions</strong>, then Cardinal.</p>
+            <p>Cancelling stops the next renewal. You keep Pro until the period you already paid for runs out, and everything free stays free afterwards. A study you have already written stays readable and exportable even once a subscription lapses.</p>
+          </div>
+        </details>
+
+        <details name="support">
+          <summary>Can I get a refund?<span class="mark" aria-hidden="true"></span></summary>
+          <div class="faq-body">
+            <p>Refunds are Apple's to give, not ours, because Apple takes the payment and we never see your card. Request one at <a href="https://reportaproblem.apple.com">reportaproblem.apple.com</a> with the Apple Account that made the purchase. Write to us as well if something in the app is the reason.</p>
+          </div>
+        </details>
+
+        <details name="support">
+          <summary>Why can't I read the NKJV, NASB, CSB or NLT offline?<span class="mark" aria-hidden="true"></span></summary>
+          <div class="faq-body">
+            <p>Those four are licensed from their publishers, and the licenses do not permit storing the text on your device. Cardinal fetches them a chapter at a time and keeps nothing, so they need a connection every time and cannot be searched offline. It is a genuine limitation rather than a setting you can change.</p>
+            <p>The other thirteen translations can all be read offline. Eight are built into the app and work from the first launch. The other five can be downloaded in full from the translation picker, which also builds their search index.</p>
+          </div>
+        </details>
+
+        <details name="support">
+          <summary>My notes and highlights are missing on another device.<span class="mark" aria-hidden="true"></span></summary>
+          <div class="faq-body">
+            <p>Cardinal syncs through your own private iCloud, not through an account with us. Both devices need to be signed into the same Apple Account with iCloud Drive turned on, and Cardinal needs to be allowed to use iCloud in the iOS Settings app under your name, then iCloud.</p>
+            <p>If iCloud was unavailable the first time Cardinal launched, it falls back to storing everything on that device alone. Turning iCloud on afterwards fixes new writing, but anything written while it was off stays on the device it was written on. Write to us before deleting the app if you are unsure, because deleting it removes device-only data for good.</p>
+          </div>
+        </details>
+
+        <details name="support">
+          <summary>Can I change the app's language?<span class="mark" aria-hidden="true"></span></summary>
+          <div class="faq-body">
+            <p>Cardinal follows your phone's language on its own, and you can override it in Cardinal's Settings, which lists all nine: English, Español, Português, Français, Deutsch, Русский, 한국어, 简体中文 and 繁體中文.</p>
+            <p>Eight of the nine also read a Bible in that language. A Korean translation is not licensed yet, so Korean currently reads with an English text.</p>
+          </div>
+        </details>
+
+        <details name="support">
+          <summary>Can I add my own verses?<span class="mark" aria-hidden="true"></span></summary>
+          <div class="faq-body">
+            <p>Yes. Alongside the fifty-plus curated packs you can build a pack from any verses you choose, and you can describe a reading path in your own words and have Cardinal shape one around it. Both are free.</p>
+          </div>
+        </details>
+
+        <details name="support">
+          <summary>Is Cardinal on Android?<span class="mark" aria-hidden="true"></span></summary>
+          <div class="faq-body">
+            <p>Not today. Cardinal is on iPhone, iPad and Apple Watch, and needs iOS 17 or later.</p>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section aria-labelledby="w-h">
+      <h2 id="w-h">Write to us</h2>
+      <p class="sub">This goes straight to a person, not a ticket queue. If something is broken, saying which iPhone and which iOS version usually saves a round trip.</p>
+
+      <div class="form-card">
+        <!--
+          ENDPOINT SETUP, one time, about two minutes.
+
+          1. Go to web3forms.com, enter the address you want mail delivered to,
+             and it emails you an access key (a UUID). No account, no dashboard.
+          2. Replace PASTE_YOUR_WEB3FORMS_ACCESS_KEY_HERE below with that key.
+          3. Confirm the verification email it sends on the first submission.
+
+          The key is a public identifier, not a secret: it is safe in page source,
+          and it is what keeps the delivery address out of the HTML. Free tier is
+          unlimited submissions. The markup here is ours, so the styling is not
+          tied to the provider; swapping to another endpoint means changing the
+          form's action and this one field.
+
+          If you would rather self-host something open source later, HeyForm and
+          Formbricks both do this and both need a server; that is the tradeoff.
+        -->
+        <div class="setup-notice" id="setup-notice" hidden>
+          <strong>This form is not connected yet.</strong> Paste a Web3Forms access key into
+          <code>support.html</code> (see the comment above the form) and this notice disappears.
+          Until then nothing sent here is delivered.
+        </div>
+
+        <form id="contact" action="https://api.web3forms.com/submit" method="POST" novalidate>
+          <input type="hidden" name="access_key" id="access-key" value="PASTE_YOUR_WEB3FORMS_ACCESS_KEY_HERE" />
+          <input type="hidden" name="subject" value="Cardinal support: a message from the website" />
+          <input type="hidden" name="from_name" value="Cardinal support form" />
+
+          <div class="hp" aria-hidden="true">
+            <label for="botcheck">Leave this field empty</label>
+            <input type="checkbox" name="botcheck" id="botcheck" tabindex="-1" autocomplete="off" />
+          </div>
+
+          <div class="field">
+            <label for="name">Your name <span class="opt">(optional)</span></label>
+            <input type="text" id="name" name="name" autocomplete="name" placeholder="So we know what to call you" />
+          </div>
+
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required autocomplete="email" inputmode="email" placeholder="Where the reply should go" />
+            <p class="hint">Used to reply to you and nothing else. It is not added to a list, because there is no list.</p>
+          </div>
+
+          <div class="field">
+            <label for="topic">What is this about?</label>
+            <select id="topic" name="topic">
+              <option>Something is not working</option>
+              <option>A question about how Cardinal works</option>
+              <option>Subscription, restore or refund</option>
+              <option>A suggestion</option>
+              <option>Something about a translation or a passage</option>
+              <option>Something else</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" required placeholder="What happened, and what you expected instead."></textarea>
+          </div>
+
+          <button class="btn" type="submit" id="submit">
+            <span id="submit-label">Send</span>
+          </button>
+
+          <p class="status" id="status" role="status" aria-live="polite" hidden></p>
+        </form>
+      </div>
+
+      <p class="hint" style="margin-top: var(--s-5); max-width: 62ch;">
+        What you type here goes to the form service that delivers it and then to us. Nothing from inside the app travels with it: your reading, notes, prayers and highlights stay where they are. See the <a href="privacy-policy.html">privacy policy</a> for the rest.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <div>&copy; <span id="year">2026</span> Cardinal</div>
+    <div class="foot-links">
+      <a href="/">Home</a>
+      <a href="privacy-policy.html">Privacy policy</a>
+      <a href="terms-of-use.html">Terms</a>
+      <a href="https://apps.apple.com/app/id6758185643">App Store</a>
+    </div>
+  </footer>
+</div>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  (function () {
+    var form   = document.getElementById('contact');
+    var key    = document.getElementById('access-key');
+    var btn    = document.getElementById('submit');
+    var label  = document.getElementById('submit-label');
+    var status = document.getElementById('status');
+    var notice = document.getElementById('setup-notice');
+    var PLACEHOLDER = 'PASTE_YOUR_WEB3FORMS_ACCESS_KEY_HERE';
+
+    // Never let the form look like it worked when it cannot.
+    var unconfigured = key.value === PLACEHOLDER;
+    if (unconfigured) notice.hidden = false;
+
+    function show(kind, text) {
+      status.hidden = false;
+      status.className = 'status ' + kind;
+      status.textContent = text;
+    }
+
+    function busy(on) {
+      btn.disabled = on;
+      label.textContent = on ? 'Sending' : 'Send';
+      var s = btn.querySelector('.spinner');
+      if (on && !s) {
+        s = document.createElement('span');
+        s.className = 'spinner';
+        btn.appendChild(s);
+      } else if (!on && s) {
+        s.remove();
+      }
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+      if (unconfigured) {
+        show('error', 'This form is not connected to an inbox yet, so nothing would reach us. Please try again shortly.');
+        return;
+      }
+
+      busy(true);
+      status.hidden = true;
+
+      fetch(form.action, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(Object.fromEntries(new FormData(form)))
+      })
+        .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d }; }); })
+        .then(function (res) {
+          if (res.ok && res.d.success) {
+            form.reset();
+            show('ok', 'Sent. A person will read it and reply to the address you gave, usually within a couple of days.');
+          } else {
+            show('error', 'That did not send. Please try again, and if it keeps failing, write to us on the App Store listing instead.');
+          }
+        })
+        .catch(function () {
+          show('error', 'That did not send, which usually means the connection dropped. Your message is still in the box, so you can try again.');
+        })
+        .finally(function () { busy(false); });
+    });
+  })();
+</script>
+
+</body>
+</html>
