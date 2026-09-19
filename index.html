@@ -72,23 +72,26 @@
   <!-- ------------------------------------------------------------------
        ANALYTICS
 
-       Plausible: cookieless, no personal data, no cross-site identifier,
-       about 1KB, and it needs no consent banner. That is not a stylistic
-       preference. This page argues that nobody is watching you read, and
-       it cannot make that argument over Google Analytics.
+       Umami Cloud, on its free tier. Cookieless, no personal data, no
+       cross-site identifier, about 2KB, open source, and it needs no
+       consent banner. That last part is not a stylistic preference: this
+       page argues that nobody is watching you read, and it cannot make
+       that argument over Google Analytics.
 
-       SETUP, once: create the site at plausible.io, then replace
-       PLAUSIBLE_DOMAIN_NOT_SET below with cardinalbible.app. Until then
-       the script 404s harmlessly, every track() call no-ops, and the
-       experiment still assigns and renders. Nothing on the page depends
-       on analytics loading.
+       SETUP, once: create the site at cloud.umami.is, copy the website ID
+       it gives you, and replace UMAMI_WEBSITE_ID_NOT_SET below. Until
+       then the script 404s harmlessly, every track() call no-ops, and the
+       experiment still assigns and renders. Nothing on this page depends
+       on analytics loading, so a forgotten ID costs data and not a page.
 
-       Umami instead: swap this one tag for Umami's. track() below already
-       speaks both.
+       `defer` matters. It keeps the script off the critical path, and it
+       guarantees execution before DOMContentLoaded, which is what lets
+       the events below fire without a queue. See the note there.
+
+       Plausible instead: swap this one tag. track() speaks both.
   ------------------------------------------------------------------- -->
-  <script defer data-domain="PLAUSIBLE_DOMAIN_NOT_SET"
-          src="https://plausible.io/js/script.tagged-events.outbound-links.js"></script>
-  <script>window.plausible = window.plausible || function () { (window.plausible.q = window.plausible.q || []).push(arguments); };</script>
+  <script defer src="https://cloud.umami.is/script.js"
+          data-website-id="UMAMI_WEBSITE_ID_NOT_SET"></script>
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -2853,15 +2856,25 @@
 
     function track(event, props) {
       try {
-        if (typeof window.plausible === 'function') {
-          window.plausible(event, { props: props });
-        } else if (window.umami && typeof window.umami.track === 'function') {
+        if (window.umami && typeof window.umami.track === 'function') {
           window.umami.track(event, props);
+        } else if (typeof window.plausible === 'function') {
+          window.plausible(event, { props: props });
         }
       } catch (e) {}
     }
 
-    track('Hero shown', { variant: variant });
+    // Fired after DOMContentLoaded, not during parse. Umami has no queue
+    // of its own, so an event sent before the deferred script executes
+    // vanishes. A deferred script is guaranteed to have run by this point,
+    // and clicks happen long after, so neither event needs a queue.
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', function () {
+        track('Hero shown', { variant: variant });
+      });
+    } else {
+      track('Hero shown', { variant: variant });
+    }
 
     // Delegated, and on pointerdown rather than click: a tap that leaves
     // for the App Store can tear the page down before a click listener

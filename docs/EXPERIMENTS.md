@@ -56,7 +56,8 @@ not whether any of them beat what you already had.
 
 ## Reading the results
 
-In Plausible, both events carry a `variant` property.
+In Umami, both events carry a `variant` property. Open the site, then
+Events, and break each one down by `variant`.
 
 - **Hero shown** fires once per page view.
 - **Download click** fires when someone taps through to the App Store, and
@@ -151,16 +152,27 @@ one word in `localStorage`. No cookie, no identifier, no network call. If
 storage is unavailable the visitor is simply reassigned each time, which
 costs a little precision and breaks nothing.
 
-**Analytics is Plausible**: cookieless, no personal data, no consent banner.
-That is not a preference. This page argues that nobody is watching you read,
-and it cannot make that argument over Google Analytics. Section 13 of the
-privacy policy describes both the analytics and this test.
+**Analytics is Umami Cloud**, on its free tier: cookieless, no personal
+data, open source, no consent banner. That last part is not a preference.
+This page argues that nobody is watching you read, and it cannot make that
+argument over Google Analytics. Section 13 of the privacy policy describes
+both the analytics and this test.
+
+The tag is `defer`, which keeps it off the critical path and guarantees it
+has executed before `DOMContentLoaded`. That is what lets the events fire
+without a queue: Umami has none of its own, so an event sent while the page
+is still parsing is simply lost. The impression waits for
+`DOMContentLoaded`; clicks happen long after.
 
 ## Setup, once
 
-The analytics tag in `index.html` ships with `PLAUSIBLE_DOMAIN_NOT_SET`.
-Create the site at plausible.io, then replace that string with
-`cardinalbible.app`.
+The analytics tag in `index.html` ships with `UMAMI_WEBSITE_ID_NOT_SET`.
+Create the site at cloud.umami.is, copy the website ID it gives you, and
+replace that string with it.
+
+Free tier, so there is nothing to cancel and no card to add. If it ever
+outgrows the free limits, swapping the one tag for Plausible's is the whole
+migration: `track()` already speaks both.
 
 Until you do, the script 404s harmlessly, every event is a no-op, and the
 experiment still assigns and renders. Nothing on the page depends on
