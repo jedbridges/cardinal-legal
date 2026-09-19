@@ -223,6 +223,48 @@ mark {
   box-decoration-break: clone;
 }
 
+/* ---------- Legal ----------------------------------------------------
+   Privacy and Terms carried their own stylesheet from before the site was
+   redesigned: system sans, cool grey, a different red. They read as a
+   different product. The text is untouched; only the shell around it moved. */
+.legal .meta {
+  font-family: var(--font-ui);
+  font-size: 13.5px;
+  color: var(--muted);
+  margin: calc(-1 * var(--s-2)) 0 var(--s-6);
+}
+.legal .intro {
+  background: var(--band-bg);
+  border-radius: var(--r-lg);
+  padding: var(--s-5) clamp(1.25rem, 3vw, 1.75rem);
+  margin-bottom: var(--s-7);
+  color: var(--ink-2);
+  max-width: none;
+}
+/* Numbered clause headings, smaller than an article's and set in the UI face
+   so the long ordered run reads as a contents list rather than as prose. */
+.legal h2 {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--muted);
+  margin: var(--s-7) 0 var(--s-3);
+  padding-bottom: var(--s-3);
+  border-bottom: 1px solid var(--border-soft);
+}
+.legal p { font-size: 16.5px; color: var(--ink-3); }
+.legal li { font-size: 16.5px; color: var(--ink-3); }
+.legal code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.88em;
+  background: var(--band-bg);
+  border-radius: 5px;
+  padding: 0.1em 0.35em;
+}
+.legal h1 + .meta { margin-top: calc(-1 * var(--s-2)); }
+
 /* ---------- Callout ---------- */
 .note {
   background: var(--band-bg);
