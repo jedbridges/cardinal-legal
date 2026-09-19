@@ -102,7 +102,6 @@
       font-size: 17px;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
-      overflow-x: hidden;
       text-rendering: optimizeLegibility;
     }
 
@@ -250,17 +249,6 @@
     }
     @media (max-width: 900px) { .hero-mark { width: 64px; height: 64px; border-radius: 15px; } }
 
-    .eyebrow {
-      font-family: var(--font-ui);
-      display: inline-block;
-      font-size: 11.5px; font-weight: 600;
-      text-transform: uppercase; letter-spacing: 0.13em;
-      color: var(--red-ink);
-      background: var(--red-soft);
-      padding: 7px 14px;
-      border-radius: var(--r-full);
-      margin-bottom: var(--s-5);
-    }
     .hero h1 {
       font-size: clamp(2.5rem, 5.6vw, 4.1rem);
       margin-bottom: var(--s-6);
@@ -311,7 +299,10 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: clamp(2rem, 6vw, 5rem);
-      align-items: start;
+      /* Centred, not top-aligned: the prose column is always the shorter of
+         the two, and starting both at the top left a third of the panel
+         empty under it. */
+      align-items: center;
     }
     .why h2 {
       font-size: clamp(1.9rem, 3.4vw, 2.7rem);
@@ -513,6 +504,20 @@
 
     /* ---------- Reviews ---------- */
     .reviews { padding: var(--section-y) 0; }
+
+    /* The score belongs to the claim in the heading, so it sits on the same
+       line as it rather than under a column of empty paper. */
+    @media (min-width: 901px) {
+      .reviews-top {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: end;
+        gap: var(--s-7);
+      }
+      .reviews-top .head { margin-bottom: 0; }
+      .reviews-top .rating { margin-bottom: 0; justify-content: flex-end; }
+    }
+    .reviews-top { margin-bottom: var(--s-8); }
 
     .rating {
       display: flex;
@@ -843,19 +848,8 @@
     }
 
     /* ---------- Privacy ---------- */
-    .privacy-list { list-style: none; display: grid; gap: var(--s-6); max-width: 62ch; }
-    .privacy-list li { font-size: 16.5px; color: var(--ink-3); }
     /* Was an 18px-tall target. */
     .band a { display: inline-flex; align-items: center; min-height: 44px; }
-
-    .privacy-list strong {
-      display: block;
-      font-family: var(--font-display);
-      font-size: 19px;
-      font-weight: 600;
-      color: var(--ink);
-      margin-bottom: var(--s-1);
-    }
 
     /* ---------- Closing ---------- */
     .closing {
@@ -1031,8 +1025,45 @@
       .subnav-links a::after { transition: none; }
     }
 
+    /* ---------- The highlighter ----------------------------------------
+       Cardinal's marker is one token in the app: amber rgb(245,184,87), laid
+       at 26% while the stroke is still under your finger. Nothing on this page
+       is a highlight anyone saved, so everything here uses that one number:
+       the stroke below draws at it, and dragging across any sentence marks it
+       at it too. That is the one thing this page does rather than describes. */
+    :root {
+      --marker: 245, 184, 87;
+      --marker-drag: rgba(var(--marker), 0.26);
+    }
+
     /* ---------- Browser surfaces ---------- */
-    ::selection { background: rgba(189,38,48,0.16); color: var(--ink); }
+    ::selection { background: var(--marker-drag); color: var(--ink); }
+    ::-moz-selection { background: var(--marker-drag); color: var(--ink); }
+
+    /* The stroke itself. box-decoration-break keeps every line fragment
+       rounded when the phrase wraps, which is what a continuous marker pass
+       actually looks like once it crosses a line break. It draws left to
+       right, once, at the speed of a drag. */
+    mark {
+      background: none;
+      /* Marked words step up to the body ink. Secondary grey over an amber
+         wash reads as washed out, and a highlight that does not darken what
+         it marks is doing the opposite of its job. */
+      color: var(--ink);
+      background-image: linear-gradient(var(--marker-drag), var(--marker-drag));
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+      padding: 0.08em 0.16em;
+      margin: 0 -0.06em;
+      border-radius: 0.28em;
+      -webkit-box-decoration-break: clone;
+      box-decoration-break: clone;
+    }
+    html:not(.no-js) .marker { background-size: 0% 100%; }
+    html:not(.no-js) .marker.drawn {
+      background-size: 100% 100%;
+      transition: background-size 0.62s cubic-bezier(0.32, 0.72, 0.3, 1);
+    }
 
     /* ---------- Reveal ---------- */
     /* Scoped to .no-js's absence: with scripts blocked the page renders
@@ -1178,7 +1209,6 @@
       .chapter .shot-col { justify-content: center; }
       .chapter .shot { max-width: 250px; }
       .nav-links { display: none; }
-      .quote-band .band-inner { grid-template-columns: 1fr; gap: var(--s-3); }
       .quote-mark { font-size: 3.5rem; }
     }
     @media (max-width: 560px) {
@@ -1281,6 +1311,7 @@
         transition-duration: 0.01ms !important;
       }
       .reveal { opacity: 1; transform: none; }
+      .marker, html:not(.no-js) .marker { background-size: 100% 100% !important; }
       .line-inner { transform: none !important; }
       .hero .hero-mark, .hero .lede, .hero .cta-row, .hero .cta-note,
       .hero .shot, .refusals li, .showcase figure, .chips .chip {
@@ -1388,7 +1419,7 @@
         <p class="sub">Cardinal opens on the Berean Standard Bible. No setup, no account, no choosing a plan before you are allowed to read a verse.</p>
         <ul class="points">
           <li><span><strong>Seventeen translations.</strong> Eight of them live on your phone and read offline, including the King James, Berean Standard, World English and Majority Standard Bibles.</span></li>
-          <li><span><strong>Highlight the exact words.</strong> Long-press and drag across a phrase and only those words are marked, not the whole verse around them. Where the phrase runs past a line break the mark stays one continuous stroke instead of stacked rectangles, rounded at every corner and set on the letters rather than floating above them.</span></li>
+          <li><span><strong>Highlight the exact words.</strong> Long-press and drag across a phrase and <mark class="marker">only those words</mark> are marked, not the whole verse around them. Where the phrase runs past a line break the mark stays one continuous stroke instead of stacked rectangles, rounded at every corner and set on the letters rather than floating above them.</span></li>
           <li><span><strong>Search that respects the wording.</strong> Every translation carries its own index, because the words they choose are not the same.</span></li>
           <li><span><strong>Favorites and margins.</strong> Save a verse, or write a note that stays with the passage and is searchable in Bible order.</span></li>
           <li><span><strong>It remembers where you stopped.</strong> The book grid carries a pill back to the chapter you were last in, so picking the Bible up again is one tap rather than a hunt.</span></li>
@@ -1578,6 +1609,7 @@
   <!-- ---------- Reviews ---------- -->
   <div class="wrap">
     <section class="reviews" id="reviews" aria-labelledby="reviews-h">
+      <div class="reviews-top">
       <div class="head reveal">
         <h2 id="reviews-h">Five stars, from the people reading it.</h2>
         <p>Every rating Cardinal has on the App Store is a five. Here are three of them, in full.</p>
@@ -1587,6 +1619,7 @@
         <span class="rating-score">5.0</span>
         <span class="stars" role="img" aria-label="Rated 5 out of 5 stars"><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.9 5.88 6.49.95-4.7 4.58 1.11 6.46L12 17.42 6.2 20.47l1.11-6.46-4.7-4.58 6.49-.95z"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.9 5.88 6.49.95-4.7 4.58 1.11 6.46L12 17.42 6.2 20.47l1.11-6.46-4.7-4.58 6.49-.95z"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.9 5.88 6.49.95-4.7 4.58 1.11 6.46L12 17.42 6.2 20.47l1.11-6.46-4.7-4.58 6.49-.95z"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.9 5.88 6.49.95-4.7 4.58 1.11 6.46L12 17.42 6.2 20.47l1.11-6.46-4.7-4.58 6.49-.95z"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.9 5.88 6.49.95-4.7 4.58 1.11 6.46L12 17.42 6.2 20.47l1.11-6.46-4.7-4.58 6.49-.95z"/></svg></span>
         <span class="rating-count">13 ratings on the App&nbsp;Store</span>
+      </div>
       </div>
 
       <div class="review-grid reveal">
@@ -2260,6 +2293,26 @@
       btn.addEventListener('pointerleave', function () { btn.style.transform = ''; });
     });
   }
+
+  // ---- The marker draws itself, once ------------------------------------
+  // Held back until the sentence it marks is on screen and has settled, so it
+  // reads as a hand passing over the words rather than as a page load.
+  (function () {
+    var marks = document.querySelectorAll('.marker');
+    if (!marks.length) return;
+    if (reduce || !hasIO) {
+      marks.forEach(function (m) { m.classList.add('drawn'); });
+      return;
+    }
+    var mio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        mio.unobserve(e.target);
+        setTimeout(function () { e.target.classList.add('drawn'); }, 260);
+      });
+    }, { threshold: 1, rootMargin: '0px 0px -12% 0px' });
+    marks.forEach(function (m) { mio.observe(m); });
+  })();
 
   // ---- Phone: long point lists fold behind one tap ----------------------
   // Built in script on purpose. With JS off, or on a wide screen, every point
