@@ -654,13 +654,19 @@
       border-bottom: 1px solid var(--border-soft);
     }
     .chips { display: flex; flex-wrap: wrap; gap: var(--s-2); }
+    /* Paper on paper is the trap here. --bg-2 over --bg measured 1.07:1 and
+       the hairline 1.12:1, so a free chip was a word floating on the page
+       with no edge at all. The Pro chips are only 1.40:1 themselves and read
+       fine, because what separates them is hue, not lightness. So these get
+       real chroma too: a parchment tan against cream cream, with an edge dark
+       enough to close the shape. Body ink on the fill runs 8.5:1. */
     .chip {
       font-family: var(--font-ui);
       font-size: 14.5px;
       padding: 8px 15px;
       border-radius: var(--r-full);
-      background: var(--bg-2);
-      border: 1px solid var(--border-soft);
+      background: #EADFC8;
+      border: 1px solid #D9C8A6;
       color: var(--ink-2);
     }
     /* The old fill measured 1.05:1 against the page, so the badge never
