@@ -21,8 +21,8 @@
   ------------------------------------------------------------------- -->
   <script>
     (function () {
-      var LIVE = ['control', 'ai', 'ai-grounded', 'ai-path'];
-      var KEY = 'cardinal.hero.v2';
+      var LIVE = ['control', 'depth', 'ai-grounded', 'ai-path'];
+      var KEY = 'cardinal.hero.v3';
       var v = null;
       try { v = localStorage.getItem(KEY); } catch (e) {}
       if (LIVE.indexOf(v) === -1) {
@@ -1604,11 +1604,13 @@
                 lede: 'Open Cardinal and you are reading. No name, no email, no password, no sign-in, and no advertising identifier anywhere in it. Your notes and prayers stay on your device.'
               },
 
-              // The AI angle. Careful about what is actually free: thirty
-              // answered in full, three of your own a month.
-              ai: {
-                h1: 'Ask&nbsp;anything. <em>Every answer shows its verses.</em>',
-                lede: 'Hit a verse you do not understand and ask about it. Answers come from the passage in front of you, with the cross-references and word studies they rest on. Thirty of the biggest questions are answered in full, free.'
+              // Depth as the reason to download, without naming the machinery.
+              // Broader than the AI arms on purpose: a word study, a
+              // cross-reference map and a chapter brief are depth too, and
+              // three of the four need no connection.
+              depth: {
+                h1: 'A Bible app <em>designed for depth.</em>',
+                lede: 'Tap a verse for the cross-references it rests on, the word behind the English, and a brief on the chapter around it. Ask a question and the answer shows its verses. Thirty of the biggest questions are answered in full, free.'
               },
 
               // The claim no generic "AI Bible app" can make. AskAboutView

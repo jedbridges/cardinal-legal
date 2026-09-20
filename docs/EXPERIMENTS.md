@@ -51,7 +51,7 @@ Anyone already assigned to a message you removed is reassigned on their next
 visit, which is correct: a retired message should stop being served.
 
 **If you rewrite a message that is already running, bump `KEY`** (currently
-`cardinal.hero.v2`). Everyone is then reassigned, and the round starts clean.
+`cardinal.hero.v3`). Everyone is then reassigned, and the round starts clean.
 Without that bump, visitors keep their old assignment while seeing new words,
 so their clicks are recorded against a headline they were never shown, and
 the round's numbers mean nothing. Start counting from the bump, not before.
@@ -96,7 +96,7 @@ all of them and `LIVE` holds the ones being served.
 | Name | Headline | Running |
 | --- | --- | --- |
 | `control` | Just you, God and Scripture. | yes |
-| `ai` | Ask anything. Every answer shows its verses. | yes |
+| `depth` | A Bible app designed for depth. | yes |
 | `ai-grounded` | A Bible AI that quotes the text itself. | yes |
 | `ai-path` | Say what you are facing. It builds the plan. | yes |
 | `ai-free` | Hard questions. Full answers. Free. | parked |
@@ -111,17 +111,18 @@ All eleven sit between 28 and 44 characters, so every one lands in two or
 three lines of display type at every width. They were up to 65 before, which
 cost the hero a line and the headline its punch.
 
-The current round tests one hypothesis: that the AI is the reason to
-download. Three framings of it against the incumbent, chosen to be as
-unalike as possible, because two similar messages split the traffic and
-answer nothing.
+The current round tests whether depth is the reason to download, in three
+framings against the incumbent, chosen to be as unalike as possible because
+two similar messages split the traffic and answer nothing. Two name the AI
+and one does not, so a win for `depth` says people want more than the verse
+without saying they came for a machine.
 
-- `ai` is **capability**: it can answer.
+- `depth` is **the reason to open it**: there is more here than the verse.
 - `ai-grounded` is **trust**: it will not invent a verse.
 - `ai-path` is **personalisation**: it makes something for you.
 
-If all three lose to `control`, AI is not the reason people download, and
-that is worth knowing in one round rather than six.
+If all three lose to `control`, the reason to download is the thing the page
+already says, and that is worth knowing in one round rather than six.
 
 ### On the grounded claim
 
