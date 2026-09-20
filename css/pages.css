@@ -223,6 +223,20 @@ mark {
   box-decoration-break: clone;
 }
 
+/* The one piece of motion this site owns, and the only one worth carrying
+   across every page: the mark draws itself left to right, once, at the speed
+   of a drag, which is how the highlight is actually made in the app. It runs
+   when the sentence it marks has settled on screen, so it reads as a hand
+   passing over the words rather than as a page loading.
+
+   Scoped to the absence of .no-js so a blocked script leaves the phrase
+   marked rather than unmarked. */
+html:not(.no-js) .marker { background-size: 0% 100%; }
+html:not(.no-js) .marker.drawn {
+  background-size: 100% 100%;
+  transition: background-size 0.62s cubic-bezier(0.32, 0.72, 0.3, 1);
+}
+
 /* ---------- Legal ----------------------------------------------------
    Privacy and Terms carried their own stylesheet from before the site was
    redesigned: system sans, cool grey, a different red. They read as a
@@ -348,7 +362,8 @@ td:first-child { color: var(--ink); }
   background: var(--red); color: #fff;
   box-shadow: 0 8px 22px -8px rgba(189, 38, 48, 0.55);
 }
-.btn-primary:hover {
+.btn-primary:hover,
+.btn-primary:focus-visible {
   text-decoration: none;
   transform: translateY(-2px);
   box-shadow: 0 14px 30px -10px rgba(189, 38, 48, 0.6);
@@ -389,7 +404,8 @@ td:first-child { color: var(--ink); }
   color: var(--ink);
   transition: border-color 0.2s ease, transform 0.25s var(--ease-out);
 }
-.next a:hover { text-decoration: none; border-color: var(--band-border); transform: translateY(-2px); }
+.next a:hover,
+.next a:focus-visible { text-decoration: none; border-color: var(--band-border); transform: translateY(-2px); }
 .next strong { display: block; font-family: var(--font-display); font-size: 17px; margin-bottom: 2px; }
 .next span { font-family: var(--font-ui); font-size: 14px; color: var(--ink-3); }
 
@@ -435,4 +451,8 @@ footer.site {
     transition-duration: 0.01ms !important;
   }
   html { scroll-behavior: auto; }
+
+  /* Reduced motion means gentler, not absent: the phrase still ends up
+     marked, it simply does not draw. */
+  html:not(.no-js) .marker { background-size: 100% 100% !important; }
 }

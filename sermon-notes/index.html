@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
+  <script>document.documentElement.classList.remove('no-js');</script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -149,7 +150,7 @@
       <p>This is the part worth being precise about, because &ldquo;AI sermon helper&rdquo; usually means something a careful preacher should be wary of. Three things are true of it, and they are properties of how it is built rather than promises about how it behaves.</p>
       <p><strong>The retrieval is deterministic, and it runs on your phone.</strong> Every candidate comes out of a bundled corpus or an on-device index. The same passage and the same theme produce the same list in the same order. No model is involved in finding anything.</p>
       <p><strong>The model only ranks and captions what retrieval already found.</strong> Each candidate goes to it with an identifier, and anything that comes back with an identifier the app did not issue is dropped. So it cannot cite a verse that does not exist, or a cross-reference Cardinal cannot point at in its own data. That guarantee is in the parser, not in the wording of a prompt, which is the difference between a safeguard and a hope.</p>
-      <p><strong>It gathers; it does not write.</strong> That is the app&rsquo;s own line on the screen where you start: <em>It gathers. It never writes your message.</em></p>
+      <p><strong>It gathers; it does not write.</strong> That is the app&rsquo;s own line on the screen where you start: <mark class="marker"><em>It gathers. It never writes your message.</em></mark></p>
       <p>There is a fourth thing that falls out of the first: with no signal, or if the AI step fails, you still get the candidates. They just arrive captioned from the corpus instead of by the model. Retrieval never needed it.</p>
 
       <div class="shots">
@@ -241,6 +242,7 @@
 </footer>
 
 <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+<script defer src="/js/pages.js"></script>
 
 <script type="application/ld+json">
 {
