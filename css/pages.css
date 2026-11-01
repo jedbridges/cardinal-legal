@@ -8,22 +8,25 @@
 :root {
   color-scheme: light;
 
-  --red: #BD2630;
-  --red-ink: #A81C26;
-  --red-soft: #FBF0EE;
+  /* Same tokens as the landing page: bright bone paper, true ink, one
+     rubric red. docs/DESIGN_AUDIT.md has the reasoning. */
+  --red: #B01F29;
+  --red-ink: #B01F29;
+  --red-deep: #8F1820;
+  --red-soft: #F7ECEB;
 
-  --ink: #1F1F1F;
-  --ink-2: #47382E;
-  --ink-3: #5C5C5C;
-  --muted: #706962;
+  --ink: #141414;
+  --ink-2: #33332F;
+  --ink-3: #5B5B55;
+  --muted: #6E6E67;
 
-  --bg: #FAF7F2;
-  --card: #FCFAF5;
-  --border: #E6E0D5;
-  --border-soft: #EFEAE0;
-  --band-bg: #F2EADC;
-  --band-border: #E2D7C4;
-  --icon: #96763F;
+  --bg: #FAFAF7;
+  --card: #FAFAF7;
+  --border: #D9D9D1;
+  --border-soft: #E7E7E0;
+  --band-bg: #F2F2ED;
+  --band-border: #D9D9D1;
+  --icon: #6E6E67;
 
   --ok: #2F6B4F;
   --ok-soft: #EAF3EE;
@@ -35,7 +38,7 @@
 
   --font-display: ui-serif, 'New York', 'Iowan Old Style', 'Palatino Linotype', Palatino, 'Charter', Georgia, serif;
   --font-text: ui-serif, 'New York', 'Iowan Old Style', 'Palatino Linotype', Palatino, 'Charter', Georgia, serif;
-  --font-ui: ui-rounded, 'SF Pro Rounded', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --font-ui: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', system-ui, sans-serif;
 
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 
@@ -58,21 +61,12 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-body::before {
-  content: "";
-  position: fixed; inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.68' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.10  0 0 0 0 0.075  0 0 0 0 0.03  0 0 0 0.105 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
-  background-size: 260px 260px;
-  mix-blend-mode: multiply;
-}
 
 ::selection { background: var(--marker-drag); color: var(--ink); }
 ::-moz-selection { background: var(--marker-drag); color: var(--ink); }
 
-a { color: var(--red-ink); text-decoration: none; }
-a:hover { text-decoration: underline; text-underline-offset: 3px; }
+a { color: var(--red-ink); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.18em; text-decoration-color: color-mix(in srgb, var(--red) 40%, transparent); }
+a:hover { text-decoration-color: currentColor; }
 :focus-visible { outline: 2px solid var(--red); outline-offset: 3px; border-radius: 4px; }
 
 html { scrollbar-color: var(--border) transparent; }
@@ -127,7 +121,8 @@ header.top {
   letter-spacing: -0.02em;
   color: var(--ink);
 }
-.brand:hover { text-decoration: none; color: var(--red-ink); }
+.brand { text-decoration: none; }
+.brand:hover { color: var(--ink); }
 
 /* ---------- Breadcrumb ---------- */
 .crumb {
@@ -146,13 +141,14 @@ header.top {
 h1 {
   font-family: var(--font-display);
   font-size: clamp(2.1rem, 5.6vw, 3.1rem);
-  font-weight: 600;
-  line-height: 1.1;
-  letter-spacing: -0.025em;
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -0.022em;
   margin-bottom: var(--s-4);
   text-wrap: balance;
 }
-h1 em { font-style: italic; }
+/* Headlines are roman. An italic accent phrase is a generated-page tell. */
+h1 em, h2 em { font-style: normal; }
 .lede {
   font-size: 1.15rem;
   line-height: 1.62;
@@ -173,8 +169,8 @@ article { padding-top: var(--s-7); }
 article h2 {
   font-family: var(--font-display);
   font-size: clamp(1.5rem, 3.2vw, 2rem);
-  font-weight: 600;
-  letter-spacing: -0.022em;
+  font-weight: 500;
+  letter-spacing: -0.016em;
   line-height: 1.22;
   margin: var(--s-8) 0 var(--s-4);
   text-wrap: balance;
@@ -194,7 +190,7 @@ article li::before {
   position: absolute; left: 0; top: 0.72em;
   width: 5px; height: 5px;
   border-radius: 50%;
-  background: var(--icon);
+  background: var(--muted);
 }
 article ol { counter-reset: step; }
 article ol li::before {
@@ -248,9 +244,9 @@ html:not(.no-js) .marker.drawn {
   margin: calc(-1 * var(--s-2)) 0 var(--s-6);
 }
 .legal .intro {
-  background: var(--band-bg);
-  border-radius: var(--r-lg);
-  padding: var(--s-5) clamp(1.25rem, 3vw, 1.75rem);
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--border);
+  padding: var(--s-5) 0;
   margin-bottom: var(--s-7);
   color: var(--ink-2);
   max-width: none;
@@ -258,12 +254,11 @@ html:not(.no-js) .marker.drawn {
 /* Numbered clause headings, smaller than an article's and set in the UI face
    so the long ordered run reads as a contents list rather than as prose. */
 .legal h2 {
-  font-family: var(--font-ui);
-  font-size: 13px;
+  font-family: var(--font-display);
+  font-size: 19px;
   font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.09em;
-  color: var(--muted);
+  letter-spacing: -0.005em;
+  color: var(--ink);
   margin: var(--s-7) 0 var(--s-3);
   padding-bottom: var(--s-3);
   border-bottom: 1px solid var(--border-soft);
@@ -274,16 +269,16 @@ html:not(.no-js) .marker.drawn {
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   font-size: 0.88em;
   background: var(--band-bg);
-  border-radius: 5px;
+  border-radius: 3px;
   padding: 0.1em 0.35em;
 }
 .legal h1 + .meta { margin-top: calc(-1 * var(--s-2)); }
 
 /* ---------- Callout ---------- */
 .note {
-  background: var(--band-bg);
-  border-radius: var(--r-lg);
-  padding: var(--s-5) clamp(1.25rem, 3vw, 2rem);
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--border);
+  padding: var(--s-5) 0;
   margin: var(--s-6) 0;
   max-width: 68ch;
 }
@@ -307,8 +302,8 @@ html:not(.no-js) .marker.drawn {
 .shots img {
   width: 100%;
   height: auto;
-  filter: drop-shadow(0 18px 34px rgba(62, 39, 25, 0.16))
-          drop-shadow(0 2px 6px rgba(62, 39, 25, 0.10));
+  filter: drop-shadow(0 1px 1px rgba(20, 20, 20, 0.10))
+          drop-shadow(0 16px 26px rgba(20, 20, 20, 0.15));
 }
 .shots figcaption {
   margin-top: var(--s-4);
@@ -339,48 +334,36 @@ th, td {
 }
 th {
   font-family: var(--font-ui);
-  font-size: 13px; font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--muted);
+  font-size: 14px; font-weight: 600;
+  color: var(--ink);
+  border-bottom-color: var(--ink);
 }
 td { color: var(--ink-3); }
 td:first-child { color: var(--ink); }
 
 /* ---------- Buttons ---------- */
+/* Flat, the same as the landing page: no glow, no lift. */
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: var(--s-2);
-  min-height: 52px;
-  padding: 14px 28px;
-  border-radius: var(--r-full);
+  min-height: 48px;
+  padding: 0 22px;
+  border-radius: 6px;
   font-family: var(--font-ui);
-  font-size: 16px; font-weight: 600;
-  transition: transform 0.25s var(--ease-out), box-shadow 0.25s var(--ease-out);
+  font-size: 15.5px; font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.15s ease;
 }
 .btn svg { width: 18px; height: 18px; flex: none; }
-.btn-primary {
-  background: var(--red); color: #fff;
-  box-shadow: 0 8px 22px -8px rgba(189, 38, 48, 0.55);
-}
-.btn-primary:hover,
-.btn-primary:focus-visible {
-  text-decoration: none;
-  transform: translateY(-2px);
-  box-shadow: 0 14px 30px -10px rgba(189, 38, 48, 0.6);
-}
-.btn-primary:active { transform: translateY(0); }
+.btn-primary { background: var(--red); color: #fff; }
+.btn-primary:hover, .btn-primary:focus-visible { background: var(--red-deep); }
 
 /* ---------- Closing call ---------- */
 .cta {
   margin: var(--s-8) 0 0;
-  padding: clamp(1.75rem, 5vw, 2.75rem);
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--r-xl);
-  text-align: center;
+  padding: var(--s-6) 0 0;
+  border-top: 1px solid var(--ink);
 }
 .cta h2 { margin-top: 0; }
-.cta p { margin-left: auto; margin-right: auto; }
 .cta .fine {
   font-family: var(--font-ui);
   font-size: 13.5px;
@@ -392,20 +375,18 @@ td:first-child { color: var(--ink); }
 /* ---------- Read next ---------- */
 .next { margin-top: var(--s-8); }
 .next h2 { font-size: 1.15rem; margin-bottom: var(--s-4); }
-.next ul { display: grid; gap: var(--s-3); list-style: none; padding: 0; max-width: none; }
+.next ul { display: grid; list-style: none; padding: 0; max-width: none; border-top: 1px solid var(--ink); }
 .next li { padding-left: 0; margin: 0; }
 .next li::before { display: none; }
 .next a {
   display: block;
-  padding: var(--s-4) var(--s-5);
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--r-md);
+  padding: var(--s-4) 0;
+  border-bottom: 1px solid var(--border);
   color: var(--ink);
-  transition: border-color 0.2s ease, transform 0.25s var(--ease-out);
+  text-decoration: none;
 }
-.next a:hover,
-.next a:focus-visible { text-decoration: none; border-color: var(--band-border); transform: translateY(-2px); }
+.next a:hover strong,
+.next a:focus-visible strong { color: var(--red); }
 .next strong { display: block; font-family: var(--font-display); font-size: 17px; margin-bottom: 2px; }
 .next span { font-family: var(--font-ui); font-size: 14px; color: var(--ink-3); }
 
@@ -413,7 +394,7 @@ td:first-child { color: var(--ink); }
 footer.site {
   margin-top: var(--s-8);
   padding: var(--s-7) 0 var(--s-8);
-  border-top: 1px solid var(--border-soft);
+  border-top: 1px solid var(--ink);
   font-family: var(--font-ui);
   font-size: 14.5px;
 }
@@ -424,17 +405,17 @@ footer.site {
   margin-bottom: var(--s-7);
 }
 .foot-grid h2 {
-  font-family: var(--font-ui);
-  font-size: 12.5px; font-weight: 600;
-  text-transform: uppercase; letter-spacing: 0.1em;
-  color: var(--muted);
+  font-family: var(--font-display);
+  font-size: 16px; font-weight: 600;
+  letter-spacing: 0;
+  color: var(--ink);
   margin: 0 0 var(--s-3);
 }
 .foot-grid ul { list-style: none; display: grid; gap: var(--s-2); margin: 0; padding: 0; max-width: none; }
 .foot-grid li { margin: 0; padding: 0; }
 .foot-grid li::before { display: none; }
-.foot-grid a { color: var(--ink-3); display: inline-flex; align-items: center; min-height: 30px; }
-.foot-grid a:hover { color: var(--red-ink); }
+.foot-grid a { color: var(--ink-3); text-decoration: none; display: inline-flex; align-items: center; min-height: 30px; }
+.foot-grid a:hover { color: var(--ink); text-decoration: underline; }
 .foot-base {
   display: flex; flex-wrap: wrap; gap: var(--s-3) var(--s-5);
   justify-content: space-between; align-items: center;

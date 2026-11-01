@@ -8,7 +8,7 @@
   <title>Cardinal Support &middot; Help With the Bible App</title>
   <meta name="description" content="Help with Cardinal, the Bible app. Answers to the questions people ask most, and a form that reaches a person." />
   <link rel="canonical" href="https://cardinalbible.app/support.html" />
-  <meta name="theme-color" content="#FAF7F2" />
+  <meta name="theme-color" content="#FAFAF7" />
   <meta name="robots" content="index, follow, max-image-preview:large" />
 
   <meta property="og:title" content="Support &middot; Cardinal" />
@@ -30,22 +30,22 @@
     :root {
       color-scheme: light;
 
-      --red: #BD2630;
-      --red-ink: #A81C26;
-      --red-soft: #FBF0EE;
+      --red: #B01F29;
+      --red-ink: #B01F29;
+      --red-soft: #F7ECEB;
 
-      --ink: #1F1F1F;
-      --ink-2: #47382E;
-      --ink-3: #5C5C5C;
-      --muted: #706962;
+      --ink: #141414;
+      --ink-2: #33332F;
+      --ink-3: #5B5B55;
+      --muted: #6E6E67;
 
-      --bg: #FAF7F2;
-      --card: #FCFAF5;
-      --border: #E6E0D5;
-      --border-soft: #EFEAE0;
-      --band-bg: #F2EADC;
-      --band-border: #E2D7C4;
-      --icon: #96763F;
+      --bg: #FAFAF7;
+      --card: #FFFFFF;
+      --border: #D9D9D1;
+      --border-soft: #E7E7E0;
+      --band-bg: #F2F2ED;
+      --band-border: #C9C9C0;
+      --icon: #6E6E67;
 
       --ok: #2F6B4F;
       --ok-soft: #EAF3EE;
@@ -57,7 +57,7 @@
 
       --font-display: ui-serif, 'New York', 'Iowan Old Style', 'Palatino Linotype', Palatino, 'Charter', Georgia, serif;
       --font-text: ui-serif, 'New York', 'Iowan Old Style', 'Palatino Linotype', Palatino, 'Charter', Georgia, serif;
-      --font-ui: ui-rounded, 'SF Pro Rounded', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      --font-ui: -apple-system, 'SF Pro Text', BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
 
       --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 
@@ -79,15 +79,6 @@
       text-rendering: optimizeLegibility;
     }
 
-    body::before {
-      content: "";
-      position: fixed; inset: 0;
-      pointer-events: none;
-      z-index: 0;
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.68' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.10  0 0 0 0 0.075  0 0 0 0 0.03  0 0 0 0.105 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
-      background-size: 260px 260px;
-      mix-blend-mode: multiply;
-    }
 
     ::selection { background: var(--marker-drag); color: var(--ink); }
     ::-moz-selection { background: var(--marker-drag); color: var(--ink); }
@@ -133,8 +124,8 @@
     h1 {
       font-family: var(--font-display);
       font-size: clamp(2.1rem, 6vw, 3rem);
-      font-weight: 600;
-      line-height: 1.12;
+      font-weight: 500;
+      line-height: 1.1;
       letter-spacing: -0.025em;
       margin-bottom: var(--s-4);
       text-wrap: balance;
@@ -159,14 +150,8 @@
     .sub { color: var(--ink-3); max-width: 62ch; margin-bottom: var(--s-6); text-wrap: pretty; }
 
     /* ---------- Questions ---------- */
-    .faq {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--r-xl);
-      padding: var(--s-2) clamp(1.25rem, 3vw, 2rem);
-    }
-    .faq details { border-top: 1px solid var(--border-soft); }
-    .faq details:first-child { border-top: 0; }
+    .faq { border-top: 1px solid var(--ink); }
+    .faq details { border-bottom: 1px solid var(--border); }
     .faq summary {
       list-style: none;
       cursor: pointer;
@@ -240,10 +225,8 @@
 
     /* ---------- Form ---------- */
     .form-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--r-xl);
-      padding: clamp(1.5rem, 4vw, 2.5rem);
+      border-top: 1px solid var(--ink);
+      padding: var(--s-6) 0 0;
     }
     .field { margin-bottom: var(--s-5); }
     .field:last-of-type { margin-bottom: var(--s-6); }
@@ -273,7 +256,7 @@
       color: var(--ink);
       background: var(--bg);
       border: 1px solid var(--border);
-      border-radius: var(--r-md);
+      border-radius: 6px;
       padding: 13px 15px;
       min-height: 48px;
       transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
@@ -283,12 +266,12 @@
     textarea { min-height: 150px; resize: vertical; }
     select {
       /* The chevron the appearance reset removed, drawn rather than a glyph. */
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'><path d='M1 1.5 7 7.5 13 1.5' fill='none' stroke='%2396763F' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'><path d='M1 1.5 7 7.5 13 1.5' fill='none' stroke='%236E6E67' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/></svg>");
       background-repeat: no-repeat;
       background-position: right 16px center;
       padding-right: 44px;
     }
-    input::placeholder, textarea::placeholder { color: #9A938A; }
+    input::placeholder, textarea::placeholder { color: #8E8E87; }
     input:hover, select:hover, textarea:hover { border-color: var(--band-border); }
     input:focus, select:focus, textarea:focus {
       outline: none;
@@ -320,17 +303,15 @@
       min-height: 52px;
       padding: 14px 30px;
       border: 0;
-      border-radius: var(--r-full);
+      border-radius: 6px;
       background: var(--red);
       color: #fff;
       font-family: var(--font-ui);
       font-size: 16px; font-weight: 600;
       cursor: pointer;
-      box-shadow: 0 8px 22px -8px rgba(189, 38, 48, 0.55);
-      transition: transform 0.25s var(--ease-out), box-shadow 0.25s var(--ease-out), background 0.2s ease;
+      transition: background-color 0.15s ease;
     }
-    .btn:hover { transform: translateY(-2px); box-shadow: 0 14px 30px -10px rgba(189, 38, 48, 0.6); }
-    .btn:active { transform: translateY(0); }
+    .btn:hover { background: #8F1820; }
     .btn[disabled] {
       background: var(--muted);
       box-shadow: none;
@@ -383,10 +364,9 @@
       font-family: var(--font-ui);
     }
     .foot-grid h2 {
-      font-family: var(--font-ui);
-      font-size: 12.5px; font-weight: 600;
-      text-transform: uppercase; letter-spacing: 0.1em;
-      color: var(--muted);
+      font-family: var(--font-display);
+      font-size: 16px; font-weight: 600;
+      color: var(--ink);
       margin: 0 0 var(--s-3);
     }
     .foot-grid ul { list-style: none; display: grid; gap: var(--s-1); }
@@ -472,7 +452,7 @@
         <details name="support">
           <summary>Why can't I read the NKJV, NASB, CSB or NLT offline?<span class="mark" aria-hidden="true"></span></summary>
           <div class="faq-body">
-            <p>Those four are licensed from their publishers, and the licenses do not permit storing the text on your device. Cardinal fetches them a chapter at a time and keeps nothing, so they need a connection every time and cannot be searched offline. It is a genuine limitation rather than a setting you can change.</p>
+            <p>Those four are licensed from their publishers, and the licenses do not permit storing the text on your device. Cardinal fetches them a chapter at a time and keeps nothing, so they need a connection every time and cannot be searched offline. It is a genuine limitation, not a setting you can change.</p>
             <p>The other thirteen translations can all be read offline. Eight are built into the app and work from the first launch. The other five can be downloaded in full from the translation picker, which also builds their search index.</p>
           </div>
         </details>
