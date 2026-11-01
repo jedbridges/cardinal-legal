@@ -19,7 +19,7 @@ what changed, and what was kept on purpose.
 | Stat banner / hero metric (giant "5.0" and animated stars) | Reviews | One plain sentence: "Rated 5.0 from 13 ratings on the App Store." |
 | Pills and badges | Translation chips, theme chips | Ruled column lists; themes folded into the sentence that names them. |
 | FAQ accordion with plus signs | Home page | All ten answers open, question beside answer. |
-| Coloured glow on the button, hover lift, magnetic cursor pull | Every primary button | Flat red button, darkens on hover. Nothing moves. |
+| Coloured glow on the button, hover lift, magnetic cursor pull | Every primary button | Capsule button in the app's Liquid Glass style, tinted red: thin specular edge, soft lens shading, a neutral drop shadow (no coloured glow), and a small press-in on tap. No hover lift. |
 | Image hover transform, bounce/overshoot easing | Showcase, tiles, review cards, star animation | Removed. |
 | Fade-up on scroll, staggered deal-ins, headline line reveal, blur-in hero, parallax drift, scroll progress bar | Throughout | Removed. The only motion left is the highlighter drawing once, because it is the app's own gesture. |
 | Glassmorphism | Sticky section bar (48px backdrop blur) | Solid paper with a rule. |
@@ -47,4 +47,5 @@ what changed, and what was kept on purpose.
 3. No card unless the thing is genuinely an object (a form field is; a paragraph is not).
 4. Red is rubrication: links, the one button, the side heads, the "No" column, the drop cap. Nothing else.
 5. Nothing animates on scroll. Nothing lifts on hover.
+7. Buttons are Liquid Glass capsules because the app's controls are. That is the one place glass is allowed: it matches the product, it is not decoration.
 6. Write the fact. If a sentence works as a slogan, it probably needs rewriting.
