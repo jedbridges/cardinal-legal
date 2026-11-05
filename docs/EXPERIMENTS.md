@@ -95,10 +95,10 @@ all of them and `LIVE` holds the ones being served.
 
 | Name | Headline | Running |
 | --- | --- | --- |
-| `control` | Just you, God and Scripture. | yes |
-| `depth` | A Bible app designed for depth. | yes |
-| `ai-grounded` | A Bible AI that quotes the text itself. | yes |
-| `ai-path` | Say what you are facing. It builds the plan. | yes |
+| `control` | A zero-distraction Bible app, with superintelligence. | yes (only; experiment paused 2026-11-02) |
+| `depth` | A Bible app designed for depth. | parked |
+| `ai-grounded` | A Bible AI that quotes the text itself. | parked |
+| `ai-path` | Say what you are facing. It builds the plan. | parked |
 | `ai-free` | Hard questions. Full answers. Free. | parked |
 | `ai-private` | A Bible AI that never reads your notes. | parked |
 | `privacy` | Nobody sees what you underline. | parked |
